@@ -280,8 +280,8 @@ async def upstream(event):
     pattern="update deploy$",
 )
 async def upstream(event):
-    event = await edit_or_reply(event, "`Pulling the catpack repo wait a sec ....`")
-    off_repo = "https://github.com/Mr-confused/catpack"
+    event = await edit_or_reply(event, "`Pulling the nekopack repo wait a sec ....`")
+    off_repo = "https://github.com/Mr-confused/nekopack"
     os.chdir("/app")
     try:
         txt = "`Oops.. Updater cannot continue due to "
