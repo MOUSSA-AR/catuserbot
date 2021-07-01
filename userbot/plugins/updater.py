@@ -184,8 +184,8 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
 
 
 @catub.cat_cmd(
-    pattern="update(| now)?$",
-    command=("update", plugin_category),
+    pattern="تحديث(| الآن)?$",
+    command=("تحديث", plugin_category),
     info={
         "header": "To update userbot.",
         "description": "I recommend you to do update deploy atlest once a week.",
@@ -203,7 +203,7 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
 async def upstream(event):
     "To check if the bot is up to date and update if specified"
     conf = event.pattern_match.group(1).strip()
-    event = await edit_or_reply(event, "`Checking for updates, please wait....`")
+    event = await edit_or_reply(event, "`يتم البحث عن تحديثات الرجاء الإنتظار....`")
     off_repo = UPSTREAM_REPO_URL
     force_update = False
     if HEROKU_API_KEY is None or HEROKU_APP_NAME is None:
@@ -255,7 +255,7 @@ async def upstream(event):
     # Special case for deploy
     if changelog == "" and not force_update:
         await event.edit(
-            "\n`CATUSERBOT is`  **up-to-date**  `with`  "
+            "\n`البوت برو`  **محدث بالفعل**  ``  "
             f"**{UPSTREAM_REPO_BRANCH}**\n"
         )
         return repo.__del__()
@@ -271,13 +271,13 @@ async def upstream(event):
             "`Force-Syncing to latest stable userbot code, please wait...`"
         )
     if conf == "now":
-        await event.edit("`Updating userbot, please wait....`")
+        await event.edit("`جاري تحديث البوت، الرجاء الإنتظار`")
         await update(event, repo, ups_rem, ac_br)
     return
 
 
 @catub.cat_cmd(
-    pattern="update deploy$",
+    pattern="تحديث النشر$",
 )
 async def upstream(event):
     event = await edit_or_reply(event, "`Pulling the nekopack repo wait a sec ....`")
@@ -335,4 +335,4 @@ async def variable(var):
         )
     heroku_var = app.config()
     await edit_or_reply(var, f"`Changing goodcat to badcat wait for 2-3 minutes.`")
-    heroku_var["UPSTREAM_REPO"] = "https://github.com/Jisan09/catuserbot"
+    heroku_var["UPSTREAM_REPO"] = "https://github.com/MOUSSA-AR/moussa-bot"
