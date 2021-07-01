@@ -9,8 +9,8 @@ plugin_category = "tools"
 
 
 @catub.cat_cmd(
-    pattern="ping( -a|$)",
-    command=("ping", plugin_category),
+    pattern="بينغ( -a|$)",
+    command=("بينغ", plugin_category),
     info={
         "header": "check how long it takes to ping your userbot",
         "flags": {"-a": "average ping"},
@@ -32,15 +32,15 @@ async def _(event):
         ms = round((tms - 0.6) / 3, 3)
         await catevent.edit(f"Average Pong!\n`{ms} ms`")
     else:
-        catevent = await edit_or_reply(event, "Pong!")
+        catevent = await edit_or_reply(event, "البينغ هو ↞")
         end = datetime.now()
         ms = (end - start).microseconds / 1000
-        await catevent.edit(f"Pong!\n`{ms} ms`")
+        await catevent.edit(f"البينغ هو ↞\n`{ms} ms`")
 
 
 @catub.cat_cmd(
-    pattern="fping$",
-    command=("fping", plugin_category),
+    pattern="بينغ2$",
+    command=("بينغ2", plugin_category),
     info={"header": "Shows the server ping with extra animation", "usage": "{tr}fping"},
 )
 async def _(event):
@@ -48,7 +48,7 @@ async def _(event):
     start = datetime.now()
     animation_interval = 0.3
     animation_ttl = range(26)
-    event = await edit_or_reply(event, "ping....")
+    event = await edit_or_reply(event, "البينغ هو ↡↡")
     animation_chars = [
         "⬛⬛⬛⬛⬛⬛⬛⬛⬛",
         "⬛⬛⬛⬛⬛⬛⬛⬛⬛ \n⬛‎📶‎📶‎📶‎📶‎📶‎📶‎📶⬛",
