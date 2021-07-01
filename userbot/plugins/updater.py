@@ -35,14 +35,14 @@ UPSTREAM_REPO_BRANCH = Config.UPSTREAM_REPO_BRANCH
 
 REPO_REMOTE_NAME = "temponame"
 IFFUCI_ACTIVE_BRANCH_NAME = "master"
-NO_HEROKU_APP_CFGD = "no heroku application found, but a key given? 😕 "
+NO_HEROKU_APP_CFGD = "لم يتم العثور على تطبيق هيروكو ، ولكن تم إعطاء مفتاح? 😕 "
 HEROKU_GIT_REF_SPEC = "HEAD:refs/heads/master"
-RESTARTING_APP = "re-starting heroku application"
+RESTARTING_APP = "إعادة تشغيل تطبيق هيروكو."
 IS_SELECTED_DIFFERENT_BRANCH = (
-    "looks like a custom branch {branch_name} "
-    "is being used:\n"
-    "in this case, Updater is unable to identify the branch to be updated."
-    "please check out to an official branch, and re-start the updater."
+    "يبدو وكأنه فرع مخصص {branch_name} "
+    "يتم استخدامه:\n"
+    "غير قادر على تحديد الفرع المراد تحديثه."
+    "يرجى مراجعة الفرع الرسمي وإعادة التحديث."
 )
 
 
@@ -68,7 +68,7 @@ async def print_changelogs(event, ac_br, changelog):
         f"**New UPDATE available for [{ac_br}]:\n\nCHANGELOG:**\n`{changelog}`"
     )
     if len(changelog_str) > 4096:
-        await event.edit("`Changelog is too big, view the file to see it.`")
+        await event.edit("`سجل التغيير كبير جدًا ، اعرض الملف لرؤيته.`")
         with open("output.txt", "w+") as file:
             file.write(changelog_str)
         await event.client.send_file(
