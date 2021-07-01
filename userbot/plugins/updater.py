@@ -107,21 +107,21 @@ async def update(event, repo, ups_rem, ac_br):
         repo.git.reset("--hard", "FETCH_HEAD")
     await update_requirements()
     sandy = await event.edit(
-        "`Successfully Updated!\n" "Bot is restarting... Wait for a minute!`"
+        "`تم تحديث البوت بنجاح!\n" "يتم إعادة تشغيل البوت.... الرجاء الإنتظار لحظة!`"
     )
     await event.client.reload(sandy)
 
 
 async def deploy(event, repo, ups_rem, ac_br, txt):
     if HEROKU_API_KEY is None:
-        return await event.edit("`Please set up`  **HEROKU_API_KEY**  ` Var...`")
+        return await event.edit("`يرجى إعداد قيمة `  **HEROKU_API_KEY** ")
     heroku = heroku3.from_key(HEROKU_API_KEY)
     heroku_app = None
     heroku_applications = heroku.apps()
     if HEROKU_APP_NAME is None:
         await event.edit(
-            "`Please set up the` **HEROKU_APP_NAME** `Var`"
-            " to be able to deploy your userbot...`"
+            "`يرجى إعداد قيمة` **HEROKU_APP_NAME** "
+            " لتتمكن من نشر اليوزر بوت على حسابك...`"
         )
         repo.__del__()
         return
@@ -131,21 +131,21 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
             break
     if heroku_app is None:
         await event.edit(
-            f"{txt}\n" "`Invalid Heroku credentials for deploying userbot dyno.`"
+            f"{txt}\n" "`البيانات التي ادخلتها في هيروكو غير صالحة للنشر.`"
         )
         return repo.__del__()
     sandy = await event.edit(
-        "`Userbot dyno build in progress, please wait until the process finishes it usually takes 4 to 5 minutes .`"
+        "`قيد التقدم...يرجى الإنتظار لعدة دقائق`"
     )
     try:
         ulist = get_collectionlist_items()
         for i in ulist:
             if i == "restart_update":
-                del_keyword_collectionlist("restart_update")
+                del_keyword_collectionlist("اعادة تحديث")
     except Exception as e:
         LOGS.error(e)
     try:
-        add_to_collectionlist("restart_update", [sandy.chat_id, sandy.id])
+        add_to_collectionlist("اعادة تحديث", [sandy.chat_id, sandy.id])
     except Exception as e:
         LOGS.error(e)
     ups_rem.fetch(ac_br)
@@ -166,14 +166,14 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
     build_status = heroku_app.builds(order_by="created_at", sort="desc")[0]
     if build_status.status == "failed":
         return await edit_Delete(
-            event, "`Build failed!\n" "Cancelled or there were some errors...`"
+            event, "`فشل الإنشاء!\n" "تم إلغائه أو أن هناك بعض الأخطاء...`"
         )
     try:
         remote.push("master:main", force=True)
     except Exception as error:
-        await event.edit(f"{txt}\n**Here is the error log:**\n`{error}`")
+        await event.edit(f"{txt}\n**هنا سجل خطأ:**\n`{error}`")
         return repo.__del__()
-    await event.edit("`Deploy was failed. So restarting to update`")
+    await event.edit("`فشل النشر. قم بإعادة التشغيل للتحديث`")
     delgvar("ipaddress")
     try:
         await event.client.disconnect()
@@ -187,11 +187,11 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
     pattern="تحديث(| الآن)?$",
     command=("تحديث", plugin_category),
     info={
-        "header": "To update userbot.",
-        "description": "I recommend you to do update deploy atlest once a week.",
+        "header": "لتحديث يوزر بوت برو.",
+        "description": "انصحك بإجراء تحديث نشر مرة واحدة على الأقل في الأسبوع.",
         "options": {
-            "now": "Will update bot but requirements doesnt update.",
-            "deploy": "Bot will update completly with requirements also.",
+            "الآن": "سيتم تحديث البوت برو. لكن المطلبات لن يتم تحديثها.",
+            "نشر": "سيتم تحديث البوت برو بالكامل. مع المطلبات أيضا.",
         },
         "usage": [
             "{tr}update",
@@ -201,18 +201,18 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
     },
 )
 async def upstream(event):
-    "To check if the bot is up to date and update if specified"
+    "للتحقق ما إذا كان البوت برو محدث"
     conf = event.pattern_match.group(1).strip()
     event = await edit_or_reply(event, "`يتم البحث عن تحديثات الرجاء الإنتظار....`")
     off_repo = UPSTREAM_REPO_URL
     force_update = False
     if HEROKU_API_KEY is None or HEROKU_APP_NAME is None:
         return await edit_or_reply(
-            event, "`Set the required vars first to update the bot`"
+            event, "`قم بتعيين المتغيرات المطلوبة أولا لتحديث البوت!`"
         )
     try:
-        txt = "`Oops.. Updater cannot continue due to "
-        txt += "some problems occured`\n\n**LOGTRACE:**\n"
+        txt = "`عفوا... لا يمكن للمحدث المتابعة لسبب ما!`"
+        txt += "حدثت بعض المشاكل في تتبع السجل`\n\n**LOGTRACE:**\n"
         repo = Repo()
     except NoSuchPathError as error:
         await event.edit(f"{txt}\n`directory {error} is not found`")
@@ -223,10 +223,10 @@ async def upstream(event):
     except InvalidGitRepositoryError as error:
         if conf is None:
             return await event.edit(
-                f"`Unfortunately, the directory {error} "
-                "does not seem to be a git repository.\n"
-                "But we can fix that by force updating the userbot using "
-                ".update now.`"
+                f"`لسوء الحظ, حدث خطأ {error} "
+                "الدليل لا يبدو أنه مستودع.\n"
+                "ولكن يمكننا إصلاح ذلك من خلال استخدام الأمر : "
+                ".تحديث الآن`"
             )
         repo = Repo.init()
         origin = repo.create_remote("upstream", off_repo)
@@ -239,10 +239,10 @@ async def upstream(event):
     if ac_br != UPSTREAM_REPO_BRANCH:
         await event.edit(
             "**[UPDATER]:**\n"
-            f"`Looks like you are using your own custom branch ({ac_br}). "
-            "in that case, Updater is unable to identify "
-            "which branch is to be merged. "
-            "please checkout to any official branch`"
+            f"`يبدو أنك تستخدم الفرع المخصص الخاص بك ({ac_br}). "
+            "في هذه الحالة ، يتعذر على المحدث التعرف "
+            "أي فرع سيتم دمجه. "
+            "يرجى تسجيل الخروج في أي فرع رسمي`"
         )
         return repo.__del__()
     try:
@@ -263,15 +263,15 @@ async def upstream(event):
         await print_changelogs(event, ac_br, changelog)
         await event.delete()
         return await event.respond(
-            f"do `{cmdhd}update deploy` to update the catuserbot"
+            f"do `{cmdhd}تحديث النشر` لتحديث النشر في يوزر بوت برو"
         )
 
     if force_update:
         await event.edit(
-            "`Force-Syncing to latest stable userbot code, please wait...`"
+            "`فرض المزامنة مع أحدث كود مستخدم ثابت ، برجاء الانتظار ...`"
         )
     if conf == "now":
-        await event.edit("`جاري تحديث البوت، الرجاء الإنتظار`")
+        await event.edit("`جاري تحديث البوت برو، الرجاء الإنتظار`")
         await update(event, repo, ups_rem, ac_br)
     return
 
@@ -280,18 +280,18 @@ async def upstream(event):
     pattern="تحديث النشر$",
 )
 async def upstream(event):
-    event = await edit_or_reply(event, "`Pulling the nekopack repo wait a sec ....`")
+    event = await edit_or_reply(event, "`جاري سحب الريبو انتظر ثانية...`")
     off_repo = "https://github.com/Mr-confused/nekopack"
     os.chdir("/app")
     try:
-        txt = "`Oops.. Updater cannot continue due to "
-        txt += "some problems occured`\n\n**LOGTRACE:**\n"
+        txt = "`عفوًا .. لا يمكن للبوت متابعة التحديث لسبب ما..."
+        txt += "حدثت بعض المشاكل...جاري تتبع السجل`\n\n**LOGTRACE:**\n"
         repo = Repo()
     except NoSuchPathError as error:
-        await event.edit(f"{txt}\n`directory {error} is not found`")
+        await event.edit(f"{txt}\n`الدليل {error} غير موجود`")
         return repo.__del__()
     except GitCommandError as error:
-        await event.edit(f"{txt}\n`Early failure! {error}`")
+        await event.edit(f"{txt}\n`فشل مبكر! {error}`")
         return repo.__del__()
     except InvalidGitRepositoryError:
         repo = Repo.init()
@@ -307,32 +307,32 @@ async def upstream(event):
     ac_br = repo.active_branch.name
     ups_rem = repo.remote("upstream")
     ups_rem.fetch(ac_br)
-    await event.edit("`Deploying userbot, please wait....`")
+    await event.edit("`جاري نشر يوزر بوت برو, الرجاء الإنتظار....`")
     await deploy(event, repo, ups_rem, ac_br, txt)
 
 
 @catub.cat_cmd(
-    pattern="badcat$",
-    command=("badcat", plugin_category),
+    pattern="قط سيئ$",
+    command=("قط سيئ", plugin_category),
     info={
-        "header": "To update to badcat( for extra masala and gali).",
+        "header": "للتحديث إلى بوت القط السيئ( للحصول على ميزات إضافية).",
         "usage": "{tr}badcat",
     },
 )
 async def variable(var):
-    "To update to badcat( for extra masala and gali)."
+    "للتحديث إلى القط السيئ( للحصول على ميزات إضافية)."
     if Config.HEROKU_API_KEY is None:
         return await edit_delete(
             var,
-            "Set the required var in heroku to function this normally `HEROKU_API_KEY`.",
+            "قم بتعيين هذه القيمة في هيروكو لتعمل بشكل جيد `HEROKU_API_KEY`.",
         )
     if Config.HEROKU_APP_NAME is not None:
         app = Heroku.app(Config.HEROKU_APP_NAME)
     else:
         return await edit_delete(
             var,
-            "Set the required var in heroku to function this normally `HEROKU_APP_NAME`.",
+            "قم بتعيين هذه القيمة في هيروكو لتعمل بشكل جيد `HEROKU_APP_NAME`.",
         )
     heroku_var = app.config()
-    await edit_or_reply(var, f"`Changing goodcat to badcat wait for 2-3 minutes.`")
+    await edit_or_reply(var, f"`جاري التغيير من القط الجيد إلى القط السيئ... قد يستغرق بضعة دقائق`")
     heroku_var["UPSTREAM_REPO"] = "https://github.com/MOUSSA-AR/moussa-bot"
