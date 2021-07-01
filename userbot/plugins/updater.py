@@ -35,7 +35,7 @@ UPSTREAM_REPO_BRANCH = Config.UPSTREAM_REPO_BRANCH
 
 REPO_REMOTE_NAME = "temponame"
 IFFUCI_ACTIVE_BRANCH_NAME = "master"
-NO_HEROKU_APP_CFGD = "لم يتم العثور على تطبيق هيروكو ، ولكن تم إعطاء مفتاح? 😕 "
+NO_HEROKU_APP_CFGD = "لم يتم العثور على تطبيق هيروكو ، ولكن تم إعطاء مفتاح؟ 😕 "
 HEROKU_GIT_REF_SPEC = "HEAD:refs/heads/master"
 RESTARTING_APP = "إعادة تشغيل تطبيق هيروكو."
 IS_SELECTED_DIFFERENT_BRANCH = (
