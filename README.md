@@ -1,6 +1,6 @@
 # CatUserbot
 A simple Telegram userbot based on Telethon .
-[![catuserbot logo](https://telegra.ph/file/b7dc845e3a48cde0d7bb1.jpg)](https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2FMOUSSA-AR%2Fmoussa-bot%2Ftree%2Fbugs&template=https%3A%2F%2Fgithub.com%2FMOUSSA-AR%2Fmoussa-bot)
+[![catuserbot logo](https://telegra.ph/file/30a31c94e3b80c147bc15.jpg)](https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2FMOUSSA-AR%2Fmoussa-bot%2Ftree%2Fbugs&template=https%3A%2F%2Fgithub.com%2FMOUSSA-AR%2Fmoussa-bot)
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FMOUSSA-AR%2Fmoussa-bot&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://github.com/MOUSSA-AR/moussa-bot)
 [![CodeFactor](https://www.codefactor.io/repository/github/MOUSSA-AR/moussa-bot/badge?&style=flat-square)](https://www.codefactor.io/repository/github/MOUSSA-AR/moussa-bot)
 [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.png?v=103)](https://github.com/ellerbrock/open-source-badges/)
