@@ -65,7 +65,7 @@ async def gen_chlog(repo, diff):
 
 async def print_changelogs(event, ac_br, changelog):
     changelog_str = (
-        f"**New UPDATE available for [{ac_br}]:\n\nCHANGELOG:**\n`{changelog}`"
+        f"**تحديث جديد متاح ل [{ac_br}]:\n\nالتغييرات:**\n`{changelog}`"
     )
     if len(changelog_str) > 4096:
         await event.edit("`سجل التغيير كبير جدًا ، اعرض الملف لرؤيته.`")
@@ -141,11 +141,11 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
         ulist = get_collectionlist_items()
         for i in ulist:
             if i == "restart_update":
-                del_keyword_collectionlist("اعادة تحديث")
+                del_keyword_collectionlist("اعادة تشغيل")
     except Exception as e:
         LOGS.error(e)
     try:
-        add_to_collectionlist("اعادة تحديث", [sandy.chat_id, sandy.id])
+        add_to_collectionlist("اعادة تشغيل", [sandy.chat_id, sandy.id])
     except Exception as e:
         LOGS.error(e)
     ups_rem.fetch(ac_br)
@@ -215,10 +215,10 @@ async def upstream(event):
         txt += "حدثت بعض المشاكل في تتبع السجل`\n\n**LOGTRACE:**\n"
         repo = Repo()
     except NoSuchPathError as error:
-        await event.edit(f"{txt}\n`directory {error} is not found`")
+        await event.edit(f"{txt}\n`الدليل {error} غير موجود`")
         return repo.__del__()
     except GitCommandError as error:
-        await event.edit(f"{txt}\n`Early failure! {error}`")
+        await event.edit(f"{txt}\n`فشل مبكر! {error}`")
         return repo.__del__()
     except InvalidGitRepositoryError as error:
         if conf is None:
@@ -263,12 +263,12 @@ async def upstream(event):
         await print_changelogs(event, ac_br, changelog)
         await event.delete()
         return await event.respond(
-            f"do `{cmdhd}تحديث النشر` لتحديث النشر في يوزر بوت برو"
+            f"استخدم `{cmdhd}تحديث النشر` لتحديث النشر في يوزر بوت برو"
         )
 
     if force_update:
         await event.edit(
-            "`فرض المزامنة مع أحدث كود مستخدم ثابت ، برجاء الانتظار ...`"
+            "`فرض المزامنة مع أحدث كود مستخدم ثابت ، الرجاء الانتظار ...`"
         )
     if conf == "now":
         await event.edit("`جاري تحديث البوت برو، الرجاء الإنتظار`")
