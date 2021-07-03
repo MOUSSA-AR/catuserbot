@@ -66,9 +66,9 @@ async def amireallyalive(event):
 
     _, check_sgnirts = check_data_base_heal_th()
 
-    EMOJI = gvarstatus("ALIVE_EMOJI") or "🍒"
+    EMOJI = gvarstatus("ALIVE_EMOJI") or "   ┃‣ 🍒 "
 
-    ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "[⇝𝐖𝐄𝐋𝐂𝐎𝐌𝐄  𝐓𝐎  𝐏𝐑𝐎 𝐔𝐒𝐄𝐑𝐁𝐎𝐓⇜]**(t.me/moussa_pro)"
+    ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "⇝𝐖𝐄𝐋𝐂𝐎𝐌𝐄  𝐓𝐎  ℙℝ𝕆 𝕌𝕊𝔼ℝ 𝔹𝕆𝕋⇜"
 
     CAT_IMG = gvarstatus("ALIVE_PIC") or "https://telegra.ph/file/47b6a423bab8cbc66e186.jpg"
 
@@ -82,7 +82,11 @@ async def amireallyalive(event):
 
         cat_caption = f"**{ALIVE_TEXT}**\n\n"
 
-        cat_caption += f"**{EMOJI} المنشئ ↞ : {mention}**\n"
+        
+
+        cat_caption += f"            ┏━━━━━✦❘༻༺❘✦━━━━━┓\n"
+
+        cat_caption += f"**{EMOJI} المنشئ ↞ :** {mention}\n"
 
         cat_caption += f"**{EMOJI} المؤقت ↞ :** `{uptime}\n`"
 
@@ -93,6 +97,16 @@ async def amireallyalive(event):
         cat_caption += f"**{EMOJI} اصدار بايثون ↞ :** `{python_version()}\n`"
 
         cat_caption += f"**{EMOJI} قاعدة البيانات ↞ :** `{check_sgnirts}`\n"
+
+        cat_caption += f"            ┗━━━━━✦❘༻༺❘✦━━━━━┛\n"
+
+        cat_caption += f"            ┏━━━━━✦❘༻༺❘✦━━━━━┓\n"
+
+        cat_caption += f"**{EMOJI} البينغ ↞ :** `{ms}`\n"
+
+        cat_caption += f"            ┗━━━━━✦❘༻༺❘✦━━━━━┛\n"
+
+        cat_caption += f" ‣ البوت برو يعمل بنجاح✔، بماذا تريدني أن أخدمك🧸\n"
 
         try:
 
@@ -132,7 +146,7 @@ async def amireallyalive(event):
 
             f"**{EMOJI} اصدار بايثون ↞ :** `{python_version()}\n`"
 
-            f"**{EMOJI} قاعدة البيانات ↞ :** `{check_sgnirts}`\n",
+            f"**{EMOJI} قاعدة البيانات ↞ : `{check_sgnirts}`\n",
 
         )
 
@@ -166,7 +180,7 @@ async def amireallyalive(event):
 
     EMOJI = gvarstatus("ALIVE_EMOJI") or "🍒"
 
-    cat_caption = f"**[⇝𝐖𝐄𝐋𝐂𝐎𝐌𝐄  𝐓𝐎  𝐏𝐑𝐎 𝐔𝐒𝐄𝐑𝐁𝐎𝐓⇜]**(t.me/moussa_pro)**\n"
+    cat_caption = f"**[𝐖𝐄𝐋𝐂𝐎𝐌𝐄  𝐓𝐎 ℙℝ𝕆 𝕌𝕊𝔼ℝ 𝔹𝕆𝕋⇜\n"
 
     cat_caption += f"**{EMOJI} اصدار تليثون ↞ :** `{version.__version__}\n`"
 
@@ -189,3 +203,4 @@ async def on_plug_in_callback_query_handler(event):
     statstext = await catalive(StartTime)
 
     await event.answer(statstext, cache_time=0, alert=True)
+
