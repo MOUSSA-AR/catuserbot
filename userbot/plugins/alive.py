@@ -50,13 +50,13 @@ async def amireallyalive(event):
         cat_caption += f"**            ┏━━━━━✦❘༻༺❘✦━━━━━┓** `\n`"
         cat_caption += f"**   ┃‣ 🗣 المنشئ ↞ : ** `{mention}`🔥\n"
         cat_caption += f"**   ┃‣ 🍒 اصدار برو ↞ : ** `{catversion}🔥\n`"
-        cat_caption += f"**   ┃‣ 🍒 اصدار بايثون ↞ : ** `{python_version()}`\n"
-        cat_caption += f"**   ┃‣ 🍒 اصدار تليثون ↞ : ** `{version.__version__}\n`"
-        cat_caption += f"**   ┃‣ 🍒 قاعدة البيانات ↞ : ** `{check_sgnirts}\n`"
-        cat_caption += f"**   ┃‣ 🍒 مؤقت التشغيل ↞ : ** `{uptime}\n`"
+        cat_caption += f"**   ┃‣ 🍒 اصدار بايثون ↞ : ** `{python_version()}`🔥\n"
+        cat_caption += f"**   ┃‣ 🍒 اصدار تليثون ↞ : ** `{version.__version__}🔥\n`"
+        cat_caption += f"**   ┃‣ 🍒 قاعدة البيانات ↞ : ** `{check_sgnirts}🔥\n`"
+        cat_caption += f"**   ┃‣ 🍒 مؤقت التشغيل ↞ : ** `{uptime}🔥\n`"
         cat_caption += f"**            ┗━━━━━✦❘༻༺❘✦━━━━━┛**\n"
         cat_caption += f"**            ┏━━━━━✦❘༻༺❘✦━━━━━┓**\n"
-        cat_caption += f"**   ┃‣ 📡 البينغ ↞ : ** `{ms} ms \n`"
+        cat_caption += f"**   ┃‣ 📡 البينغ ↞ : ** `{ms} ms 🔥\n`"
         cat_caption += f"**            ┗━━━━━✦❘༻༺❘✦━━━━━┛**\n"
         cat_caption += f"** ‣ البوت برو يعمل بنجاح✔، بماذا تريدني أن أخدمك🧸**\n"
         try:
@@ -82,19 +82,19 @@ async def amireallyalive(event):
 
         f"**   ┃‣ 🍒 اصدار برو ↞ : ** `{catversion}🔥\n`"
 
-        f"**   ┃‣ 🍒 اصدار بايثون ↞ : ** `{python_version()}`\n"
+        f"**   ┃‣ 🍒 اصدار بايثون ↞ : ** `{python_version()}`🔥\n"
 
-        f"**   ┃‣ 🍒 اصدار تليثون ↞ : ** `{version.__version__}\n`"
+        f"**   ┃‣ 🍒 اصدار تليثون ↞ : ** `{version.__version__}🔥\n`"
 
-        f"**   ┃‣ 🍒 قاعدة البيانات ↞ : ** `{check_sgnirts}\n`"
+        f"**   ┃‣ 🍒 قاعدة البيانات ↞ : ** `{check_sgnirts}🔥\n`"
 
-        f"**   ┃‣ 🍒 مؤقت التشغيل ↞ : ** `{uptime}\n`"
+        f"**   ┃‣ 🍒 مؤقت التشغيل ↞ : ** `{uptime}🔥\n`"
 
         f"**            ┗━━━━━✦❘༻༺❘✦━━━━━┛**\n"
 
         f"**            ┏━━━━━✦❘༻༺❘✦━━━━━┓**\n"
 
-        f"**   ┃‣ 📡 البينغ ↞ : ** `{ms} ms \n`"
+        f"**   ┃‣ 📡 البينغ ↞ : ** `{ms} ms 🔥\n`"
 
         f"**            ┗━━━━━✦❘༻༺❘✦━━━━━┛**\n"
 
@@ -106,15 +106,14 @@ async def amireallyalive(event):
     pattern="ريبو$",
     command=("ريبو", plugin_category),
     info={
-        "header": "To check bot's alive status via inline mode",
+        "header": "للتحقق من حالة عمل البوت",
         "options": "To show media in this cmd you need to set ALIVE_PIC with media link, get this by replying the media by .tgm",
         "usage": [
             "{tr}alive",
         ],
     },
-)
 async def amireallyalive(event):
-    "A kind of showing bot details by your inline bot"
+    "لعرض معلومات عن حالة البوت"
     reply_to_id = await reply_id(event)
     EMOJI = gvarstatus("ALIVE_EMOJI") or "  ✥ "
     cat_caption = f"**البوت برو يعمل بنجاح**\n"
