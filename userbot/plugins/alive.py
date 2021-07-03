@@ -20,6 +20,14 @@ from telethon.errors.rpcerrorlist import (
 
 from telethon.events import CallbackQuery
 
+import asyncio
+
+from datetime import datetime
+
+from userbot import catub
+
+from ..core.managers import edit_or_reply
+
 from ..Config import Config
 
 from ..core.managers import edit_or_reply
@@ -71,7 +79,9 @@ async def amireallyalive(event):
     ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "⇝𝐖𝐄𝐋𝐂𝐎𝐌𝐄  𝐓𝐎  ℙℝ𝕆 𝕌𝕊𝔼ℝ 𝔹𝕆𝕋⇜"
 
     CAT_IMG = gvarstatus("ALIVE_PIC") or "https://telegra.ph/file/47b6a423bab8cbc66e186.jpg"
-
+    
+    ms = (end - start).microseconds / 1000
+    
     if CAT_IMG:
 
         CAT = [x for x in CAT_IMG.split()]
