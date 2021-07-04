@@ -80,6 +80,8 @@ async def amireallyalive(event):
 
     CAT_IMG = gvarstatus("ALIVE_PIC") or "https://telegra.ph/file/47b6a423bab8cbc66e186.jpg"
     
+    start = datetime.now()
+    end = datetime.now()
     ms = (end - start).microseconds / 1000
     
     if CAT_IMG:
