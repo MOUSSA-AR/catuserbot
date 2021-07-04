@@ -72,11 +72,11 @@ async def amireallyalive(event):
 
     uptime = await get_readable_time((time.time() - StartTime))
 
-    _, check_sgnirts = "تعمل بنجاح"
+    _, check_sgnirts = check_data_base_heal_th()
 
     EMOJI = gvarstatus("ALIVE_EMOJI") or "   ┃‣ 🍒 "
 
-    ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "⇝𝐖𝐄𝐋𝐂𝐎𝐌𝐄  𝐓𝐎  ℙℝ𝕆 𝕌𝕊𝔼ℝ 𝔹𝕆𝕋⇜"
+    ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "⇝𝗪َ𝗘𝗟َِ𝗖𝗢𝗠َِ𝙀َِ 𝗧𝗢 𓆩𝐏𝐑𝐎𓆪⇜"
 
     CAT_IMG = gvarstatus("ALIVE_PIC") or "https://telegra.ph/file/47b6a423bab8cbc66e186.jpg"
     
@@ -119,7 +119,7 @@ async def amireallyalive(event):
 
         cat_caption += f"            ┗━━━━━✦❘༻༺❘✦━━━━━┛\n"
 
-        cat_caption += f" ‣ البوت برو يعمل بنجاح✔، بماذا تريدني أن أخدمك🧸\n"
+        cat_caption += f" ‣ البوت برو يعمل بنجاح✔، **[قناة السورس]**(t.me/moussa_pro)🧸\n"
 
         try:
 
