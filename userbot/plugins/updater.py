@@ -173,7 +173,7 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
     except Exception as error:
         await event.edit(f"{txt}\n**هنا سجل خطأ:**\n`{error}`")
         return repo.__del__()
-    await event.edit("`فشل النشر. قم بإعادة التشغيل للتحديث`")
+    await event.edit("`جاري اعادة نشر البوت. يرجى الانتظار مابين 3 إلى 5 دقائق`")
     delgvar("ipaddress")
     try:
         await event.client.disconnect()
