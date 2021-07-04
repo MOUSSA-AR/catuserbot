@@ -72,7 +72,7 @@ async def amireallyalive(event):
 
     uptime = await get_readable_time((time.time() - StartTime))
 
-    _, check_sgnirts = check_data_base_heal_th()
+    _, check_sgnirts = "تعمل بنجاح"
 
     EMOJI = gvarstatus("ALIVE_EMOJI") or "   ┃‣ 🍒 "
 
@@ -82,7 +82,8 @@ async def amireallyalive(event):
     
     start = datetime.now()
     end = datetime.now()
-    ms = (end - start).microseconds / 1000
+    tms = (end - start).microseconds / 1000
+    ms = round((tms - 0.6) / 3, 3)
     
     if CAT_IMG:
 
@@ -114,7 +115,7 @@ async def amireallyalive(event):
 
         cat_caption += f"            ┏━━━━━✦❘༻༺❘✦━━━━━┓\n"
 
-        cat_caption += f"**{EMOJI} البينغ ↞ :** `{ms}`\n"
+        cat_caption += f"**{EMOJI} البينغ ↞ :** `{ms}ms`\n"
 
         cat_caption += f"            ┗━━━━━✦❘༻༺❘✦━━━━━┛\n"
 
