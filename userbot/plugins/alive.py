@@ -1,7 +1,5 @@
 import random
 
-import asyncio
-
 import re
 
 import time
@@ -22,14 +20,6 @@ from telethon.errors.rpcerrorlist import (
 
 from telethon.events import CallbackQuery
 
-import asyncio
-
-from datetime import datetime
-
-from userbot import catub
-
-from ..core.managers import edit_or_reply
-
 from ..Config import Config
 
 from ..core.managers import edit_or_reply
@@ -46,13 +36,13 @@ plugin_category = "utils"
 
 @catub.cat_cmd(
 
-    pattern="بوت$",
+    pattern="alive$",
 
-    command=("بوت", plugin_category),
+    command=("alive", plugin_category),
 
     info={
 
-        "header": "للتأكد من حالة عمل البوت",
+        "header": "To check bot s alive status",
 
         "options": "To show media in this cmd you need to set ALIVE_PIC with media link, get this by replying the media by .tgm",
 
@@ -76,12 +66,12 @@ async def amireallyalive(event):
 
     _, check_sgnirts = check_data_base_heal_th()
 
-    EMOJI = gvarstatus("ALIVE_EMOJI") or "🍒 "
+    EMOJI = gvarstatus("ALIVE_EMOJI") or "✧✧"
 
-    ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "⇝𝗪َ𝗘𝗟َِ𝗖𝗢𝗠َِ𝙀َِ 𝗧𝗢 𓆩𝐏𝐑𝐎𓆪⇜"
+    ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "✮ MY BOT IS RUNNING SUCCESSFULLY ✮"
 
-    CAT_IMG = gvarstatus("ALIVE_PIC") or "https://telegra.ph/file/47b6a423bab8cbc66e186.jpg"
-       
+    CAT_IMG = gvarstatus("ALIVE_PIC")
+
     if CAT_IMG:
 
         CAT = [x for x in CAT_IMG.split()]
@@ -92,31 +82,17 @@ async def amireallyalive(event):
 
         cat_caption = f"**{ALIVE_TEXT}**\n\n"
 
-        
+        cat_caption += f"**{EMOJI} Master : {mention}**\n"
 
-        cat_caption += f"            ┏━━━━━✦❘༻༺❘✦━━━━━┓\n"
+        cat_caption += f"**{EMOJI} Uptime :** `{uptime}\n`"
 
-        cat_caption += f"**   ┃‣ {EMOJI} المنشئ ↞ :** {mention}\n"
+        cat_caption += f"**{EMOJI} Telethon version :** `{version.__version__}\n`"
 
-        cat_caption += f"**   ┃‣ {EMOJI} المؤقت ↞ :** `{uptime}\n`"
+        cat_caption += f"**{EMOJI} Catuserbot Version :** `{catversion}`\n"
 
-        cat_caption += f"**   ┃‣ {EMOJI} اصدار تليثون ↞ :** `{version.__version__}\n`"
+        cat_caption += f"**{EMOJI} Python Version :** `{python_version()}\n`"
 
-        cat_caption += f"**   ┃‣ {EMOJI} اصدار برو ↞ :** `{catversion}`\n"
-
-        cat_caption += f"**   ┃‣ {EMOJI} اصدار بايثون ↞ :** `{python_version()}\n`"
-
-        cat_caption += f"**   ┃‣ {EMOJI} قاعدة البيانات ↞ :** `{check_sgnirts}`\n"
-
-        cat_caption += f"            ┗━━━━━✦❘༻༺❘✦━━━━━┛\n"
-
-        cat_caption += f"            ┏━━━━━✦❘༻༺❘✦━━━━━┓\n"
-
-        cat_caption += f"**   ┃‣ {EMOJI} قناة السورس ↞ :** [𝐏𝐑𝐎 𝐔𝐒𝐄𝐑𝐁𝐎𝐓](t.me/moussa_pro) \n"
-
-        cat_caption += f"            ┗━━━━━✦❘༻༺❘✦━━━━━┛\n"
-
-        cat_caption += f" ‣ البوت برو يعمل بنجاح✔🧸🖤\n"
+        cat_caption += f"**{EMOJI} Database :** `{check_sgnirts}`\n"
 
         try:
 
@@ -146,29 +122,29 @@ async def amireallyalive(event):
 
             f"**{ALIVE_TEXT}**\n\n"
 
-            f"**{EMOJI} المنشئ ↞ : {mention}**\n"
+            f"**{EMOJI} Master : {mention}**\n"
 
-            f"**{EMOJI} المؤقت ↞ :** `{uptime}\n`"
+            f"**{EMOJI} Uptime :** `{uptime}\n`"
 
-            f"**{EMOJI} اصدار تليثون ↞ :** `{version.__version__}\n`"
+            f"**{EMOJI} Telethon Version :** `{version.__version__}\n`"
 
-            f"**{EMOJI} اصدار برو ↞ :** `{catversion}`\n"
+            f"**{EMOJI} Catuserbot Version :** `{catversion}`\n"
 
-            f"**{EMOJI} اصدار بايثون ↞ :** `{python_version()}\n`"
+            f"**{EMOJI} Python Version :** `{python_version()}\n`"
 
-            f"**{EMOJI} قاعدة البيانات ↞ : `{check_sgnirts}`\n",
+            f"**{EMOJI} Database :** `{check_sgnirts}`\n",
 
         )
 
 @catub.cat_cmd(
 
-    pattern="برو$",
+    pattern="ialive$",
 
-    command=("برو", plugin_category),
+    command=("ialive", plugin_category),
 
     info={
 
-        "header": "لعرض معلومات حول البوت",
+        "header": "To check bot s alive status via inline mode",
 
         "options": "To show media in this cmd you need to set ALIVE_PIC with media link, get this by replying the media by .tgm",
 
@@ -188,17 +164,17 @@ async def amireallyalive(event):
 
     reply_to_id = await reply_id(event)
 
-    EMOJI = gvarstatus("ALIVE_EMOJI") or "🍒"
+    EMOJI = gvarstatus("ALIVE_EMOJI") or "✧✧"
 
-    cat_caption = f"**[𝐖𝐄𝐋𝐂𝐎𝐌𝐄  𝐓𝐎 ℙℝ𝕆 𝕌𝕊𝔼ℝ 𝔹𝕆𝕋⇜\n"
+    cat_caption = f"**Catuserbot is Up and Running**\n"
 
-    cat_caption += f"**{EMOJI} اصدار تليثون ↞ :** `{version.__version__}\n`"
+    cat_caption += f"**{EMOJI} Telethon version :** `{version.__version__}\n`"
 
-    cat_caption += f"**{EMOJI} اصدار برو ↞ :** `{catversion}`\n"
+    cat_caption += f"**{EMOJI} Catuserbot Version :** `{catversion}`\n"
 
-    cat_caption += f"**{EMOJI} اصدار بايثون ↞ :** `{python_version()}\n`"
+    cat_caption += f"**{EMOJI} Python Version :** `{python_version()}\n`"
 
-    cat_caption += f"**{EMOJI} المنشئ ↞ :** {mention}\n"
+    cat_caption += f"**{EMOJI} Master:** {mention}\n"
 
     results = await event.client.inline_query(Config.TG_BOT_USERNAME, cat_caption)
 
@@ -213,4 +189,3 @@ async def on_plug_in_callback_query_handler(event):
     statstext = await catalive(StartTime)
 
     await event.answer(statstext, cache_time=0, alert=True)
-
