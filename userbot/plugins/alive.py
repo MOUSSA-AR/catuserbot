@@ -81,20 +81,7 @@ async def amireallyalive(event):
     ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "⇝𝗪َ𝗘𝗟َِ𝗖𝗢𝗠َِ𝙀َِ 𝗧𝗢 𓆩𝐏𝐑𝐎𓆪⇜"
 
     CAT_IMG = gvarstatus("ALIVE_PIC") or "https://telegra.ph/file/47b6a423bab8cbc66e186.jpg"
-    
-    flag = event.pattern_match.group(1)
-
-    start = datetime.now()
-    
-    catevent = await edit_or_reply(event, "`!....`")
-        await asyncio.sleep(0.3)
-        await catevent.edit("`..!..`")
-        await asyncio.sleep(0.3)
-        await catevent.edit("`....!`")
-        end = datetime.now()
-        ms = (end - start).microseconds / 1000
-
-    
+       
     if CAT_IMG:
 
         CAT = [x for x in CAT_IMG.split()]
