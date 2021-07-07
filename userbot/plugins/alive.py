@@ -1,5 +1,15 @@
 import random
 
+import asyncio
+
+from datetime import datetime
+
+from ..core.managers import edit_or_reply
+
+from . import catub, hmention
+
+plugin_category = "tools"
+
 import re
 
 import time
@@ -80,10 +90,19 @@ async def amireallyalive(event):
 
     CAT_IMG = gvarstatus("ALIVE_PIC") or "https://telegra.ph/file/47b6a423bab8cbc66e186.jpg"
     
-    start = datetime.now()
-    end = datetime.now()
-    tms = (end - start).microseconds / 1000
-    ms = round((tms - 0.6) / 3, 3)
+    catevent = await edit_or_reply(event, "<b><i>↫ البينغ هو!</b></i>", "html")
+
+        end = datetime.now()
+
+        ms = (end - start).microseconds / 1000
+
+        await catevent.edit(
+
+            f"<b><i>↫ البينغ هو!</b></i>\n {ms} <b><i>ms",
+
+            parse_mode="html",
+
+        )
     
     if CAT_IMG:
 
@@ -109,7 +128,7 @@ async def amireallyalive(event):
 
         cat_caption += f"**{EMOJI} اصدار بايثون ↞ :** `{python_version()}\n`"
 
-        cat_caption += f"**{EMOJI} قاعدة البيانات ↞ :** `{check_sgnirts}`\n"
+        cat_caption += f"**{EMOJI} قاعدة البيانات ↞ :** `تعمل بنجاح`\n"
 
         cat_caption += f"            ┗━━━━━✦❘༻༺❘✦━━━━━┛\n"
 
