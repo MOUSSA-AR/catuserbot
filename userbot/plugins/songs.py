@@ -50,7 +50,7 @@ SONG_NOT_FOUND = "<code>آسف! لا يمكنني العثور على هذه ا�
 
 SONG_SENDING_STRING = "<code>نعم..! لقد وجدت شيئا..🥰...</code>"
 
-SONGBOT_BLOCKED_STRING = "<code>Please unblock @songdl_bot and try again</code>"
+SONGBOT_BLOCKED_STRING = "<code>فك الحظر عن البوت @songdl_bot وحاول مرة ثانية</code>"
 
 # =========================================================== #
 
