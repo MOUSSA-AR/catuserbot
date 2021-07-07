@@ -2,14 +2,6 @@ import random
 
 import asyncio
 
-from datetime import datetime
-
-from ..core.managers import edit_or_reply
-
-from . import catub, hmention
-
-plugin_category = "tools"
-
 import re
 
 import time
@@ -84,7 +76,7 @@ async def amireallyalive(event):
 
     _, check_sgnirts = check_data_base_heal_th()
 
-    EMOJI = gvarstatus("ALIVE_EMOJI") or "   ┃‣ 🍒 "
+    EMOJI = gvarstatus("ALIVE_EMOJI") or "🍒 "
 
     ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "⇝𝗪َ𝗘𝗟َِ𝗖𝗢𝗠َِ𝙀َِ 𝗧𝗢 𓆩𝐏𝐑𝐎𓆪⇜"
 
@@ -117,27 +109,27 @@ async def amireallyalive(event):
 
         cat_caption += f"            ┏━━━━━✦❘༻༺❘✦━━━━━┓\n"
 
-        cat_caption += f"**{EMOJI} المنشئ ↞ :** {mention}\n"
+        cat_caption += f"**   ┃‣ {EMOJI} المنشئ ↞ :** {mention}\n"
 
-        cat_caption += f"**{EMOJI} المؤقت ↞ :** `{uptime}\n`"
+        cat_caption += f"**   ┃‣ {EMOJI} المؤقت ↞ :** `{uptime}\n`"
 
-        cat_caption += f"**{EMOJI} اصدار تليثون ↞ :** `{version.__version__}\n`"
+        cat_caption += f"**   ┃‣ {EMOJI} اصدار تليثون ↞ :** `{version.__version__}\n`"
 
-        cat_caption += f"**{EMOJI} اصدار برو ↞ :** `{catversion}`\n"
+        cat_caption += f"**   ┃‣ {EMOJI} اصدار برو ↞ :** `{catversion}`\n"
 
-        cat_caption += f"**{EMOJI} اصدار بايثون ↞ :** `{python_version()}\n`"
+        cat_caption += f"**   ┃‣ {EMOJI} اصدار بايثون ↞ :** `{python_version()}\n`"
 
-        cat_caption += f"**{EMOJI} قاعدة البيانات ↞ :** `{check_sgnirts}`\n"
+        cat_caption += f"**   ┃‣ {EMOJI} قاعدة البيانات ↞ :** `{check_sgnirts}`\n"
 
         cat_caption += f"            ┗━━━━━✦❘༻༺❘✦━━━━━┛\n"
 
         cat_caption += f"            ┏━━━━━✦❘༻༺❘✦━━━━━┓\n"
 
-        cat_caption += f"**{EMOJI} البينغ ↞ :** `{ms}ms`\n"
+        cat_caption += f"**   ┃‣ {EMOJI} قناة السورس ↞ :** [𝐏𝐑𝐎 𝐔𝐒𝐄𝐑𝐁𝐎𝐓](t.me/moussa_pro) \n"
 
         cat_caption += f"            ┗━━━━━✦❘༻༺❘✦━━━━━┛\n"
 
-        cat_caption += f" ‣ البوت برو يعمل بنجاح✔، **[قناة السورس]**(t.me/moussa_pro)🧸\n"
+        cat_caption += f" ‣ البوت برو يعمل بنجاح✔🧸🖤\n"
 
         try:
 
