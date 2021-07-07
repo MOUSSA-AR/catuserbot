@@ -36,9 +36,9 @@ plugin_category = "utils"
 
 @catub.cat_cmd(
 
-    pattern="alive$",
+    pattern="بوت$",
 
-    command=("alive", plugin_category),
+    command=("بوت", plugin_category),
 
     info={
 
