@@ -127,7 +127,7 @@ async def amireallyalive(event):
 
         cat_caption += f"**{EMOJI} اصدار بايثون ↞ :** `{python_version()}\n`"
 
-        cat_caption += f"**{EMOJI} قاعدة البيانات ↞ :** تعمل بنجاح. \n"
+        cat_caption += f"**{EMOJI} قاعدة البيانات ↞ :** `{check_sgnirts}`\n"
 
         cat_caption += f"            ┗━━━━━✦❘༻༺❘✦━━━━━┛\n"
 
