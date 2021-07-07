@@ -1,6 +1,6 @@
 # by  @u_5_1 ( https://t.me/moussa_pro )
 
-# songs finder for PRO-BOT
+# songs finder for moussa pro
 
 import asyncio
 
@@ -48,9 +48,9 @@ SONG_SEARCH_STRING = "<code>حاضر..! انا سأجد اغنيتك....</code>"
 
 SONG_NOT_FOUND = "<code>آسف! لا يمكنني العثور على هذه الأغنية</code>"
 
-SONG_SENDING_STRING = "<code>نعم..! لقد وجدت شيئا . . 🥰  . . .</code>"
+SONG_SENDING_STRING = "<code>نعم..! لقد وجدت شيئا..🥰...</code>"
 
-SONGBOT_BLOCKED_STRING = "<code>يرجى إلغاء حظر @songdl_bot وحاول مرة أخرى</code>"
+SONGBOT_BLOCKED_STRING = "<code>Please unblock @songdl_bot and try again</code>"
 
 # =========================================================== #
 
@@ -60,25 +60,25 @@ SONGBOT_BLOCKED_STRING = "<code>يرجى إلغاء حظر @songdl_bot وحاو�
 
 @catub.cat_cmd(
 
-    pattern="اغنية(320)?(?:\s|$)([\s\S]*)",
+    pattern="غنية(320)?(?:\s|$)([\s\S]*)",
 
-    command=("اغنية", plugin_category),
+    command=("غنية", plugin_category),
 
     info={
 
-        "header": "للبحث عن أغنية في اليوتيوب",
+        "header": "To get songs from youtube.",
 
-        "description": "يقوم هذا الأمر بالبحث في اليوتيوب وإرسال اول مقطع فيديو إليك على شكل ملف صوتي",
+        "description": "Basically this command searches youtube and send the first video as audio file.",
 
         "flags": {
 
-            "320": "اذا استخدمت الأمر (.اغنية320) فسوف يرسل لك الأغنية بدقة 320k او 128k في حال لم يجد الدقو الأولى.",
+            "320": "if you use song320 then you get 320k quality else 128k quality",
 
         },
 
-        "usage": "{tr}اغنية <اسم الأغنية>",
+        "usage": "{tr}song <song name>",
 
-        "examples": "{tr}اغنية memories song",
+        "examples": "{tr}song memories song",
 
     },
 
@@ -86,7 +86,7 @@ SONGBOT_BLOCKED_STRING = "<code>يرجى إلغاء حظر @songdl_bot وحاو�
 
 async def _(event):
 
-    "للبحث عن الأغاني"
+    "To search songs"
 
     reply_to_id = await reply_id(event)
 
@@ -104,7 +104,7 @@ async def _(event):
 
     else:
 
-        return await edit_or_reply(event, "`لا يمكنني ايجاد هذه الأغنية!`")
+        return await edit_or_reply(event, "`لا يمكنني ايجاد هذه الأغنية! `")
 
     cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
 
@@ -116,7 +116,7 @@ async def _(event):
 
         return await catevent.edit(
 
-            f"آسف.! لا يمكنني العثور على الأغنية التي طلبتها `{query}`"
+            f"لا يمكنني العثور على الأغنية التي طلبتها `{query}`"
 
         )
 
@@ -166,7 +166,7 @@ async def _(event):
 
         return await catevent.edit(
 
-            f"آسف.! لا يمكنني العثور على الأغنية التي طلبتها `{query}`"
+            f"لا يمكنني العثور على الأغنية التي طلبتها `{query}`"
 
         )
 
@@ -230,13 +230,13 @@ async def delete_messages(event, chat, from_message):
 
     info={
 
-        "header": "لجلب فيديو من اليوتيوب.",
+        "header": "To get video songs from youtube.",
 
-        "description": "يقوم هذا الأمر بالبحث عن الفيديو المطلوب ويرسل الفيديو الأول",
+        "description": "Basically this command searches youtube and sends the first video",
 
-        "usage": "{tr}فيديو <اسم الفيديو>",
+        "usage": "{tr}vsong <song name>",
 
-        "examples": "{tr}فيديو memories song",
+        "examples": "{tr}vsong memories song",
 
     },
 
@@ -244,7 +244,7 @@ async def delete_messages(event, chat, from_message):
 
 async def _(event):
 
-    "للبحث عن فيديو"
+    "To search video songs"
 
     reply_to_id = await reply_id(event)
 
@@ -274,7 +274,7 @@ async def _(event):
 
         return await catevent.edit(
 
-            f"آسف..! لا يمكنني العثور على الفيديو المطلوب..! `{query}`"
+            f"لا يمكنني العثور على الأغنية التي طلبتها `{query}`"
 
         )
 
@@ -324,7 +324,7 @@ async def _(event):
 
         return await catevent.edit(
 
-            f"آسف! لا يمكنني العثور على الفيديو المطلوب `{query}`"
+            f"لا يمكنني العثور على الأغنية التي طلبتها `{query}`"
 
         )
 
@@ -374,11 +374,11 @@ async def _(event):
 
     info={
 
-        "header": "لعكس أغنية البحث.",
+        "header": "To reverse search song.",
 
-        "description": "بحث عكسي عن ملف الصوت",
+        "description": "Reverse search audio file using shazam api",
 
-        "usage": "{tr}بحث عكسي <reply to voice/audio>",
+        "usage": "{tr}shazam <reply to voice/audio>",
 
     },
 
@@ -386,7 +386,7 @@ async def _(event):
 
 async def shazamcmd(event):
 
-    "بحث عكسي عن أغنية."
+    "To reverse search song."
 
     reply = await event.get_reply_message()
 
@@ -396,11 +396,11 @@ async def shazamcmd(event):
 
         return await edit_delete(
 
-            event, "__الرد على مقطع الصوت أو مقطع الصوت إلى لعكس البحث هذه الأغنية.__"
+            event, "__قم بالرد على فيديو او اغنية لعكسها.__"
 
         )
 
-    catevent = await edit_or_reply(event, "__تحميل مقطع صوتي...__")
+    catevent = await edit_or_reply(event, "__تحميل مقطع صوتي__")
 
     try:
 
@@ -436,7 +436,7 @@ async def shazamcmd(event):
 
         return await edit_delete(
 
-            catevent, f"**حطث خطأ في البحث العكسي:**\n__{str(e)}__"
+            catevent, f"**حدث خطأ في البحث العكسي:**\n__{str(e)}__"
 
         )
 
@@ -446,7 +446,7 @@ async def shazamcmd(event):
 
     await event.client.send_file(
 
-        event.chat_id, image, caption=f"**الأغنية🖤:** `{song}`", reply_to=reply
+        event.chat_id, image, caption=f"**الأغنية:** `{song}`", reply_to=reply
 
     )
 
@@ -454,19 +454,19 @@ async def shazamcmd(event):
 
 @catub.cat_cmd(
 
-    pattern="اغنية2(?:\s|$)([\s\S]*)",
+    pattern="غنية2(?:\s|$)([\s\S]*)",
 
-    command=("اغنية2", plugin_category),
+    command=("غنية2", plugin_category),
 
     info={
 
-        "header": "البحث عن الأغنية وارسالها إلى التلغرام",
+        "header": "To search songs and upload to telegram",
 
-        "description": "يبحث عن الأغنية التي طلبتها ويرسلها إليك بدقة 320k",
+        "description": "Searches the song you entered in query and sends it quality of it is 320k",
 
-        "usage": "{tr}اغنية2 <song name>",
+        "usage": "{tr}song2 <song name>",
 
-        "examples": "{tr}اغنية2 memories song",
+        "examples": "{tr}song2 memories song",
 
     },
 
@@ -474,11 +474,11 @@ async def shazamcmd(event):
 
 async def _(event):
 
-    "البحث عن الأغنية"
+    "To search songs"
 
     song = event.pattern_match.group(1)
 
-    chat = "@Nvvbbot"
+    chat = "@songdl_bot"
 
     reply_id_ = await reply_id(event)
 
@@ -506,7 +506,7 @@ async def _(event):
 
             if baka[0].message.startswith(
 
-                ("لم اعثر على الأغنية المطلوبة.!")
+                ("لم اعثر على الأغنية المطلوبة..!")
 
             ):
 
@@ -562,11 +562,11 @@ async def _(event):
 
     info={
 
-        "header": "لعكس ملف الاغنية",
+        "header": "To reverse search music file.",
 
-        "description": "يجب أن يكون ملف الموسيقى الطويل حوالي 10 ثانية، لذا استخدم البرنامج المساعد FFMPEG لتقليمه.",
+        "description": "music file lenght must be around 10 sec so use ffmpeg plugin to trim it.",
 
-        "usage": "{tr}عكس2",
+        "usage": "{tr}szm",
 
     },
 
@@ -574,17 +574,17 @@ async def _(event):
 
 async def _(event):
 
-    "لعكس الموسيقى البحث عن طريق بوت."
+    "To reverse search music by bot."
 
     if not event.reply_to_msg_id:
 
-        return await edit_delete(event, "```الرد على رسالة صوتية.```")
+        return await edit_delete(event, "```قم بالرد على رسالة صوتية.```")
 
     reply_message = await event.get_reply_message()
 
     chat = "@auddbot"
 
-    catevent = await edit_or_reply(event, "```تحديد الاغنية```")
+    catevent = await edit_or_reply(event, "```تحديد الأغنية```")
 
     async with event.client.conversation(chat) as conv:
 
@@ -602,7 +602,7 @@ async def _(event):
 
                 return await catevent.edit(
 
-                    "خطأ أثناء تحديد الأغنية. حاول استخدام رسالة صوتية طويلة 5-10s."
+                    "خطأ أثناء تحديد الأغنية. حاول استخدام رسالة صوتية طويلة 5-10s"
 
                 )
 
@@ -620,6 +620,6 @@ async def _(event):
 
     namem = f"**أسم الأغنية : **`{result.text.splitlines()[0]}`\
 
-        \n\n**تفاصيل :**__{result.text.splitlines()[2]}__"
+        \n\n**تفاصيل : **__{result.text.splitlines()[2]}__"
 
     await catevent.edit(namem)
