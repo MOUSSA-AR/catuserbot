@@ -64,7 +64,7 @@ async def _(event):
 
         await catevent.edit(
 
-            f"<b><i>**↫ البينغ هو↞**</b></i>{ms} <b><i>ms",
+            f"<b><i>↫ البينغ هو↞</b></i>{ms} <b><i>ms",
 
             parse_mode="html",
 
