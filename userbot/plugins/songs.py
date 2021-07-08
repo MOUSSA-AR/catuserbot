@@ -1,6 +1,6 @@
-# by  @sandy1709 ( https://t.me/mrconfused  )
+# by  @moussa_pro ( https://t.me/moussa_pro  )
 
-# songs finder for catuserbot
+# songs finder for pro userbot
 
 import asyncio
 
@@ -44,13 +44,13 @@ LOGS = logging.getLogger(__name__)
 
 # =========================================================== #
 
-SONG_SEARCH_STRING = "<code>wi8..! I am finding your song....</code>"
+SONG_SEARCH_STRING = "<code>**حاضر..! انا سأجد اغنيتك...**</code>"
 
-SONG_NOT_FOUND = "<code>Sorry !I am unable to find any song like that</code>"
+SONG_NOT_FOUND = "<code>**آسف! لا يمكنني العثور على هذه الأغنية**</code>"
 
-SONG_SENDING_STRING = "<code>yeah..! i found something wi8..🥰...</code>"
+SONG_SENDING_STRING = "<code>**حاضر..! انا سأجد اغنيتك....**</code>"
 
-SONGBOT_BLOCKED_STRING = "<code>Please unblock @songdl_bot and try again</code>"
+SONGBOT_BLOCKED_STRING = "<code>قم بفك الحظر عن البوت @songdl_bot ثم حاول مرة ثانية</code>"
 
 # =========================================================== #
 
@@ -60,9 +60,9 @@ SONGBOT_BLOCKED_STRING = "<code>Please unblock @songdl_bot and try again</code>"
 
 @catub.cat_cmd(
 
-    pattern="song(320)?(?:\s|$)([\s\S]*)",
+    pattern="غنية(320)?(?:\s|$)([\s\S]*)",
 
-    command=("song", plugin_category),
+    command=("غنية", plugin_category),
 
     info={
 
@@ -104,11 +104,11 @@ async def _(event):
 
     else:
 
-        return await edit_or_reply(event, "`What I am Supposed to find `")
+        return await edit_or_reply(event, "`**لا يمكنني ايجاد هذه الأغنية! **`")
 
     cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
 
-    catevent = await edit_or_reply(event, "`wi8..! I am finding your song....`")
+    catevent = await edit_or_reply(event, "`**لقد وجدت أغنيتك♥. .!**`")
 
     video_link = await yt_search(str(query))
 
@@ -116,7 +116,7 @@ async def _(event):
 
         return await catevent.edit(
 
-            f"Sorry!. I can t find any related video/audio for `{query}`"
+            f"لا يمكنني العثور على الأغنية التي طلبتها `{query}`"
 
         )
 
@@ -144,13 +144,13 @@ async def _(event):
 
     if stderr:
 
-        return await catevent.edit(f"**Error :** `{stderr}`")
+        return await catevent.edit(f"**خطأ :** `{stderr}`")
 
     catname, stderr = (await _catutils.runcmd(name_cmd))[:2]
 
     if stderr:
 
-        return await catevent.edit(f"**Error :** `{stderr}`")
+        return await catevent.edit(f"**خطأ :** `{stderr}`")
 
     # stderr = (await runcmd(thumb_cmd))[1]
 
@@ -166,11 +166,11 @@ async def _(event):
 
         return await catevent.edit(
 
-            f"Sorry!. I can t find any related video/audio for `{query}`"
+            f"لا يمكنني العثور على الأغنية التي طلبتها `{query}`"
 
         )
 
-    await catevent.edit("`yeah..! i found something wi8..🥰`")
+    await catevent.edit("`**لقد وجدت أغنيتك♥. .!**`")
 
     catthumb = Path(f"{catname}.jpg")
 
@@ -224,9 +224,9 @@ async def delete_messages(event, chat, from_message):
 
 @catub.cat_cmd(
 
-    pattern="vsong(?:\s|$)([\s\S]*)",
+    pattern="فيديو(?:\s|$)([\s\S]*)",
 
-    command=("vsong", plugin_category),
+    command=("فيديو", plugin_category),
 
     info={
 
@@ -262,11 +262,11 @@ async def _(event):
 
     else:
 
-        return await edit_or_reply(event, "`What I am Supposed to find`")
+        return await edit_or_reply(event, "`**لا يمكنني إيجاد هذا الفيديو!**`")
 
     cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
 
-    catevent = await edit_or_reply(event, "`wi8..! I am finding your song....`")
+    catevent = await edit_or_reply(event, "`**لقد وجدت الفيديو❤..!**`")
 
     video_link = await yt_search(str(query))
 
@@ -274,7 +274,7 @@ async def _(event):
 
         return await catevent.edit(
 
-            f"Sorry!. I can t find any related video/audio for `{query}`"
+            f" اعتذر. لايمكنني العثور على الفيديو الذي طلبته `{query}`"
 
         )
 
@@ -324,11 +324,11 @@ async def _(event):
 
         return await catevent.edit(
 
-            f"Sorry!. I can t find any related video/audio for `{query}`"
+            f" اعتذر. لايمكنني العثور على الفيديو الذي طلبته `{query}`"
 
         )
 
-    await catevent.edit("`yeah..! i found something wi8..🥰`")
+    await catevent.edit("`**لقد وجدت الفيديو المطلوب🥰..!**`")
 
     catthumb = Path(f"{catname}.jpg")
 
@@ -368,9 +368,9 @@ async def _(event):
 
 @catub.cat_cmd(
 
-    pattern="shazam$",
+    pattern="عكس$",
 
-    command=("shazam", plugin_category),
+    command=("عكس", plugin_category),
 
     info={
 
@@ -396,11 +396,11 @@ async def shazamcmd(event):
 
         return await edit_delete(
 
-            event, "__Reply to Voice clip or Audio clip to reverse search that song.__"
+            event, "__قم بالرد على فيديو او اغنية لعكسها.__"
 
         )
 
-    catevent = await edit_or_reply(event, "__Downloading the audio clip...__")
+    catevent = await edit_or_reply(event, "__تحميل مقطع صوتي.__")
 
     try:
 
@@ -436,7 +436,7 @@ async def shazamcmd(event):
 
         return await edit_delete(
 
-            catevent, f"**Error while reverse searching song:**\n__{str(e)}__"
+            catevent, f"**حدث خطأ في البحث العكسي:**\n__{str(e)}__"
 
         )
 
@@ -446,7 +446,7 @@ async def shazamcmd(event):
 
     await event.client.send_file(
 
-        event.chat_id, image, caption=f"**Song:** `{song}`", reply_to=reply
+        event.chat_id, image, caption=f"**↫ الأغنية🖤 :** `{song}`", reply_to=reply
 
     )
 
@@ -454,9 +454,9 @@ async def shazamcmd(event):
 
 @catub.cat_cmd(
 
-    pattern="song2(?:\s|$)([\s\S]*)",
+    pattern="غنية2(?:\s|$)([\s\S]*)",
 
-    command=("song2", plugin_category),
+    command=("غنية2", plugin_category),
 
     info={
 
@@ -506,7 +506,7 @@ async def _(event):
 
             if baka[0].message.startswith(
 
-                ("I don t like to say this but I failed to find any such song.")
+                ("لم اعثر على الأغنية المطلوبة..!")
 
             ):
 
@@ -540,7 +540,7 @@ async def _(event):
 
             music,
 
-            caption=f"<b>➥ Song :- <code>{song}</code></b>",
+            caption=f"<b>↫ الأغنية🖤 :- <code>{song}</code></b>",
 
             parse_mode="html",
 
@@ -556,9 +556,9 @@ async def _(event):
 
 @catub.cat_cmd(
 
-    pattern="szm$",
+    pattern="عكس2$",
 
-    command=("szm", plugin_category),
+    command=("عكس2", plugin_category),
 
     info={
 
@@ -578,13 +578,13 @@ async def _(event):
 
     if not event.reply_to_msg_id:
 
-        return await edit_delete(event, "```Reply to an audio message.```")
+        return await edit_delete(event, "```قم بالرد على الرسالة الصوتية.```")
 
     reply_message = await event.get_reply_message()
 
     chat = "@auddbot"
 
-    catevent = await edit_or_reply(event, "```Identifying the song```")
+    catevent = await edit_or_reply(event, "```تحديد الأغنية.```")
 
     async with event.client.conversation(chat) as conv:
 
@@ -602,11 +602,11 @@ async def _(event):
 
                 return await catevent.edit(
 
-                    "An error while identifying the song. Try to use a 5-10s long audio message."
+                    "خطأ أثناء تحديد الأغنية. حاول استخدام رسالة صوتية طويلة 5-10s"
 
                 )
 
-            await catevent.edit("Wait just a sec...")
+            await catevent.edit("انتظر قليلا...")
 
             result = await conv.get_response()
 
@@ -614,12 +614,12 @@ async def _(event):
 
         except YouBlockedUserError:
 
-            await catevent.edit("```Please unblock (@auddbot) and try again```")
+            await catevent.edit("```رجاءً قم بفك الحظر عن (@auddbot) وحاول مرة ثانية```")
 
             return
 
-    namem = f"**Song Name : **`{result.text.splitlines()[0]}`\
+    namem = f"**↫ اسم الأغنية : **`{result.text.splitlines()[0]}`\
 
-        \n\n**Details : **__{result.text.splitlines()[2]}__"
+        \n\n**↫ تفاصيل : **__{result.text.splitlines()[2]}__"
 
     await catevent.edit(namem)
