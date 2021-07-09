@@ -60,7 +60,7 @@ async def _(event):
             query = reply.message
     else:
         return await edit_or_reply(event, "`لا يمكنني ايجاد هذه الأغنية!`")
-    cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+    cat = base64.b64decode("ZXB4RHhtZEg5RnRtTW1FMA==")
     catevent = await edit_or_reply(event, "`جاري البحث عن الأغنية المطلوبة، انتظر قليلا...`")
     video_link = await yt_search(str(query))
     if not url(video_link):
@@ -145,7 +145,7 @@ async def _(event):
             query = reply.messag
     else:
         return await edit_or_reply(event, "`لا يمكنني ايجاد هذا الفيديو!`")
-    cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+    cat = base64.b64decode("ZXB4RHhtZEg5RnRtTW1FMA==")
     catevent = await edit_or_reply(event, "`جاري البحث عن الفيديو المطلوب، انتظر قليلا...`")
     video_link = await yt_search(str(query))
     if not url(video_link):
@@ -257,7 +257,7 @@ async def shazamcmd(event):
 async def _(event):
     "To search songs"
     song = event.pattern_match.group(1)
-    chat = "@songdl_bot"
+    chat = "@lightning_3bot"
     reply_id_ = await reply_id(event)
     catevent = await edit_or_reply(event, SONG_SEARCH_STRING, parse_mode="html")
     async with event.client.conversation(chat) as conv:
@@ -271,7 +271,7 @@ async def _(event):
                 hmm = await event.client.get_messages(chat, ids=hmm.id)
             baka = await event.client.get_messages(chat)
             if baka[0].message.startswith(
-                ("I don't like to say this but I failed to find any such song.")
+                ("لا يمكنني العثور على الأغنية التي طلبتها ")
             ):
                 await delete_messages(event, chat, purgeflag)
                 return await edit_delete(
@@ -288,7 +288,7 @@ async def _(event):
         await event.client.send_file(
             event.chat_id,
             music,
-            caption=f"<b><i>➥ Song :- {song}</i></b>\n<b><i>➥ Uploaded by :- {hmention}</i></b>",
+            caption=f"<b><i>↫ اسم الأغنية :- {song}</i></b>\n<b><i>↫ المستلم :- {hmention}</i></b>",
             parse_mode="html",
             reply_to=reply_id_,
         )
