@@ -60,7 +60,7 @@ async def _(event):
             query = reply.message
     else:
         return await edit_or_reply(event, "`لا يمكنني ايجاد هذه الأغنية!`")
-    cat = base64.b64decode("ZXB4RHhtZEg5RnRtTW1FMA==")
+    cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     catevent = await edit_or_reply(event, "`جاري البحث عن الأغنية المطلوبة، انتظر قليلا...`")
     video_link = await yt_search(str(query))
     if not url(video_link):
@@ -145,7 +145,7 @@ async def _(event):
             query = reply.messag
     else:
         return await edit_or_reply(event, "`لا يمكنني ايجاد هذا الفيديو!`")
-    cat = base64.b64decode("ZXB4RHhtZEg5RnRtTW1FMA==")
+    cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     catevent = await edit_or_reply(event, "`جاري البحث عن الفيديو المطلوب، انتظر قليلا...`")
     video_link = await yt_search(str(query))
     if not url(video_link):
@@ -257,7 +257,7 @@ async def shazamcmd(event):
 async def _(event):
     "To search songs"
     song = event.pattern_match.group(1)
-    chat = "@lightning_3bot"
+    chat = "@songdl_bot"
     reply_id_ = await reply_id(event)
     catevent = await edit_or_reply(event, SONG_SEARCH_STRING, parse_mode="html")
     async with event.client.conversation(chat) as conv:
