@@ -1,6 +1,6 @@
-# by  @sandy1709 ( https://t.me/mrconfused  )
+# by  @u_5_1 ( https://t.me/moussa_pro  )
 
-# songs finder for catuserbot
+# songs finder for pro userbot
 import asyncio
 import base64
 import io
@@ -37,8 +37,8 @@ SONGBOT_BLOCKED_STRING = "<code>Please unblock @songdl_bot and try again</code>"
 
 
 @catub.cat_cmd(
-    pattern="song(320)?(?: |$)(.*)",
-    command=("song", plugin_category),
+    pattern="غنية(320)?(?: |$)(.*)",
+    command=("غنية", plugin_category),
     info={
         "header": "To get songs from youtube.",
         "description": "Basically this command searches youtube and send the first video as audio file.",
@@ -125,8 +125,8 @@ async def delete_messages(event, chat, from_message):
 
 
 @catub.cat_cmd(
-    pattern="vsong(?: |$)(.*)",
-    command=("vsong", plugin_category),
+    pattern="فيديو(?: |$)(.*)",
+    command=("فيديو", plugin_category),
     info={
         "header": "To get video songs from youtube.",
         "description": "Basically this command searches youtube and sends the first video",
@@ -200,8 +200,8 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="shazam$",
-    command=("shazam", plugin_category),
+    pattern="عكس$",
+    command=("عكس", plugin_category),
     info={
         "header": "To reverse search song.",
         "description": "Reverse search audio file using shazam api",
@@ -245,8 +245,8 @@ async def shazamcmd(event):
 
 
 @catub.cat_cmd(
-    pattern="song2(?: |$)(.*)",
-    command=("song2", plugin_category),
+    pattern="غنية2(?: |$)(.*)",
+    command=("غنية2", plugin_category),
     info={
         "header": "To search songs and upload to telegram",
         "description": "Searches the song you entered in query and sends it quality of it is 320k",
@@ -298,8 +298,8 @@ async def _(event):
 
 # reverse search by  @Lal_bakthan
 @catub.cat_cmd(
-    pattern="szm$",
-    command=("szm", plugin_category),
+    pattern="عكس2$",
+    command=("عكس2", plugin_category),
     info={
         "header": "To reverse search music file.",
         "description": "music file lenght must be around 10 sec so use ffmpeg plugin to trim it.",
