@@ -27,10 +27,10 @@ LOGS = logging.getLogger(__name__)
 # =========================================================== #
 #                           STRINGS                           #
 # =========================================================== #
-SONG_SEARCH_STRING = "<code>wi8..! I am finding your song....</code>"
-SONG_NOT_FOUND = "<code>Sorry !I am unable to find any song like that</code>"
-SONG_SENDING_STRING = "<code>yeah..! i found something wi8..🥰...</code>"
-SONGBOT_BLOCKED_STRING = "<code>Please unblock @songdl_bot and try again</code>"
+SONG_SEARCH_STRING = "<code>جاري البحث عن الأغنية، الرجاء الإنتظار...</code>"
+SONG_NOT_FOUND = "<code>لم اعثر على الأغنية المطلوبة</code>"
+SONG_SENDING_STRING = "<code>نعم، لقد وجدت الأغنية، جاري الإرسال...</code>"
+SONGBOT_BLOCKED_STRING = "<code>قم بفك الحظر عن البوت @songdl_bot وحاول مرة ثانية</code>"
 # =========================================================== #
 #                                                             #
 # =========================================================== #
@@ -59,13 +59,13 @@ async def _(event):
         if reply.message:
             query = reply.message
     else:
-        return await edit_or_reply(event, "`What I am Supposed to find `")
+        return await edit_or_reply(event, "`**لا يمكنني ايجاد هذه الأغنية!**`")
     cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    catevent = await edit_or_reply(event, "`wi8..! I am finding your song....`")
+    catevent = await edit_or_reply(event, "`**لقد وجدت أغنيتك♥. .!**`")
     video_link = await yt_search(str(query))
     if not url(video_link):
         return await catevent.edit(
-            f"Sorry!. I can't find any related video/audio for `{query}`"
+            f"لا يمكنني العثور على الأغنية التي طلبتها `{query}`"
         )
     cmd = event.pattern_match.group(1)
     q = "320k" if cmd == "320" else "128k"
@@ -90,9 +90,9 @@ async def _(event):
     song_file = Path(f"{catname}.mp3")
     if not os.path.exists(song_file):
         return await catevent.edit(
-            f"Sorry!. I can't find any related video/audio for `{query}`"
+            f"لا يمكنني العثور على الأغنية التي طلبتها `{query}`"
         )
-    await catevent.edit("`yeah..! i found something wi8..🥰`")
+    await catevent.edit("`**لقد وجدت شيئاً🧸🖤!**`")
     catthumb = Path(f"{catname}.jpg")
     if not os.path.exists(catthumb):
         catthumb = Path(f"{catname}.webp")
@@ -103,7 +103,7 @@ async def _(event):
         event.chat_id,
         song_file,
         force_document=False,
-        caption=f"<b><i>➥ Song :- {query}</i></b>\n<b><i>➥ Uploaded by :- {hmention}</i></b>",
+        caption=f"<b><i>↫ الأغنية :- {query}</i></b>\n<b><i>↫ المستلم :- {hmention}</i></b>",
         thumb=catthumb,
         supports_streaming=True,
         parse_mode="html",
@@ -144,23 +144,23 @@ async def _(event):
         if reply.message:
             query = reply.messag
     else:
-        return await edit_or_reply(event, "`What I am Supposed to find`")
+        return await edit_or_reply(event, "`**لا يمكنني ايجاد هذه الأغنية!**`")
     cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
-    catevent = await edit_or_reply(event, "`wi8..! I am finding your song....`")
+    catevent = await edit_or_reply(event, "`**لقد وجدت أغنيتك♥. .!**`")
     video_link = await yt_search(str(query))
     if not url(video_link):
         return await catevent.edit(
-            f"Sorry!. I can't find any related video/audio for `{query}`"
+            f"لا يمكنني العثور على الأغنية التي طلبتها `{query}`"
         )
     # thumb_cmd = thumb_dl.format(video_link=video_link)
     name_cmd = name_dl.format(video_link=video_link)
     video_cmd = video_dl.format(video_link=video_link)
     stderr = (await _catutils.runcmd(video_cmd))[1]
     if stderr:
-        return await catevent.edit(f"**Error :** `{stderr}`")
+        return await catevent.edit(f"**خطأ :** `{stderr}`")
     catname, stderr = (await _catutils.runcmd(name_cmd))[:2]
     if stderr:
-        return await catevent.edit(f"**Error :** `{stderr}`")
+        return await catevent.edit(f"**خطأ :** `{stderr}`")
     # stderr = (await runcmd(thumb_cmd))[1]
     try:
         cat = Get(cat)
@@ -175,9 +175,9 @@ async def _(event):
         vsong_file = Path(f"{catname}.mkv")
     elif not os.path.exists(vsong_file):
         return await catevent.edit(
-            f"Sorry!. I can't find any related video/audio for `{query}`"
+            f"لا يمكنني العثور على الأغنية التي طلبتها `{query}`"
         )
-    await catevent.edit("`yeah..! i found something wi8..🥰`")
+    await catevent.edit("`**لقد وجدت شيئاً🧸🖤!**`")
     catthumb = Path(f"{catname}.jpg")
     if not os.path.exists(catthumb):
         catthumb = Path(f"{catname}.webp")
@@ -187,7 +187,7 @@ async def _(event):
         event.chat_id,
         vsong_file,
         force_document=False,
-        caption=f"<b><i>➥ Song :- {query}</i></b>\n<b><i>➥ Uploaded by :- {hmention}</i></b>",
+        caption=f"<b><i>↫ الأغنية :- {query}</i></b>\n<b><i>↫ المستلم :- {hmention}</i></b>",
         thumb=catthumb,
         supports_streaming=True,
         parse_mode="html",
