@@ -24,7 +24,7 @@ plugin_category = "utils"
 async def app_search(event):
     "To search any app in playstore."
     app_name = event.pattern_match.group(1)
-    event = await edit_or_reply(event, "`يتم البحث...!`")
+    event = await edit_or_reply(event, "`يتم البحث، يرجى الإنتظار🧸🖤...`")
     try:
         remove_space = app_name.split(" ")
         final_name = "+".join(remove_space)
@@ -61,16 +61,16 @@ async def app_search(event):
             .findNext("div", "uzcko")
             .img["data-src"]
         )
-        app_details = "<a href='" + app_icon + "'〽️التطبيق :&#8203;</a>"
+        app_details = "<a href='" + app_icon + "'<〽️ اسم التطبيق :&#8203;</a>"
         app_details += " <b>" + app_name + "</b>"
         app_details += (
-            "\n\n<code>👨‍💻المطور :</code> <a href='"
+            "\n\n<code>👨‍💻 المطور :</code> <a href='"
             + app_dev_link
             + "'>"
             + app_dev
             + "</a>"
         )
-        app_details += "\n<code>🌟تقييم التطبيق :</code> " + app_rating.replace(
+        app_details += "\n<code>🌟 تقييم التطبيق :</code> " + app_rating.replace(
             "Rated ", "⭐ "
         ).replace(" out of ", "/").replace(" stars", "", 1).replace(
             " stars", "⭐ "
@@ -78,13 +78,48 @@ async def app_search(event):
             "five", "5"
         )
         app_details += (
-            "\n<code>💎ميزات التطبيق :</code> <a href='"
+            "\n<code>💎 ميزات التطبيق :</code> <a href='"
             + app_link
-            + "'>مشاهدة على متجر بلاي</a>"
+            + "'>اضغط هنا</a>"
         )
-        app_details += f"\n\n===> {ALIVE_NAME} <==="
+        app_details += f"\n\n↠ {ALIVE_NAME} ↞"
         await event.edit(app_details, link_preview=True, parse_mode="HTML")
     except IndexError:
         await event.edit("تعذر العثور على التطبيق. يرجى إدخال **اسم تطبيق صالح**")
     except Exception as err:
         await event.edit("حدث استثناء:- " + str(err))
+
+
+@bot.on(admin_cmd(pattern="appx ?(.*)"))
+
+@bot.on(sudo_cmd(pattern="appx ?(.*)", allow_sudo=True))
+
+async def mod(event):
+
+    if event.fwd_from:
+
+        return
+
+    modr = event.pattern_match.group(1)
+
+    botusername = "@PremiumAppBot"
+
+    if event.reply_to_msg_id:
+
+        await event.get_reply_message()
+
+    tap = await bot.inline_query(botusername, modr)
+
+    await tap[0].click(event.chat_id)
+
+    await event.delete()
+
+CMD_HELP.update(
+
+    {
+
+        "app": "`.app (app name)\nUse - Get a preview nd link of all apps from playstore.\
+
+        \n\n.appx (app name)\nUse - send mod apks file.`"})
+
+       
