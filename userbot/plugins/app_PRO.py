@@ -60,7 +60,7 @@ async def app_search(event):
             .findNext("div", "uzcko")
             .img["data-src"]
         )
-        app_details = "<a href='" + app_icon + "'<〽️| اسم التطبيق :&#8203;</a>"
+        app_details = "<a href='" + app_icon + "'<📲&#8203;</a>"
         app_details += " <b>" + app_name + "</b>"
         app_details += (
             "\n\n<code>👨‍💻| المطور :</code> <a href='"
