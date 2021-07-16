@@ -3,14 +3,31 @@
 .استخدم الأمر .تطبيق<اسم التطبيق> لجلب تفاصيل عن التطبيق
   © [معرف المطور](http://t.me/u_5_1)
 """
-
+import re
 import bs4
 import requests
+
+from platform import uname
+
+from telethon import events
+
+from bs4 import BeautifulSoup
+
+from telegraph import Telegraph
+
+from telethon.errors.rpcerrorlist import YouBlockedUserError
+
+from userbot import Var
+
+from userbot import CMD_HELP ,ALIVE_NAME
+
+from userbot.utils import admin_cmd, edit_or_reply , sudo_cmd
+
+DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "cat"
 
 from . import ALIVE_NAME, catub, edit_or_reply
 
 plugin_category = "utils"
-
 
 @catub.cat_cmd(
     pattern="تطبيق ([\s\S]*)",
