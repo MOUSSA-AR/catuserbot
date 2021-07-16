@@ -3,31 +3,13 @@
 .استخدم الأمر .تطبيق<اسم التطبيق> لجلب تفاصيل عن التطبيق
   © [معرف المطور](http://t.me/u_5_1)
 """
-import re
 import bs4
 import requests
-
-from platform import uname
-
-from telethon import events
-
-from bs4 import BeautifulSoup
-
-from telegraph import Telegraph
-
-from telethon.errors.rpcerrorlist import YouBlockedUserError
-
-from userbot import Var
-
-from userbot import CMD_HELP ,ALIVE_NAME
-
-from userbot.utils import admin_cmd, edit_or_reply , sudo_cmd
-
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "cat"
 
 from . import ALIVE_NAME, catub, edit_or_reply
 
 plugin_category = "utils"
+
 
 @catub.cat_cmd(
     pattern="تطبيق ([\s\S]*)",
@@ -78,16 +60,16 @@ async def app_search(event):
             .findNext("div", "uzcko")
             .img["data-src"]
         )
-        app_details = "<a href='" + app_icon + "'<〽️ اسم التطبيق :&#8203;</a>"
+        app_details = "<a href='" + app_icon + "'<〽️| اسم التطبيق :&#8203;</a>"
         app_details += " <b>" + app_name + "</b>"
         app_details += (
-            "\n\n<code>👨‍💻 المطور :</code> <a href='"
+            "\n\n<code>👨‍💻| المطور :</code> <a href='"
             + app_dev_link
             + "'>"
             + app_dev
             + "</a>"
         )
-        app_details += "\n<code>🌟 تقييم التطبيق :</code> " + app_rating.replace(
+        app_details += "\n<code>🌟| تقييم التطبيق :</code> " + app_rating.replace(
             "Rated ", "⭐ "
         ).replace(" out of ", "/").replace(" stars", "", 1).replace(
             " stars", "⭐ "
@@ -95,7 +77,7 @@ async def app_search(event):
             "five", "5"
         )
         app_details += (
-            "\n<code>💎 ميزات التطبيق :</code> <a href='"
+            "\n<code>💎| ميزات التطبيق :</code> <a href='"
             + app_link
             + "'>اضغط هنا</a>"
         )
@@ -105,38 +87,3 @@ async def app_search(event):
         await event.edit("تعذر العثور على التطبيق. يرجى إدخال **اسم تطبيق صالح**")
     except Exception as err:
         await event.edit("حدث استثناء:- " + str(err))
-
-
-@bot.on(admin_cmd(pattern="appx ?(.*)"))
-
-@bot.on(sudo_cmd(pattern="appx ?(.*)", allow_sudo=True))
-
-async def mod(event):
-
-    if event.fwd_from:
-
-        return
-
-    modr = event.pattern_match.group(1)
-
-    botusername = "@PremiumAppBot"
-
-    if event.reply_to_msg_id:
-
-        await event.get_reply_message()
-
-    tap = await bot.inline_query(botusername, modr)
-
-    await tap[0].click(event.chat_id)
-
-    await event.delete()
-
-CMD_HELP.update(
-
-    {
-
-        "app": "`.app (app name)\nUse - Get a preview nd link of all apps from playstore.\
-
-        \n\n.appx (app name)\nUse - send mod apks file.`"})
-
-       
