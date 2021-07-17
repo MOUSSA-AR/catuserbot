@@ -58,12 +58,12 @@ async def set_not_afk(event):
         else:
             endtime += f"{m}m {s}s" if m > 0 else f"{s}s"
     current_message = event.message.message
-    if (("afk" not in current_message) or ("#afk" not in current_message)) and (
+    if (("afk" not in current_message) or ("#نوم" not in current_message)) and (
         "on" in AFK_.USERAFK_ON
     ):
         shite = await event.client.send_message(
             event.chat_id,
-            "`Back alive! No Longer afk.\nWas afk for " + endtime + "`",
+            "`لقد عاد للعمل! تم الغاء وضع النوم.\nكان بعيدا عن " + endtime + "`",
         )
         AFK_.USERAFK_ON = {}
         AFK_.afk_time = None
@@ -73,8 +73,8 @@ async def set_not_afk(event):
         if BOTLOG:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                "#متصل \n`الغاء تفعيل وضع المتصل\n"
-                + "لقد عاد للعمل. لم يعد هناك حاجة لوضع المتصل "
+                "#وضع_النوم \n`تم الغاء تفعيل وضع النوم\n"
+                + "لقد عاد للعمل. \n مدة النوم: "
                 + endtime
                 + "`",
             )
@@ -106,7 +106,7 @@ async def on_afk(event):  # sourcery no-metrics
         else:
             endtime += f"{m}m {s}s" if m > 0 else f"{s}s"
     current_message_text = event.message.message.lower()
-    if "afk" in current_message_text or "#متصل" in current_message_text:
+    if "afk" in current_message_text or "#وضع_النوم" in current_message_text:
         return False
     if not await event.get_sender():
         return
@@ -166,8 +166,8 @@ async def on_afk(event):  # sourcery no-metrics
 
 
 @catub.cat_cmd(
-    pattern="نام(?:\s|$)([\s\S]*)",
-    command=("نام", plugin_category),
+    pattern="نوم(?:\s|$)([\s\S]*)",
+    command=("نوم", plugin_category),
     info={
         "header": "Enables afk for your account",
         "description": "When you are in afk if any one tags you then your bot will reply as he is offline.\
