@@ -52,7 +52,7 @@ async def _(event):
 
         ms = round((tms - 0.6) / 3, 3)
 
-        await catevent.edit(f"**↫ البينغ هو :** {ms} ms")
+        await catevent.edit(f"**↫ البينغ هو :** ms{ms}")
 
     else:
 
@@ -64,7 +64,7 @@ async def _(event):
 
         await catevent.edit(
 
-            f"<b><i>↫ البينغ هو↞</b></i>{ms} <b><i>ms",
+            f"<b><i>↫ البينغ هو↞</b></i>{ms}<b><i>",
 
             parse_mode="html",
 
