@@ -90,7 +90,7 @@ async def fastpurger(event):
 
             return await edit_or_reply(
 
-                event, f"**Error**\n`{input_str} ليس عدداً صحيحاً. اعد بناء الجملة بشكل صحيح!`"
+                event, f"**خطأ**\n`{input_str} ليس عدداً صحيحاً. اعد بناء الجملة بشكل صحيح!`"
 
             )
 
