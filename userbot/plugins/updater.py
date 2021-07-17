@@ -263,7 +263,7 @@ async def upstream(event):
         await print_changelogs(event, ac_br, changelog)
         await event.delete()
         return await event.respond(
-            f"استخدم `{cmdhd}تحديث النشر` لتحديث النشر في يوزر بوت برو"
+            f"استخدم `{cmdhd}اعادة تشغيل` لتحديث الاوامر في يوزر بوت برو"
         )
 
     if force_update:
@@ -281,7 +281,7 @@ async def upstream(event):
 )
 async def upstream(event):
     event = await edit_or_reply(event, "`جاري سحب الريبو انتظر ثانية...`")
-    off_repo = "https://github.com/Mr-confused/nekopack"
+    off_repo = "https://github.com/MOUSSA-AR/pro-pack"
     os.chdir("/app")
     try:
         txt = "`عفوًا .. لا يمكن للبوت متابعة التحديث لسبب ما..."
