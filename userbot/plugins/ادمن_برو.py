@@ -30,12 +30,12 @@ from ..sql_helper.mute_sql import is_muted, mute, unmute
 from . import BOTLOG, BOTLOG_CHATID
 
 # =================== STRINGS ============
-PP_TOO_SMOL = "`The image is too small`"
-PP_ERROR = "`Failure while processing the image`"
-NO_ADMIN = "`I am not an admin nub nibba!`"
-NO_PERM = "`I don't have sufficient permissions! This is so sed. Alexa play despacito`"
-CHAT_PP_CHANGED = "`Chat Picture Changed`"
-INVALID_MEDIA = "`Invalid Extension`"
+PP_TOO_SMOL = "`الصورة صغيرة جدا`"
+PP_ERROR = "`فشل أثناء معالجة الصورة`"
+NO_ADMIN = "`أنا لست مشرف!`"
+NO_PERM = "`ليس لدي أذونات كافية! هذا سيئ جدا.`"
+CHAT_PP_CHANGED = "`تغيرت صورة الدردشة`"
+INVALID_MEDIA = "`ملحق غير صالح`"
 
 BANNED_RIGHTS = ChatBannedRights(
     until_date=None,
@@ -112,20 +112,20 @@ async def set_group_photo(event):  # sourcery no-metrics
             except ImageProcessFailedError:
                 return await edit_delete(event, PP_ERROR)
             except Exception as e:
-                return await edit_delete(event, f"**خطأ : **`{str(e)}`")
-            process = "updated"
+                return await edit_delete(event, f"خطأ : `{str(e)}`")
+            process = "تم تحديثها بنجاح"
     else:
         try:
             await event.client(EditPhotoRequest(event.chat_id, InputChatPhotoEmpty()))
         except Exception as e:
-            return await edit_delete(event, f"**خطأ : **`{str(e)}`")
-        process = "deleted"
-        await edit_delete(event, "```**تم ازالة صورة المجموعة🧸🖤**```")
+            return await edit_delete(event, f"خطأ : `{str(e)}`")
+        process = "تم حذفها بنجاح"
+        await edit_delete(event, "```تم ازالة صورة المجموعة🧸🖤```")
     if BOTLOG:
         await event.client.send_message(
             BOTLOG_CHATID,
             "#صورة_المجموعة\n"
-            f"تم تغيير صورة المجموعة {process} بنجاح "
+            f"الصورة {process}\n"
             f"المحادثة: {event.chat.title}(`{event.chat_id}`)",
         )
 
