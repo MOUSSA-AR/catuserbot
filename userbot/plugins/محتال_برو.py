@@ -77,8 +77,8 @@ async def get_imposter_img(text: str) -> str:
 
 
 @catub.cat_cmd(
-    pattern="amongus(?:\s|$)([\s\S]*)",
-    command=("amongus", plugin_category),
+    pattern="ملصق(?:\s|$)([\s\S]*)",
+    command=("ملصق", plugin_category),
     info={
         "header": "Create a Sticker based on the popular game Among Us",
         "flags": {
@@ -123,11 +123,11 @@ async def sayliecmd(event):
         clr = randint(1, 12)
     if not text:
         if not reply:
-            return await edit_or_reply(event, f"{mention} Was a traitor!")
+            return await edit_or_reply(event, f"{mention} كان خائن!")
         if not reply.text:
             return await edit_or_reply(
                 event,
-                f"{_format.mentionuser(get_display_name(reply.sender) ,reply.sender.id)} Was a traitor!",
+                f"{_format.mentionuser(get_display_name(reply.sender) ,reply.sender.id)} كان خائن!",
             )
     imposter_file = await amongus_gen(text, clr)
     await event.delete()
@@ -135,8 +135,8 @@ async def sayliecmd(event):
 
 
 @catub.cat_cmd(
-    pattern="imposter(?:\s|$)([\s\S]*)",
-    command=("imposter", plugin_category),
+    pattern="محتال2(?:\s|$)([\s\S]*)",
+    command=("محتال2", plugin_category),
     info={
         "header": "Fun images for imposter ",
         "usage": "{tr}imposter <username/userid/reply>",
@@ -145,8 +145,8 @@ async def sayliecmd(event):
 async def procces_img(event):
     "Fun images for imposter"
     remain = randint(1, 2)
-    imps = ["wasn`t the impostor", "was the impostor"]
-    text2 = f"\n{remain} impostor(s) remain."
+    imps = ["لم يكن المحتال", "كان المحتال"]
+    text2 = f"\n{remain} المحتالين الباقيين."
     reply_to = await reply_id(event)
     user, reason = await get_user_from_event(event, noedits=True)
     reply = await event.get_reply_message()
@@ -170,8 +170,8 @@ async def procces_img(event):
 
 
 @catub.cat_cmd(
-    pattern="imp(|n) ([\s\S]*)",
-    command=("imp", plugin_category),
+    pattern="محتال(|n) ([\s\S]*)",
+    command=("محتال", plugin_category),
     info={
         "header": "Find imposter with stickers animation.",
         "description": "Imp for imposter impn for not imposter",
@@ -184,14 +184,14 @@ async def _(event):
     USERNAME = f"tg://user?id={event.client.uid}"
     name = event.pattern_match.group(2)
     cmd = event.pattern_match.group(1).lower()
-    text1 = await edit_or_reply(event, "Uhmm... Something is wrong here!!")
+    text1 = await edit_or_reply(event, "امممم ... شئ خطأ هنا !!")
     await asyncio.sleep(2)
     await text1.delete()
     stcr1 = await event.client.send_file(
         event.chat_id, "CAADAQADRwADnjOcH98isYD5RJTwAg"
     )
     text2 = await event.reply(
-        f"**[{ALIVE_NAME}]({USERNAME}) :** I have to call discussion"
+        f"**[{ALIVE_NAME}]({USERNAME}) :** لابد لي من الاتصال والمناقشة"
     )
     await asyncio.sleep(3)
     await stcr1.delete()
@@ -200,7 +200,7 @@ async def _(event):
         event.chat_id, "CAADAQADRgADnjOcH9odHIXtfgmvAg"
     )
     text3 = await event.reply(
-        f"**[{ALIVE_NAME}]({USERNAME}) :** We have to eject the imposter or will lose "
+        f"**[{ALIVE_NAME}]({USERNAME}) :** علينا إخراج المحتال وإلا سنخسر "
     )
     await asyncio.sleep(3)
     await stcr2.delete()
@@ -208,22 +208,22 @@ async def _(event):
     stcr3 = await event.client.send_file(
         event.chat_id, "CAADAQADOwADnjOcH77v3Ap51R7gAg"
     )
-    text4 = await event.reply(f"**Others :** Where??? ")
+    text4 = await event.reply(f"**آخرون :** أين؟؟؟ ")
     await asyncio.sleep(2)
-    await text4.edit(f"**Others :** Who?? ")
+    await text4.edit(f"**آخرون :** من؟؟ ")
     await asyncio.sleep(2)
     await text4.edit(
-        f"**[{ALIVE_NAME}]({USERNAME}) :** Its {name} , I saw {name}  using vent,"
+        f"**[{ALIVE_NAME}]({USERNAME}) :** انها {name} , لقد رأيت {name}  باستخدام التنفيس,"
     )
     await asyncio.sleep(3)
-    await text4.edit(f"**Others :**Okay.. Vote {name} ")
+    await text4.edit(f"**آخرون :**حسنا.. تصويت {name} ")
     await asyncio.sleep(2)
     await stcr3.delete()
     await text4.delete()
     stcr4 = await event.client.send_file(
         event.chat_id, "CAADAQADLwADnjOcH-wxu-ehy6NRAg"
     )
-    catevent = await event.reply(f"{name} is ejected.......")
+    catevent = await event.reply(f"{name} طرد.......")
     await asyncio.sleep(2)
     await catevent.edit("ඞㅤㅤㅤㅤ ㅤㅤㅤㅤ")
     await asyncio.sleep(0.5)
@@ -248,14 +248,14 @@ async def _(event):
     await stcr4.delete()
     if cmd == "":
         await catevent.edit(
-            f". 　　　。　　　　•　 　ﾟ　　。 　　.\n .　　　 　　.　　　　　。　　 。　. 　\n\n  . 　　 。   　     ඞ         。 . 　　 • 　　　　•\n\n  ﾟ{name} was an Imposter.      。　. 　 　       。　.                                        。　. \n                                   　.          。　  　. \n　'         0 Impostor remains    　 。　.  　　.                。　.        。 　     .          。 　            .               .         .    ,      。\n　　ﾟ　　　.　　.    ,　 　。　 　. 　 .     。"
+            f". 　　　。　　　　•　 　ﾟ　　。 　　.\n .　　　 　　.　　　　　。　　 。　. 　\n\n  . 　　 。   　     ඞ         。 . 　　 • 　　　　•\n\n  ﾟ{name} كان محتال.      。　. 　 　       。　.                                        。　. \n                                   　.          。　  　. \n　'         0 يبقى المحتال    　 。　.  　　.                。　.        。 　     .          。 　            .               .         .    ,      。\n　　ﾟ　　　.　　.    ,　 　。　 　. 　 .     。"
         )
         await asyncio.sleep(4)
         await catevent.delete()
         await event.client.send_file(event.chat_id, "CAADAQADLQADnjOcH39IqwyR6Q_0Ag")
     elif cmd == "n":
         await catevent.edit(
-            f". 　　　。　　　　•　 　ﾟ　　。 　　.\n .　　　 　　.　　　　　。　　 。　. 　\n\n  . 　　 。   　     ඞ         。 . 　　 • 　　　　•\n\n  ﾟ{name} was not an Imposter.      。　. 　 　       。　.                                        。　. \n                                   　.          。　  　. \n　'         1 Impostor remains    　 。　.  　　.                。　.        。 　     .          。 　            .               .         .    ,      。\n　　ﾟ　　　.　　.    ,　 　。　 　. 　 .     。"
+            f". 　　　。　　　　•　 　ﾟ　　。 　　.\n .　　　 　　.　　　　　。　　 。　. 　\n\n  . 　　 。   　     ඞ         。 . 　　 • 　　　　•\n\n  ﾟ{name} ليس محتال.      。　. 　 　       。　.                                        。　. \n                                   　.          。　  　. \n　'         1 يبقا المحتال    　 。　.  　　.                。　.        。 　     .          。 　            .               .         .    ,      。\n　　ﾟ　　　.　　.    ,　 　。　 　. 　 .     。"
         )
         await asyncio.sleep(4)
         await catevent.delete()
@@ -263,8 +263,8 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="timp(|n) ([\s\S]*)",
-    command=("timp", plugin_category),
+    pattern="محتال3(|n) ([\s\S]*)",
+    command=("محتال3", plugin_category),
     info={
         "header": "Find imposter with text animation.",
         "description": "timp for imposter timpn for not imposter",
@@ -276,7 +276,7 @@ async def _(event):
     "Find imposter with text animation."
     name = event.pattern_match.group(2)
     cmd = event.pattern_match.group(1).lower()
-    catevent = await edit_or_reply(event, f"{name} is ejected.......")
+    catevent = await edit_or_reply(event, f"{name} طرد.......")
     await asyncio.sleep(2)
     await catevent.edit("ඞㅤㅤㅤㅤ ㅤㅤㅤㅤ")
     await asyncio.sleep(0.8)
@@ -300,9 +300,9 @@ async def _(event):
     await asyncio.sleep(0.2)
     if cmd == "":
         await catevent.edit(
-            f". 　　　。　　　　•　 　ﾟ　　。 　　.\n .　　　 　　.　　　　　。　　 。　. 　\n\n  . 　　 。   　     ඞ         。 . 　　 • 　　　　•\n\n  ﾟ {name} was an Imposter.      。　. 　 　       。　.                                        。　. \n                                   　.          。　  　. \n　'         0 Impostor remains    　 。　.  　　.                。　.        。 　     .          。 　            .               .         .    ,      。\n　　ﾟ　　　.　　.    ,　 　。　 　. 　 .     。"
+            f". 　　　。　　　　•　 　ﾟ　　。 　　.\n .　　　 　　.　　　　　。　　 。　. 　\n\n  . 　　 。   　     ඞ         。 . 　　 • 　　　　•\n\n  ﾟ {name} كان محتال.      。　. 　 　       。　.                                        。　. \n                                   　.          。　  　. \n　'         0 يبقى المحتال    　 。　.  　　.                。　.        。 　     .          。 　            .               .         .    ,      。\n　　ﾟ　　　.　　.    ,　 　。　 　. 　 .     。"
         )
     elif cmd == "n":
         await catevent.edit(
-            f". 　　　。　　　　•　 　ﾟ　　。 　　.\n .　　　 　　.　　　　　。　　 。　. 　\n\n  . 　　 。   　     ඞ         。 . 　　 • 　　　　•\n\n  ﾟ {name} was not an Imposter.      。　. 　 　       。　.                                        。　. \n                                   　.          。　  　. \n　'         1 Impostor remains    　 。　.  　　.                。　.        。 　     .          。 　            .               .         .    ,      。\n　　ﾟ　　　.　　.    ,　 　。　 　. 　 .     。"
+            f". 　　　。　　　　•　 　ﾟ　　。 　　.\n .　　　 　　.　　　　　。　　 。　. 　\n\n  . 　　 。   　     ඞ         。 . 　　 • 　　　　•\n\n  ﾟ {name} ليس محتال.      。　. 　 　       。　.                                        。　. \n                                   　.          。　  　. \n　'         1 يبقى المحتال    　 。　.  　　.                。　.        。 　     .          。 　            .               .         .    ,      。\n　　ﾟ　　　.　　.    ,　 　。　 　. 　 .     。"
         )
