@@ -309,7 +309,7 @@ async def nothanos(event):
         if BOTLOG:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                "#الغء_تقييد\n"
+                "#الغاء_تقييد\n"
                 f"العضو: [{user.first_name}](tg://user?id={user.id})\n"
                 f"المحادثة: {event.chat.title}(`{event.chat_id}`)",
             )
@@ -531,7 +531,7 @@ async def endmute(event):
     try:
         await event.client.kick_participant(event.chat_id, user.id)
     except Exception as e:
-        return await catevent.edit(NO_PERM + f"\n{str(e)}")
+        return await cateventedit(NO_PERM + f"\n{str(e)}")
     if reason:
         await catevent.edit(
             f"`طرد` [{user.first_name}](tg://user?id={user.id})`!`\nالسبب: {reason}"
@@ -603,7 +603,7 @@ async def pin(event):
     "To unpin message(s) in the group"
     to_unpin = event.reply_to_msg_id
     options = (event.pattern_match.group(1)).strip()
-    if not to_unpin and options != "all":
+    if not to_unpin and options != "الكل":
         return await edit_delete(
             event,
             "__قم بالرد على الرسالة لتتمكن من الغاء تثبيتها__",
@@ -612,7 +612,7 @@ async def pin(event):
     try:
         if to_unpin and not options:
             await event.client.unpin_message(event.chat_id, to_unpin)
-        elif options == "all":
+        elif options == "الكل":
             await event.client.unpin_message(event.chat_id)
         else:
             return await edit_delete(
@@ -655,7 +655,7 @@ async def pin(event):
 )
 async def _iundlt(event):  # sourcery no-metrics
     "To check recent deleted messages in group"
-    catevent = await edit_or_reply(event, "`البحث في الرسائل الأخيرة.....`")
+    catevent = await edit_or_reply(event, "`جاري البحث في الرسائل الأخيرة. انتظر قليلا....`")
     flag = event.pattern_match.group(1)
     if event.pattern_match.group(2) != "":
         lim = int(event.pattern_match.group(2))
