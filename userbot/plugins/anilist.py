@@ -33,8 +33,8 @@ plugin_category = "extra"
 
 
 @catub.cat_cmd(
-    pattern="airing ([\s\S]*)",
-    command=("airing", plugin_category),
+    pattern="بث ([\s\S]*)",
+    command=("بث", plugin_category),
     info={
         "header": "Shows you the time left for the new episode of current running anime show.",
         "usage": "{tr}airing",
@@ -48,19 +48,19 @@ async def anilist(event):
     response = requests.post(
         url, json={"query": airing_query, "variables": variables}
     ).json()["data"]["Media"]
-    ms_g = f"**Name**: **{response['title']['romaji']}**(`{response['title']['native']}`)\n**ID**: `{response['id']}`"
+    ms_g = f"**الأسم**: **{response['title']['romaji']}**(`{response['title']['native']}`)\n**الأيدي**: `{response['id']}`"
     if response["nextAiringEpisode"]:
         airing_time = response["nextAiringEpisode"]["timeUntilAiring"]
         airing_time_final = time_formatter(airing_time)
-        ms_g += f"\n**Episode**: `{response['nextAiringEpisode']['episode']}`\n**Airing In**: `{airing_time_final}`"
+        ms_g += f"\n**حلقة**: `{response['nextAiringEpisode']['episode']}`\n**بث في**: `{airing_time_final}`"
     else:
-        ms_g += f"\n**Episode**:{response['episodes']}\n**Status**: `N/A`"
+        ms_g += f"\n**حلقة**:{response['episodes']}\n**حالة**: `N/A`"
     await edit_or_reply(event, ms_g)
 
 
 @catub.cat_cmd(
-    pattern="anime(?:\s|$)([\s\S]*)",
-    command=("anime", plugin_category),
+    pattern="انمي(?:\s|$)([\s\S]*)",
+    command=("انمي", plugin_category),
     info={
         "header": "Shows you the details of the anime.",
         "description": "Fectchs anime information from anilist",
@@ -73,17 +73,17 @@ async def anilist(event):
     input_str = event.pattern_match.group(1)
     if not input_str:
         return await edit_delete(
-            event, "__What should i search ? Gib me Something to Search__"
+            event, "__ما الذي يجب أن أبحث عنه؟ اعطني شيء للبحث__"
         )
-    event = await edit_or_reply(event, "`Searching...`")
+    event = await edit_or_reply(event, "`جاري البحث...`")
     result = await callAPI(input_str)
     msg = await formatJSON(result)
     await event.edit(msg, link_preview=True)
 
 
 @catub.cat_cmd(
-    pattern="manga(?:\s|$)([\s\S]*)",
-    command=("manga", plugin_category),
+    pattern="مانغا(?:\s|$)([\s\S]*)",
+    command=("مانغا", plugin_category),
     info={
         "header": "Searches for manga.",
         "usage": "{tr}manga <manga name",
@@ -100,9 +100,9 @@ async def get_manga(event):
             input_str = reply.text
         else:
             return await edit_delete(
-                event, "__What should i search ? Gib me Something to Search__"
+                event, "__ما الذي يجب أن أبحث عنه؟ اعطني شيء للبحث__"
             )
-    catevent = await edit_or_reply(event, "`Searching Manga..`")
+    catevent = await edit_or_reply(event, "`البحث في المانغا..`")
     jikan = jikanpy.jikan.Jikan()
     search_result = jikan.search("manga", input_str)
     first_mal_id = search_result["results"][0]["mal_id"]
@@ -114,8 +114,8 @@ async def get_manga(event):
 
 
 @catub.cat_cmd(
-    pattern="sanime(?:\s|$)([\s\S]*)",
-    command=("sanime", plugin_category),
+    pattern="بحث انمي(?:\s|$)([\s\S]*)",
+    command=("بحث انمي", plugin_category),
     info={
         "header": "Searches for anime.",
         "usage": "{tr}sanime <anime name",
@@ -132,9 +132,9 @@ async def get_manga(event):
             input_str = reply.text
         else:
             return await edit_delete(
-                event, "__What should i search ? Gib me Something to Search__"
+                event, "ما الذي يجب أن أبحث عنه؟ اعطني شيء للبحث فيه _"
             )
-    catevent = await edit_or_reply(event, "`Searching Anime..`")
+    catevent = await edit_or_reply(event, "`البحث عن الانمي..`")
     jikan = jikanpy.jikan.Jikan()
     search_result = jikan.search("anime", input_str)
     first_mal_id = search_result["results"][0]["mal_id"]
@@ -160,8 +160,8 @@ async def get_manga(event):
 
 
 @catub.cat_cmd(
-    pattern="char(?:\s|$)([\s\S]*)",
-    command=("char", plugin_category),
+    pattern="شخصية(?:\s|$)([\s\S]*)",
+    command=("شخصية", plugin_category),
     info={
         "header": "Shows you character infomation.",
         "usage": "{tr}char <char name>",
@@ -178,13 +178,13 @@ async def character(event):
             search_query = reply.text
         else:
             return await edit_delete(
-                event, "__What should i search ? Gib me Something to Search__"
+                event, "ما الذي يجب أن أبحث عنه؟ اعطني شيء للبحث فيه _"
             )
-    catevent = await edit_or_reply(event, "`Searching Character...`")
+    catevent = await edit_or_reply(event, "`البحث عن الشخصية...`")
     try:
         search_result = jikan.search("character", search_query)
     except APIException:
-        return await edit_delete(catevent, "`Character not found.`")
+        return await edit_delete(catevent, "`الشخصية غير موجودة.`")
     first_mal_id = search_result["results"][0]["mal_id"]
     character = jikan.character(first_mal_id)
     caption = f"[{character['name']}]({character['url']})"
@@ -194,7 +194,7 @@ async def character(event):
         caption += "\n"
     if character["nicknames"]:
         nicknames_string = ", ".join(character["nicknames"])
-        caption += f"\n**Nicknames** : `{nicknames_string}`"
+        caption += f"\n**اسماء مستعارة** : `{nicknames_string}`"
     about = character["about"].split(" ", 60)
     try:
         about.pop(60)
@@ -205,7 +205,7 @@ async def character(event):
     for entity in character:
         if character[entity] is None:
             character[entity] = "Unknown"
-    caption += f"\n🔰**Extracted Character Data**🔰\n\n{about_string}"
+    caption += f"\n🔰**بينات الشخصية المستخرجة**🔰\n\n{about_string}"
     caption += f" [Read More]({mal_url})..."
     await catevent.delete()
     await event.client.send_file(
@@ -217,8 +217,8 @@ async def character(event):
 
 
 @catub.cat_cmd(
-    pattern="a(kaizoku|kayo|indi)(?: |$)([\S\s]*)",
-    command=("akaizoku", plugin_category),
+    pattern="انمي(قراصنة|كايو|هندي)(?: |$)([\S\s]*)",
+    command=("انمي", plugin_category),
     info={
         "header": "Shows you anime download link.",
         "usage": [
@@ -242,9 +242,9 @@ async def anime_download(event):  # sourcery no-metrics
         search_query = reply.text
     elif not search_query:
         return await edit_delete(
-            event, "__What should i search ? Gib me Something to Search__"
+            event, "ما الذي يجب أن أبحث عنه؟ اعطني شيء للبحث فيه _"
         )
-    catevent = await edit_or_reply(event, "`Searching anime...`")
+    catevent = await edit_or_reply(event, "`البحث عن الانمي...`")
     search_query = search_query.replace(" ", "+")
     if input_str == "kaizoku":
         search_url = f"https://animekaizoku.com/?s={search_query}"
@@ -252,51 +252,51 @@ async def anime_download(event):  # sourcery no-metrics
         soup = bs4.BeautifulSoup(html_text, "html.parser")
         search_result = soup.find_all("h2", {"class": "post-title"})
         if search_result:
-            result = f"<a href={search_url}>Click Here For More Results</a> <b>of</b> <code>{html.escape(search_query)}</code> <b>on</b> <code>AnimeKaizoku</code>: \n\n"
+            result = f"<a href={search_url}>انقر هنا لمزيد من النتائج</a> <b>من</b> <code>{html.escape(search_query)}</code> <b>على</b> <code>قراصنة الانمي</code>: \n\n"
             for entry in search_result:
                 post_link = "https://animekaizoku.com/" + entry.a["href"]
                 post_name = html.escape(entry.text)
                 result += f"• <a href={post_link}>{post_name}</a>\n"
         else:
-            result = f"<b>No result found for</b> <code>{html.escape(search_query)}</code> <b>on</b> <code>AnimeKaizoku</code>"
+            result = f"<b>لم يتم العثور على نتيجة ل</b> <code>{html.escape(search_query)}</code> <b>على</b> <code>قراصنة الانمي</code>"
     elif input_str == "kayo":
         search_url = f"https://animekayo.com/?s={search_query}"
         html_text = requests.get(search_url, headers=headers).text
         soup = bs4.BeautifulSoup(html_text, "html.parser")
         search_result = soup.find_all("h2", {"class": "title"})
-        result = f"<a href={search_url}>Click Here For More Results</a> <b>of</b> <code>{html.escape(search_query)}</code> <b>on</b> <code>AnimeKayo</code>: \n\n"
+        result = f"<a href={search_url}>انقر هنا لمزيد من النتائج</a> <b>من</b> <code>{html.escape(search_query)}</code> <b>على</b> <code>انمي كايو</code>: \n\n"
         if search_result:
             for entry in search_result:
-                if entry.text.strip() == "Nothing Found":
-                    result = f"<b>No result found for</b> <code>{html.escape(search_query)}</code> <b>on</b> <code>AnimeKayo</code>"
+                if entry.text.strip() == "لم يتم العثور على شيء":
+                    result = f"<b>لم يتم العثور على نتيجة ل</b> <code>{html.escape(search_query)}</code> <b>على</b> <code>انمي كايو</code>"
                     break
                 post_link = entry.a["href"]
                 post_name = html.escape(entry.text.strip())
                 result += f"• <a href={post_link}>{post_name}</a>\n"
         else:
-            result = f"<b>No result found for</b> <code>{html.escape(search_query)}</code> <b>on</b> <code>AnimeKayo</code>"
+            result = f"<b>لم يتم العثور على نتيجة ل</b> <code>{html.escape(search_query)}</code> <b>على</b> <code>انمي كايو</code>"
     elif input_str == "indi":
         search_url = f"https://indianime.com/?s={search_query}"
         html_text = requests.get(search_url, headers=headers).text
         soup = bs4.BeautifulSoup(html_text, "html.parser")
         search_result = soup.find_all("h1", {"class": "elementor-post__title"})
-        result = f"<a href={search_url}>Click Here For More Results</a> <b>of</b> <code>{html.escape(search_query)}</code> <b>on</b> <code>indianime</code>: \n\n"
+        result = f"<a href={search_url}>لم يتم العثور على نتيجة ل</a> <b>من</b> <code>{html.escape(search_query)}</code> <b>على</b> <code>انمي الهند</code>: \n\n"
         if search_result:
             for entry in search_result:
-                if entry.text.strip() == "Nothing Found":
-                    result = f"<b>No result found for</b> <code>{html.escape(search_query)}</code> <b>on</b> <code>Indianime</code>.\n<b>You can request anime <a href='https://indianime.com/request-anime'>here</a></b>"
+                if entry.text.strip() == "لم يتم العثور على شيء":
+                    result = f"<b>لم يتم العثور على نتيجة ل</b> <code>{html.escape(search_query)}</code> <b>على</b> <code>انمي الهند</code>.\n<b>يمكنك طلب أنمي <a href='https://indianime.com/request-anime'>here</a></b>"
                     break
                 post_link = entry.a["href"]
                 post_name = html.escape(entry.text.strip())
                 result += f"• <a href={post_link}>{post_name}</a>\n"
         else:
-            result = f"<b>No result found for</b> <code>{html.escape(search_query)}</code> <b>on</b> <code>IndiAnime</code>"
+            result = f"<b>لم يتم العثور على نتيجة ل</b> <code>{html.escape(search_query)}</code> <b>على</b> <code>انمي الهند</code>"
     await catevent.edit(result, parse_mode="html")
 
 
 @catub.cat_cmd(
-    pattern="upcoming$",
-    command=("upcoming", plugin_category),
+    pattern="انمي جديد$",
+    command=("انمي جديد", plugin_category),
     info={
         "header": "Shows you upcoming anime's.",
         "usage": "{tr}upcoming",
@@ -317,10 +317,10 @@ async def upcoming(event):
 
 
 @catub.cat_cmd(
-    pattern="w(hat)?anime$",
-    command=("whatanime", plugin_category),
+    pattern="ا(نمي)?عكسي$",
+    command=("انمي عكسي", plugin_category),
     info={
-        "header": "Reverse search of anime.",
+        "header": "البحث العكسي للأنمي.",
         "usage": [
             "{tr}whatanime reply to photo/gif/video",
             "{tr}wanime reply to photo/gif/video",
@@ -332,18 +332,18 @@ async def whatanime(event):
     reply = await event.get_reply_message()
     if not reply:
         return await edit_delete(
-            event, "__reply to media to reverse search that anime__."
+            event, "__رد على وسائل الإعلام لعكس البحث في هذا الأنمي__."
         )
     mediatype = media_type(reply)
     if mediatype not in ["Photo", "Video", "Gif", "Sticker"]:
         return await edit_delete(
             event,
-            f"__Reply to proper media that is expecting photo/video/gif/sticker. not {mediatype}__.",
+            f"__الرد على الوسائط المناسبة مثل صورة / فيديو / جيف / ملصق.  ليس {mediatype}__.",
         )
     output = await _cattools.media_to_pic(event, reply)
     if output[1] is None:
         return await edit_delete(
-            output[0], "__Unable to extract image from the replied message.__"
+            output[0], "__ تعذر استخراج الصورة من الرسالة التي تم الرد عليها.__"
         )
     file = memory_file("anime.jpg", output[1])
     try:
@@ -352,9 +352,9 @@ async def whatanime(event):
         try:
             response = upload_file(output[1])
         except exceptions.TelegraphException as exc:
-            return await edit_delete(output[0], f"**Error :**\n__{str(exc)}__")
+            return await edit_delete(output[0], f"**خطأ :**\n__{str(exc)}__")
     cat = f"https://telegra.ph{response[0]}"
-    await output[0].edit("`Searching for result..`")
+    await output[0].edit("`البحث عن النتيجة..`")
     async with aiohttp.ClientSession() as session:
         async with session.post(
             f"https://api.trace.moe/search?anilistInfo&url={quote_plus(cat)}"
@@ -363,31 +363,31 @@ async def whatanime(event):
         framecount = resp0["frameCount"]
         error = resp0["error"]
         if error != "":
-            return await edit_delete(output[0], f"**Error:**\n__{error}__")
+            return await edit_delete(output[0], f"**خطأ:**\n__{error}__")
         js0 = resp0["result"]
         if not js0:
-            return await output[0].edit("`No results found.`")
+            return await output[0].edit("`لم يتم العثور على شيء.`")
         js0 = js0[0]
         text = (
-            f'**Titile Romaji : **`{html.escape(js0["anilist"]["title"]["romaji"])}`\n'
+            f'**لقب روماجي : **`{html.escape(js0["anilist"]["title"]["romaji"])}`\n'
         )
         text += (
-            f'**Titile Native :** `{html.escape(js0["anilist"]["title"]["native"])}`\n'
+            f'**لقب محلي :** `{html.escape(js0["anilist"]["title"]["native"])}`\n'
         )
         text += (
-            f'**Titile English :** `{html.escape(js0["anilist"]["title"]["english"])}`\n'
+            f'**لقب اجنبي :** `{html.escape(js0["anilist"]["title"]["english"])}`\n'
             if js0["anilist"]["title"]["english"] is not None
             else ""
         )
-        text += f'**Is Adult :** __{js0["anilist"]["isAdult"]}__\n'
+        text += f'**بالغ :** __{js0["anilist"]["isAdult"]}__\n'
         #         text += f'**File name :** __{js0["filename"]}__\n'
-        text += f'**Episode :** __{html.escape(str(js0["episode"]))}__\n'
-        text += f'**From :** __{readable_time(js0["from"])}__\n'
-        text += f'**To :** __{readable_time(js0["to"])}__\n'
+        text += f'**حلقة :** __{html.escape(str(js0["episode"]))}__\n'
+        text += f'**من :** __{readable_time(js0["from"])}__\n'
+        text += f'**الى :** __{readable_time(js0["to"])}__\n'
         percent = round(js0["similarity"] * 100, 2)
         text += f"**Similarity :** __{percent}%__\n"
         result = (
-            f"**Searched {framecount} frames and found this as best result :**\n\n"
+            f"**تم البحث عن {framecount} الإطارات ووجدت هذا على أنه أفضل نتيجة :**\n\n"
             + text
         )
         msg = await output[0].edit(result)
