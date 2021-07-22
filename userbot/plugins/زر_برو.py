@@ -17,8 +17,8 @@ BTN_URL_REGEX = re.compile(r"(\[([^\[]+?)\]\<buttonurl:(?:/{0,2})(.+?)(:same)?\>
 
 
 @catub.cat_cmd(
-    pattern="cbutton(?:\s|$)([\s\S]*)",
-    command=("cbutton", plugin_category),
+    pattern="زر2(?:\s|$)([\s\S]*)",
+    command=("زر2", plugin_category),
     info={
         "header": "To create button posts",
         "note": f"For working of this you need your bot ({Config.TG_BOT_USERNAME}) in the group/channel \
@@ -38,7 +38,7 @@ async def _(event):
     else:
         markdown_note = "".join(event.text.split(maxsplit=1)[1:])
     if not markdown_note:
-        return await edit_delete(event, "`what text should i use in button post`")
+        return await edit_delete(event, "`ما النص الذي يجب أن أستخدمه في الزر الآخر!`")
     prev = 0
     note_data = ""
     buttons = []
@@ -84,8 +84,8 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="ibutton(?:\s|$)([\s\S]*)",
-    command=("ibutton", plugin_category),
+    pattern="زر(?:\s|$)([\s\S]*)",
+    command=("زر", plugin_category),
     info={
         "header": "To create button posts via inline",
         "note": f"Markdown is Default to html",
@@ -106,7 +106,7 @@ async def _(event):
     else:
         markdown_note = "".join(event.text.split(maxsplit=1)[1:])
     if not markdown_note:
-        return await edit_delete(event, "`what text should i use in button post`")
+        return await edit_delete(event, "`ما النص الذي يجب أن أستخدمه في الزر الآخر`")
     catinput = "Inline buttons " + markdown_note
     results = await event.client.inline_query(Config.TG_BOT_USERNAME, catinput)
     await results[0].click(event.chat_id, reply_to=reply_to_id, hide_via=True)
