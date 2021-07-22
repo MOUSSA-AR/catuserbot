@@ -4,8 +4,8 @@ plugin_category = "fun"
 
 
 @catub.cat_cmd(
-    pattern="ded ([\s\S]*)",
-    command=("ded", plugin_category),
+    pattern="عدو ([\s\S]*)",
+    command=("عدو", plugin_category),
     info={
         "header": "Just a art command try out yourself to see",
         "usage": "{tr}ded <text>",
@@ -34,8 +34,8 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="killer ([\s\S]*)",
-    command=("killer", plugin_category),
+    pattern="قتل ([\s\S]*)",
+    command=("قتل", plugin_category),
     info={
         "header": "Just a art command try out yourself to see",
         "usage": "{tr}killer <text>",
@@ -46,7 +46,7 @@ async def _(event):
     name = event.pattern_match.group(1)
     await edit_or_reply(
         event,
-        f"__**Commando **__{ALIVE_NAME}          \n\n"
+        f"__**القائد **__{ALIVE_NAME}          \n\n"
         "_/﹋\_\n"
         "(҂`_´)\n"
         f"<,︻╦╤─ ҉ - - - {name}\n"
@@ -108,7 +108,7 @@ G = (
     "╬═╬ \n"
     "╬═╬ \n"
     "╬═╬ \n"
-    "╬═╬ Hello, My Friend :D \n"
+    "╬═╬ مرحبا صديقي :D \n"
     "╬═╬☻/ \n"
     "╬═╬/▌ \n"
     "╬═╬/ \\n"
@@ -131,7 +131,7 @@ H = (
     "┻┳┻┳┻┳┃┃┃┈'''┃┈┃┃.\n"
     "┳┻┳┻┳┻┣╋┫'''┊┣━╋┫\n"
     "┻┳┻┳┻╭╯╰╰-╭╯━╯.''╰╮\n"
-    "Love You Forever,,,,\n"
+    "احبك للأبد,,,,\n"
 )
 
 I = (
@@ -183,7 +183,7 @@ J = (
     "⣿⣿⣿⣿⡿⠃⠀⠀⠀⠀⠈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⣿\n"
     "⣿⡿⠋⠋⠀⠀⠀⠀⠀⠀⠈⠙⠻⢿⢿⣿⣿⡿⣿⣿⡟⠋⠀⢀⣩\n"
     "⣿⣿⡄⠀⠀⠀⠀⠀⠁⡀⠀⠀⠀⠀⠈⠉⠛⢷⣭⠉⠁⠀⠀⣿⣿\n"
-    "⣇⣀. INDIA🇮🇳INDIA🇮🇳⠆⠠..⠘⢷⣿⣿⣛⠐⣶⣿⣿\n"
+    "⣇⣀. USERBOT🇸🇾PRO🇸🇾⠆⠠..⠘⢷⣿⣿⣛⠐⣶⣿⣿\n"
     "⣿⣄⠀⣰⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⢀⣠⣿⣿⣿⣾⣿⣿⣿\n"
     "⣿⣿⣿⣿⠀⠀⠀⠀⡠⠀⠀⠀⠀⠀⢀⣠⣿⣿⣿⣿⣿⣿⣿⣿⣿\n"
     "⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠄⠀⣤⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿\n"
@@ -301,7 +301,7 @@ O = (
     "──▄▀█▄▄▄─────▄▀█▄▄▄\n"
     "▄▀──█▄▄──────█─█▄▄\n"
     "─▄▄▄▀──▀▄───▄▄▄▀──▀▄\n"
-    "─▀───────▀▀─▀───────▀▀\n🚶🏻‍♂️🚶🏻‍♂️ɮʏɛ ʄʀɨɛռɖֆ.."
+    "─▀───────▀▀─▀───────▀▀\n س س سلام.🚶‍♂️🚶‍♂️"
 )
 
 P = (
@@ -332,8 +332,8 @@ R = (
 
 
 @catub.cat_cmd(
-    pattern="monster$",
-    command=("monster", plugin_category),
+    pattern="مسخ$",
+    command=("مسخ", plugin_category),
     info={
         "header": "Just a art command try out yourself to see",
         "usage": "{tr}monster",
@@ -345,8 +345,8 @@ async def bluedevilmonster(monster):
 
 
 @catub.cat_cmd(
-    pattern="pig$",
-    command=("pig", plugin_category),
+    pattern="خنزير$",
+    command=("خنزير", plugin_category),
     info={
         "header": "Just a art command try out yourself to see",
         "usage": "{tr}pig",
@@ -358,8 +358,8 @@ async def bluedevilpig(pig):
 
 
 @catub.cat_cmd(
-    pattern="gun$",
-    command=("gun", plugin_category),
+    pattern="مسدس$",
+    command=("مسدس", plugin_category),
     info={
         "header": "Just a art command try out yourself to see",
         "usage": "{tr}gun",
@@ -371,8 +371,8 @@ async def bluedevilgun(gun):
 
 
 @catub.cat_cmd(
-    pattern="dog$",
-    command=("dog", plugin_category),
+    pattern="كلب$",
+    command=("كلب", plugin_category),
     info={
         "header": "Just a art command try out yourself to see",
         "usage": "{tr}dog",
@@ -384,8 +384,8 @@ async def bluedevildog(dog):
 
 
 @catub.cat_cmd(
-    pattern="hello$",
-    command=("hello", plugin_category),
+    pattern="هلو$",
+    command=("هلو", plugin_category),
     info={
         "header": "Just a art command try out yourself to see",
         "usage": "{tr}hello",
@@ -397,8 +397,8 @@ async def bluedevilhello(hello):
 
 
 @catub.cat_cmd(
-    pattern="hmf$",
-    command=("hmf", plugin_category),
+    pattern="هروب$",
+    command=("هروب", plugin_category),
     info={
         "header": "Just a art command try out yourself to see",
         "usage": "{tr}hmf",
@@ -410,8 +410,8 @@ async def bluedevilhmf(hmf):
 
 
 @catub.cat_cmd(
-    pattern="couple$",
-    command=("couple", plugin_category),
+    pattern="حب$",
+    command=("حب", plugin_category),
     info={
         "header": "Just a art command try out yourself to see",
         "usage": "{tr}couple",
@@ -423,8 +423,8 @@ async def bluedevilcouple(couple):
 
 
 @catub.cat_cmd(
-    pattern="sup$",
-    command=("sup", plugin_category),
+    pattern="رشفة$",
+    command=("رشفة", plugin_category),
     info={
         "header": "Just a art command try out yourself to see",
         "usage": "{tr}sup",
@@ -436,8 +436,8 @@ async def bluedevilsupreme(supreme):
 
 
 @catub.cat_cmd(
-    pattern="india$",
-    command=("india", plugin_category),
+    pattern="سوريا$",
+    command=("سوريا", plugin_category),
     info={
         "header": "Just a art command try out yourself to see",
         "usage": "{tr}india",
@@ -449,8 +449,8 @@ async def bluedevilindia(india):
 
 
 @catub.cat_cmd(
-    pattern="wc$",
-    command=("wc", plugin_category),
+    pattern="اهلا$",
+    command=("اهلا", plugin_category),
     info={
         "header": "Just a art command try out yourself to see",
         "usage": "{tr}wc",
@@ -462,8 +462,8 @@ async def bluedevilwelcome(welcome):
 
 
 @catub.cat_cmd(
-    pattern="snk$",
-    command=("snk", plugin_category),
+    pattern="افعة$",
+    command=("افعة", plugin_category),
     info={
         "header": "Just a art command try out yourself to see",
         "usage": "{tr}snk",
@@ -475,8 +475,8 @@ async def bluedevilsnake(snake):
 
 
 @catub.cat_cmd(
-    pattern="bye$",
-    command=("bye", plugin_category),
+    pattern="سلام$",
+    command=("سلام", plugin_category),
     info={
         "header": "Just a art command try out yourself to see",
         "usage": "{tr}bye",
@@ -488,8 +488,8 @@ async def bluedevilbye(bye):
 
 
 @catub.cat_cmd(
-    pattern="shitos$",
-    command=("shitos", plugin_category),
+    pattern="قرف$",
+    command=("قرف", plugin_category),
     info={
         "header": "Just a art command try out yourself to see",
         "usage": "{tr}shitos",
@@ -501,8 +501,8 @@ async def bluedevilshitos(shitos):
 
 
 @catub.cat_cmd(
-    pattern="dislike$",
-    command=("dislike", plugin_category),
+    pattern="دسلايك$",
+    command=("دسلايك", plugin_category),
     info={
         "header": "Just a art command try out yourself to see",
         "usage": "{tr}dislike",
