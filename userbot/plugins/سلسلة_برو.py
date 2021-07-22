@@ -6,8 +6,8 @@ plugin_category = "tools"
 
 
 @catub.cat_cmd(
-    pattern="chain$",
-    command=("chain", plugin_category),
+    pattern="سلسلة$",
+    command=("سلسلة", plugin_category),
     info={
         "header": "Reply this command to any converstion(or message) and it will find the chain length of that message",
         "usage": "{tr}chain <reply>",
@@ -15,7 +15,7 @@ plugin_category = "tools"
 )
 async def _(event):
     "To find the chain length of a message."
-    await event.edit("`Counting...`")
+    await event.edit("`يتم العدّ...`")
     count = -1
     message = event.message
     while message:
@@ -28,4 +28,4 @@ async def _(event):
             )
         message = reply
         count += 1
-    await event.edit(f"Chain length: `{count}`")
+    await event.edit(f"طول السلسلة: `{count}`")
