@@ -36,28 +36,27 @@ async def _(event):
     except Exception as e:
         no_admin_privilege_message = await event.client.send_message(
             entity=event.chat_id,
-            message=f"""**Automatic AntiFlooder**
-@admin [User](tg://user?id={event.message.sender_id}) is flooding this chat.
+            message=f"""**منع الرسائل المزعجة**
+@admin [User](tg://user?id={event.message.sender_id}) يرسل رسائل عشوائية في هذه الدردشة.
 `{str(e)}`""",
             reply_to=event.message.id,
         )
         await asyncio.sleep(4)
         await no_admin_privilege_message.edit(
-            "This is useless SPAM dude. Stop this, enjoy the chat buddy "
+            "هذا هو مرسل الرسائل المزعجة. توقف عن هذا, واستمتع في الدردشة "
         )
     else:
         await event.client.send_message(
             entity=event.chat_id,
-            message=f"""**Automatic AntiFlooder**
-[User](tg://user?id={event.message.sender_id}) has been automatically restricted
-because he reached the defined flood limit.""",
+            message=f"""**منع الرسائل المزعجة**
+[User](tg://user?id={event.message.sender_id}) تم تقييده تلقائيا لأنه ارسل رسائل مزعجة.""",
             reply_to=event.message.id,
         )
 
 
 @catub.cat_cmd(
-    pattern="setflood(?:\s|$)([\s\S]*)",
-    command=("setflood", plugin_category),
+    pattern="فيضان(?:\s|$)([\s\S]*)",
+    command=("فيضان", plugin_category),
     info={
         "header": "To setup antiflood in a group",
         "description": "It warns the user if he spams the chat and if you are an admin with proper rights then it mutes him in that group.",
@@ -73,11 +72,11 @@ because he reached the defined flood limit.""",
 async def _(event):
     "To setup antiflood in a group to prevent spam"
     input_str = event.pattern_match.group(1)
-    event = await edit_or_reply(event, "`updating flood settings!`")
+    event = await edit_or_reply(event, "`تحديث اعدادات الفيضان!`")
     await asyncio.sleep(2)
     try:
         sql.set_flood(event.chat_id, input_str)
         sql.__load_flood_settings()
-        await event.edit(f"Antiflood updated to {input_str} in the current chat")
+        await event.edit(f"تم تحديث الفيضان إلى {input_str} في الدردشة الحالية")
     except Exception as e:
         await event.edit(str(e))
