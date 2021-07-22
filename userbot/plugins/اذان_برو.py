@@ -11,8 +11,8 @@ plugin_category = "extra"
 
 
 @catub.cat_cmd(
-    pattern="azan(?:\s|$)([\s\S]*)",
-    command=("azan", plugin_category),
+    pattern="اذان(?:\s|$)([\s\S]*)",
+    command=("اذان", plugin_category),
     info={
         "header": "Shows you the Islamic prayer times of the given city name.",
         "note": "you can set default city by using {tr}setcity command.",
@@ -28,18 +28,18 @@ async def get_adzan(adzan):
     request = requests.get(url)
     if request.status_code != 200:
         return await edit_delete(
-            adzan, f"`Couldn't fetch any data about the city {LOKASI}`", 5
+            adzan, f"`تعذر جلب أي بيانات عن المدينة {LOKASI}`", 5
         )
     result = json.loads(request.text)
-    catresult = f"<b>Islamic prayer times </b>\
-            \n\n<b>City     : </b><i>{result['query']}</i>\
-            \n<b>Country  : </b><i>{result['country']}</i>\
-            \n<b>Date     : </b><i>{result['items'][0]['date_for']}</i>\
-            \n<b>Fajr     : </b><i>{result['items'][0]['fajr']}</i>\
-            \n<b>Shurooq    : </b><i>{result['items'][0]['shurooq']}</i>\
-            \n<b>Dhuhr    : </b><i>{result['items'][0]['dhuhr']}</i>\
-            \n<b>Asr    : </b><i>{result['items'][0]['asr']}</i>\
-            \n<b>Maghrib    : </b><i>{result['items'][0]['maghrib']}</i>\
-            \n<b>Isha     : </b><i>{result['items'][0]['isha']}</i>\
+    catresult = f"<b>أوقات الصلاة الإسلامية </b>\
+            \n\n<b>المدينة     : </b><i>{result['query']}</i>\
+            \n<b>الدولة  : </b><i>{result['country']}</i>\
+            \n<b>التاريخ     : </b><i>{result['items'][0]['date_for']}</i>\
+            \n<b>الفجر     : </b><i>{result['items'][0]['fajr']}</i>\
+            \n<b>الشروق    : </b><i>{result['items'][0]['shurooq']}</i>\
+            \n<b>الظهر    : </b><i>{result['items'][0]['dhuhr']}</i>\
+            \n<b>العصر    : </b><i>{result['items'][0]['asr']}</i>\
+            \n<b>المغرب    : </b><i>{result['items'][0]['maghrib']}</i>\
+            \n<b>العشاء     : </b><i>{result['items'][0]['isha']}</i>\
     "
     await edit_or_reply(adzan, catresult, "html")
