@@ -2,7 +2,7 @@
 Telegram Channel Media Downloader Plugin for userbot.
 usage: .geta channel_username [will  get all media from channel, tho there is limit of 3000 there to prevent API limits.]
        .getc number_of_messsages channel_username
-By: @Zero_cool7870
+By: @u_5_1
 """
 
 
@@ -16,8 +16,8 @@ plugin_category = "tools"
 
 
 @catub.cat_cmd(
-    pattern="getc(?:\s|$)([\s\S]*)",
-    command=("getc", plugin_category),
+    pattern="ملف(?:\s|$)([\s\S]*)",
+    command=("ملف", plugin_category),
     info={
         "header": "To download channel media files",
         "description": "pass username and no of latest messages to check to command \
@@ -35,7 +35,7 @@ async def get_media(event):
         os.makedirs(tempdir)
     except BaseException:
         pass
-    event = await edit_or_reply(event, "`Downloading Media From this Channel.`")
+    event = await edit_or_reply(event, "`تحميل الوسائط من هذه القناة.`")
     msgs = await event.client.get_messages(channel_username, limit=int(limit))
     i = 0
     for msg in msgs:
@@ -44,7 +44,7 @@ async def get_media(event):
             await event.client.download_media(msg, tempdir)
             i += 1
             await event.edit(
-                f"Downloading Media From this Channel.\n **DOWNLOADED : **`{i}`"
+                f"تحميل الوسائط من هذه القناة.\n **تم التحميل : **`{i}`"
             )
     ps = subprocess.Popen(("ls", tempdir), stdout=subprocess.PIPE)
     output = subprocess.check_output(("wc", "-l"), stdin=ps.stdout)
@@ -53,13 +53,13 @@ async def get_media(event):
     output = output.replace("b'", " ")
     output = output.replace("\\n'", " ")
     await event.edit(
-        f"Successfully downloaded {output} number of media files from {channel_username} to tempdir"
+        f"اكتمل تحميل {output} من ملفات الوسائط من {channel_username} إلى tempdir"
     )
 
 
 @catub.cat_cmd(
-    pattern="geta(?:\s|$)([\s\S]*)",
-    command=("geta", plugin_category),
+    pattern="ملفات(?:\s|$)([\s\S]*)",
+    command=("ملفات", plugin_category),
     info={
         "header": "To download channel all media files",
         "description": "pass username to command so the bot will download all media files from that latest no of messages to server ",
@@ -75,7 +75,7 @@ async def get_media(event):
         os.makedirs(tempdir)
     except BaseException:
         pass
-    event = await edit_or_reply(event, "`Downloading All Media From this Channel.`")
+    event = await edit_or_reply(event, "`تحميل جميع ملفات الوسائط من هذه القناة.`")
     msgs = await event.client.get_messages(channel_username, limit=3000)
     i = 0
     for msg in msgs:
@@ -84,7 +84,7 @@ async def get_media(event):
             await event.client.download_media(msg, tempdir)
             i += 1
             await event.edit(
-                f"Downloading Media From this Channel.\n **DOWNLOADED : **`{i}`"
+                f"تحميل الوسائط من هذه القناة.\n **تم التحميل : **`{i}`"
             )
     ps = subprocess.Popen(("ls", tempdir), stdout=subprocess.PIPE)
     output = subprocess.check_output(("wc", "-l"), stdin=ps.stdout)
@@ -93,5 +93,5 @@ async def get_media(event):
     output = output.replace("b'", "")
     output = output.replace("\\n'", "")
     await event.edit(
-        f"Successfully downloaded {output} number of media files from {channel_username} to tempdir"
+        f"اكتمل تحميل {output} من ملفات الوسائط من {channel_username} إلى tempdir"
     )
