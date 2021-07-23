@@ -26,8 +26,8 @@ async def on_new_message(event):
             except Exception:
                 await event.client.send_message(
                     BOTLOG_CHATID,
-                    f"I do not have DELETE permission in {get_display_name(await event.get_chat())}.\
-                     So removing blacklist words from this group",
+                    f"ليس لدي اذن حذف في {get_display_name(await event.get_chat())}.\
+                     لذا إزالة كلمات القائمة السوداء من هذه المجموعة",
                 )
                 for word in snips:
                     sql.rm_from_blacklist(event.chat_id, word.lower())
@@ -35,8 +35,8 @@ async def on_new_message(event):
 
 
 @catub.cat_cmd(
-    pattern="addblacklist(?:\s|$)([\s\S]*)",
-    command=("addblacklist", plugin_category),
+    pattern="حظر كلمة(?:\s|$)([\s\S]*)",
+    command=("حظر كلمة", plugin_category),
     info={
         "header": "To add blacklist words to database",
         "description": "The given word or words will be added to blacklist in that specific chat if any user sends then the message gets deleted.",
@@ -59,15 +59,15 @@ async def _(event):
         sql.add_to_blacklist(event.chat_id, trigger.lower())
     await edit_or_reply(
         event,
-        "Added {} triggers to the blacklist in the current chat".format(
+        "تمت إضافة {} من الكلمات إلى القائمة السوداء في الدردشة الحالية".format(
             len(to_blacklist)
         ),
     )
 
 
 @catub.cat_cmd(
-    pattern="rmblacklist(?:\s|$)([\s\S]*)",
-    command=("rmblacklist", plugin_category),
+    pattern="الغاء حظر كلمة(?:\s|$)([\s\S]*)",
+    command=("الغاء حظر كلمة", plugin_category),
     info={
         "header": "To remove blacklist words from database",
         "description": "The given word or words will be removed from blacklist in that specific chat",
@@ -90,13 +90,13 @@ async def _(event):
         for trigger in to_unblacklist
     )
     await edit_or_reply(
-        event, f"Removed {successful} / {len(to_unblacklist)} from the blacklist"
+        event, f"تم ازالة {successful} / {len(to_unblacklist)} من القائمة السوداء بنجاح"
     )
 
 
 @catub.cat_cmd(
-    pattern="listblacklist$",
-    command=("listblacklist", plugin_category),
+    pattern="القائمة السوداء$",
+    command=("القائمة السوداء", plugin_category),
     info={
         "header": "To show the black list words",
         "description": "Shows you the list of blacklist words in that specific chat",
@@ -108,10 +108,10 @@ async def _(event):
 async def _(event):
     "To show the blacklist words in that specific chat"
     all_blacklisted = sql.get_chat_blacklist(event.chat_id)
-    OUT_STR = "Blacklists in the Current Chat:\n"
+    OUT_STR = "القائمة السوداء في الدردشة الحالية:\n"
     if len(all_blacklisted) > 0:
         for trigger in all_blacklisted:
             OUT_STR += f"👉 {trigger} \n"
     else:
-        OUT_STR = "No Blacklists found. Start saving using `.addblacklist`"
+        OUT_STR = "لم يتم العثور على قائمة سوداء. اضف قائمة باستخدام الأمر `.حظر كلمة`"
     await edit_or_reply(event, OUT_STR)
