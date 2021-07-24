@@ -1,4 +1,4 @@
-# telegraph utils for catuserbot
+# telegraph utils for pro userbot
 import os
 import random
 import string
@@ -30,8 +30,8 @@ def resize_image(image):
 
 
 @catub.cat_cmd(
-    pattern="(t(ele)?g(raph)?) ?(m|t|media|text)(?:\s|$)([\s\S]*)",
-    command=("telegraph", plugin_category),
+    pattern="(تلكراف?) ?(m|t|media|text)(?:\s|$)([\s\S]*)",
+    command=("تلكراف", plugin_category),
     info={
         "header": "To get telegraph link.",
         "description": "Reply to text message to paste that text on telegraph you can also pass input along with command \
@@ -50,16 +50,16 @@ def resize_image(image):
 )  # sourcery no-metrics
 async def _(event):
     "To get telegraph link."
-    catevent = await edit_or_reply(event, "`processing........`")
+    catevent = await edit_or_reply(event, "`جاري المعالجة........`")
     if BOTLOG:
         await event.client.send_message(
             BOTLOG_CHATID,
-            f"Created New Telegraph account {auth_url} for the current session. \n**Do not give this url to anyone, even if they say they are from Telegram!**",
+            f"إنشاء حساب تلغراف جديد {auth_url} للدورة الحالية. \n**لا تعط عنوان الرابط هذا لأي شخص ، حتى لو قالوا إنهم من شركة تلغرام!**",
         )
     optional_title = event.pattern_match.group(5)
     if not event.reply_to_msg_id:
         return await catevent.edit(
-            "`Reply to a message to get a permanent telegra.ph link.`",
+            "`قم بالرد على صورة للحصول على رابط التلكراف لها.`",
         )
 
     start = datetime.now()
@@ -69,21 +69,21 @@ async def _(event):
         downloaded_file_name = await event.client.download_media(
             r_message, Config.TEMP_DIR
         )
-        await catevent.edit(f"`Downloaded to {downloaded_file_name}`")
+        await catevent.edit(f"`تم التنزيل إلى {downloaded_file_name}`")
         if downloaded_file_name.endswith((".webp")):
             resize_image(downloaded_file_name)
         try:
             media_urls = upload_file(downloaded_file_name)
         except exceptions.TelegraphException as exc:
-            await catevent.edit(f"**Error : **\n`{str(exc)}`")
+            await catevent.edit(f"**خطأ : **\n`{str(exc)}`")
             os.remove(downloaded_file_name)
         else:
             end = datetime.now()
             ms = (end - start).seconds
             os.remove(downloaded_file_name)
             await catevent.edit(
-                f"**link : **[telegraph](https://telegra.ph{media_urls[0]})\
-                    \n**Time Taken : **`{ms} seconds.`",
+                f"**الرابط : **[اضغط هنا](https://telegra.ph{media_urls[0]})\
+                    \n**الوقت المستغرق : **`{ms} ثانية.`",
                 link_preview=True,
             )
     elif input_str in ["text", "t"]:
@@ -119,7 +119,7 @@ async def _(event):
         ms = (end - start).seconds
         cat = f"https://telegra.ph/{response['path']}"
         await catevent.edit(
-            f"**link : ** [telegraph]({cat})\
-                 \n**Time Taken : **`{ms} seconds.`",
+            f"**الرابط : ** [اضغط هنا]({cat})\
+                 \n**الوقت المستغرق : **`{ms} ثانية.`",
             link_preview=True,
         )
