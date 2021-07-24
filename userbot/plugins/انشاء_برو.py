@@ -9,8 +9,8 @@ plugin_category = "tools"
 
 
 @catub.cat_cmd(
-    pattern="create (b|g|c) ([\s\S]*)",
-    command=("create", plugin_category),
+    pattern="انشاء (b|g|c) ([\s\S]*)",
+    command=("انشاء", plugin_category),
     info={
         "header": "To create a private group/channel with userbot.",
         "description": "Use this cmd to create super group , normal group or channel.",
@@ -48,10 +48,10 @@ async def _(event):
                 )
             )
             await edit_or_reply(
-                event, f"Group `{group_name}` created successfully. Join {result.link}"
+                event, f"المجموعة `{group_name}` أنشئت بنجاح. دخول المجموعة {result.link}"
             )
         except Exception as e:
-            await edit_delete(event, f"**Error:**\n{str(e)}")
+            await edit_delete(event, f"**خطأ:**\n{str(e)}")
     elif type_of_group == "c":
         try:
             r = await event.client(
@@ -69,10 +69,10 @@ async def _(event):
             )
             await edit_or_reply(
                 event,
-                f"Channel `{group_name}` created successfully. Join {result.link}",
+                f"القناة `{group_name}` أنشئت بنجاح. دخول القناة {result.link}",
             )
         except Exception as e:
-            await edit_delete(event, f"**Error:**\n{str(e)}")
+            await edit_delete(event, f"**خطأ:**\n{str(e)}")
     elif type_of_group == "b":
         answer = await create_supergroup(
             group_name, event.client, Config.TG_BOT_USERNAME, descript
@@ -80,9 +80,9 @@ async def _(event):
         if answer[0] != "error":
             await edit_or_reply(
                 event,
-                f"Mega group `{group_name}` created successfully. Join {answer[0].link}",
+                f"المجموعة `{group_name}` أنشئت بنجاح. دخول المجموعة {answer[0].link}",
             )
         else:
-            await edit_delete(event, f"**Error:**\n{str(answer[1])}")
+            await edit_delete(event, f"**خطأ:**\n{str(answer[1])}")
     else:
-        await edit_delete(event, "Read `.help create` to know how to use me")
+        await edit_delete(event, "ارسل الأمر `.مساعدة انشاء` لمعرفة كيفية الاستخدام")
