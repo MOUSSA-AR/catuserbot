@@ -86,8 +86,8 @@ async def filter_incoming_handler(handler):  # sourcery no-metrics
 
 
 @catub.cat_cmd(
-    pattern="filter ([\s\S]*)",
-    command=("filter", plugin_category),
+    pattern="اضف رد ([\s\S]*)",
+    command=("اضف رد", plugin_category),
     info={
         "header": "To save filter for the given keyword.",
         "description": "If any user sends that filter then your bot will reply.",
@@ -120,10 +120,10 @@ async def add_new_filter(new_handler):
         if BOTLOG:
             await new_handler.client.send_message(
                 BOTLOG_CHATID,
-                f"#FILTER\
-            \nCHAT ID: {new_handler.chat_id}\
-            \nTRIGGER: {keyword}\
-            \n\nThe following message is saved as the filter's reply data for the chat, please do NOT delete it !!",
+                f"#الرد_التلقائي\
+            \nايدي المحادثة: {new_handler.chat_id}\
+            \nالردود: {keyword}\
+            \n\nيتم حفظ الرسالة التالية كبيانات رد للدردشة ، يرجى عدم حذفها !!",
             )
             msg_o = await new_handler.client.forward_messages(
                 entity=BOTLOG_CHATID,
@@ -141,18 +141,18 @@ async def add_new_filter(new_handler):
     elif new_handler.reply_to_msg_id and not string:
         rep_msg = await new_handler.get_reply_message()
         string = rep_msg.text
-    success = "`Filter` **{}** `{} successfully`"
+    success = "`تم تفعيل الرد` **{}** `{} بنجاح`"
     if add_filter(str(new_handler.chat_id), keyword, string, msg_id) is True:
         return await edit_or_reply(new_handler, success.format(keyword, "added"))
     remove_filter(str(new_handler.chat_id), keyword)
     if add_filter(str(new_handler.chat_id), keyword, string, msg_id) is True:
         return await edit_or_reply(new_handler, success.format(keyword, "Updated"))
-    await edit_or_reply(new_handler, f"Error while setting filter for {keyword}")
+    await edit_or_reply(new_handler, f"خطأ اثناء اضافة الرد {keyword}")
 
 
 @catub.cat_cmd(
-    pattern="filters$",
-    command=("filters", plugin_category),
+    pattern="الردود$",
+    command=("الردود", plugin_category),
     info={
         "header": "To list all filters in that chat.",
         "description": "Lists all active (of your userbot) filters in a chat.",
@@ -161,23 +161,23 @@ async def add_new_filter(new_handler):
 )
 async def on_snip_list(event):
     "To list all filters in that chat."
-    OUT_STR = "There are no filters in this chat."
+    OUT_STR = "لا توجد ردود في هذه الدردشة."
     filters = get_filters(event.chat_id)
     for filt in filters:
-        if OUT_STR == "There are no filters in this chat.":
-            OUT_STR = "Active filters in this chat:\n"
+        if OUT_STR == "لا توجد ردود في هذه الدردشة.":
+            OUT_STR = "الردود المفعلة في هذه الدردشة:\n"
         OUT_STR += "👉 `{}`\n".format(filt.keyword)
     await edit_or_reply(
         event,
         OUT_STR,
-        caption="Available Filters in the Current Chat",
+        caption="الردود المفعلة في هذه الدردشة",
         file_name="filters.text",
     )
 
 
 @catub.cat_cmd(
-    pattern="stop ([\s\S]*)",
-    command=("stop", plugin_category),
+    pattern="حذف رد ([\s\S]*)",
+    command=("حذف رد", plugin_category),
     info={
         "header": "To delete that filter . so if user send that keyword bot will not reply",
         "usage": "{tr}stop <keyword>",
@@ -187,14 +187,14 @@ async def remove_a_filter(r_handler):
     "Stops the specified keyword."
     filt = r_handler.pattern_match.group(1)
     if not remove_filter(r_handler.chat_id, filt):
-        await r_handler.edit("Filter` {} `doesn't exist.".format(filt))
+        await r_handler.edit("الرد` {} `غير موجود.".format(filt))
     else:
-        await r_handler.edit("Filter `{} `was deleted successfully".format(filt))
+        await r_handler.edit("الرد `{} `تم حذفه بنجاح".format(filt))
 
 
 @catub.cat_cmd(
-    pattern="rmfilters$",
-    command=("rmfilters", plugin_category),
+    pattern="حذف الردود$",
+    command=("حذف الردود", plugin_category),
     info={
         "header": "To delete all filters in that group.",
         "usage": "{tr}rmfilters",
@@ -205,6 +205,6 @@ async def on_all_snip_delete(event):
     filters = get_filters(event.chat_id)
     if filters:
         remove_all_filters(event.chat_id)
-        await edit_or_reply(event, f"filters in current chat deleted successfully")
+        await edit_or_reply(event, f"تم حذف الردود في الدردشة الحالية بنجاح")
     else:
-        await edit_or_reply(event, f"There are no filters in this group")
+        await edit_or_reply(event, f"لا توجد ردود مفعلة في هذه الدردشة")
