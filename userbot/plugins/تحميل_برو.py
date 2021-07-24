@@ -29,8 +29,8 @@ async def _get_file_name(path: pathlib.Path, full: bool = True) -> str:
 
 
 @catub.cat_cmd(
-    pattern="d(own)?l(oad)?(?:\s|$)([\s\S]*)",
-    command=("download", plugin_category),
+    pattern="تحميل(?:\s|$)([\s\S]*)",
+    command=("تحميل", plugin_category),
     info={
         "header": "To download the replied telegram file",
         "description": "Will download the replied telegram file to server .",
@@ -44,7 +44,7 @@ async def _get_file_name(path: pathlib.Path, full: bool = True) -> str:
 )
 async def _(event):  # sourcery no-metrics
     "To download the replied telegram file"
-    mone = await edit_or_reply(event, "`Downloading....`")
+    mone = await edit_or_reply(event, "`جاري التحميل....`")
     input_str = event.pattern_match.group(3)
     name = NAME
     path = None
@@ -91,14 +91,14 @@ async def _(event):  # sourcery no-metrics
             await reply.download_media(
                 file=file_name.absolute(),
                 progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                    progress(d, t, mone, c_time, "trying to download")
+                    progress(d, t, mone, c_time, "محاولة التنزيل")
                 ),
             )
         elif not reply.document:
             file_name = await reply.download_media(
                 file=downloads,
                 progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                    progress(d, t, mone, c_time, "trying to download")
+                    progress(d, t, mone, c_time, "محاولة التنزيل")
                 ),
             )
         else:
@@ -107,14 +107,14 @@ async def _(event):  # sourcery no-metrics
                 location=reply.document,
                 out=dl,
                 progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                    progress(d, t, mone, c_time, "trying to download")
+                    progress(d, t, mone, c_time, "محاولة التنزيل")
                 ),
             )
             dl.close()
         end = datetime.now()
         ms = (end - start).seconds
         await mone.edit(
-            f"**•  Downloaded in {ms} seconds.**\n**•  Downloaded to :- **  `{os.path.relpath(file_name,os.getcwd())}`\n   "
+            f"**•  تحميل في {ms} ثواني.**\n**•  مكان التخزين :- **  `{os.path.relpath(file_name,os.getcwd())}`\n   "
         )
     elif input_str:
         start = datetime.now()
@@ -147,9 +147,9 @@ async def _(event):  # sourcery no-metrics
                 round(percentage, 2),
             )
             estimated_total_time = downloader.get_eta(human=True)
-            current_message = f"Downloading the file\
-                                \n\n**URL : **`{url}`\
-                                \n**File Name :** `{file_name}`\
+            current_message = f"تحميل الملف\
+                                \n\n**الرابط : **`{url}`\
+                                \n**اسم الملف :** `{file_name}`\
                                 \n{progress_str}\
                                 \n`{humanbytes(downloaded)} of {humanbytes(total_length)}`\
                                 \n**ETA : **`{estimated_total_time}`"
@@ -164,17 +164,17 @@ async def _(event):  # sourcery no-metrics
         ms = (end - start).seconds
         if downloader.isSuccessful():
             await mone.edit(
-                f"**•  Downloaded in {ms} seconds.**\n**•  Downloaded file location :- ** `{os.path.relpath(downloaded_file_name,os.getcwd())}`"
+                f"**•  تحميل في {ms} ثواني.**\n**•  مكان التخزين :- ** `{os.path.relpath(downloaded_file_name,os.getcwd())}`"
             )
         else:
-            await mone.edit("Incorrect URL\n {}".format(input_str))
+            await mone.edit("الرابط غير صحيح\n {}".format(input_str))
     else:
-        await mone.edit("`Reply to a message to download to my local server.`")
+        await mone.edit("`يجب الرد على الرسالة للتنزيل على الخادم برو.`")
 
 
 @catub.cat_cmd(
-    pattern="d(own)?l(oad)?to(?:\s|$)([\s\S]*)",
-    command=("dlto", plugin_category),
+    pattern="تحميل الى(?:\s|$)([\s\S]*)",
+    command=("تحميل الى", plugin_category),
     info={
         "header": "To download the replied telegram file to specific directory",
         "description": "Will download the replied telegram file to server that is your custom folder.",
@@ -202,11 +202,11 @@ async def _(event):  # sourcery no-metrics
     if not reply:
         return await edit_delete(
             event,
-            "Reply to media file to download it to bot server",
+            "قم بالرد على ملف الوسائط لتنزيله على خادم البوت برو",
             parse_mode=_format.parse_pre,
         )
     mone = await edit_or_reply(
-        event, "Downloading the file ...", parse_mode=_format.parse_pre
+        event, "تحميل الملف ...", parse_mode=_format.parse_pre
     )
     start = datetime.now()
     for attr in getattr(reply.document, "attributes", []):
@@ -247,14 +247,14 @@ async def _(event):  # sourcery no-metrics
         await reply.download_media(
             file=file_name.absolute(),
             progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                progress(d, t, mone, c_time, "trying to download")
+                progress(d, t, mone, c_time, "محاولة التنزيل")
             ),
         )
     elif not reply.document:
         file_name = await reply.download_media(
             file=location,
             progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                progress(d, t, mone, c_time, "trying to download")
+                progress(d, t, mone, c_time, "محاولة التنزيل")
             ),
         )
     else:
@@ -263,12 +263,12 @@ async def _(event):  # sourcery no-metrics
             location=reply.document,
             out=dl,
             progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
-                progress(d, t, mone, c_time, "trying to download")
+                progress(d, t, mone, c_time, "محاولة التنزيل")
             ),
         )
         dl.close()
     end = datetime.now()
     ms = (end - start).seconds
     await mone.edit(
-        f"**•  Downloaded in {ms} seconds.**\n**•  Downloaded to :- **  `{os.path.relpath(file_name,os.getcwd())}`\n   "
+        f"**•  التحميل في {ms} ثواني.**\n**•  تم التحميل إلى :- **  `{os.path.relpath(file_name,os.getcwd())}`\n   "
     )
