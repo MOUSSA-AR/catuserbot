@@ -10,16 +10,16 @@ plugin_category = "fun"
 game_code = ["ttt", "ttf", "cf", "rps", "rpsls", "rr", "c", "pc"]
 button = ["0", "1", "2", "3", "4", "5", "6", "7"]
 game_name = [
-    "Tic-Tac-Toe",
-    "Tic-Tac-Four",
-    "Connect Four",
-    "Rock-Paper-Scissors",
-    "Rock-Paper-Scissors-Lizard-Spock",
-    "Russian Roulette",
-    "Checkers",
-    "Pool Checkers",
+    "لعبة تيك-تاك-توك",
+    "لعبة تيك-تاك-أربعة",
+    "لعبة الربط 4",
+    "لعبة حجر-ورقة-مقص",
+    "لعبة حجر-ورقة-مقص-سحلية-رجل فضاء",
+    "لعبة الروليت الروسية",
+    "لعبة الداما",
+    "لعبة تجمع الداما",
 ]
-game_list = "1.`ttt` :- Tic-Tac-Toe\n2.`ttf` :- Tic-Tac-Four\n3.`cf` :- Connect Four\n4.`rps` :- Rock-Paper-Scissors\n5.`rpsls` :- Rock-Paper-Scissors-Lizard-Spock\n6.`rr` :- Russian Roulette\n7.`c` :- Checkers\n8.`pc` :- Pool Checkers"
+game_list = "1.`ttt` :- لعبة تيك-تاك-توك\n2.`ttf` :- لعبة تيك-تاك-أربعة\n3.`cf` :- لعبة الربط 4\n4.`rps` :- لعبة حجر-ورقة-مقص\n5.`rpsls` :- لعبة حجر-ورقة-مقص-سحلية-رجل فضاء\n6.`rr` :- لعبة الروليت الروسية\n7.`c` :- لعبة الداما\n8.`pc` :- لعبة تجمع الداما"
 
 
 @catub.cat_cmd(
@@ -50,14 +50,14 @@ async def igame(event):
     name = dict(zip(game_code, game_name))
     if not input_str:
         await edit_delete(
-            event, f"**رموز اللعبة المتاحة والأسماء :-**\n\n{game_list}", time=60
+            event, f"**موز وأسماء الألعاب المتاحة :-**\n\n{game_list}", time=60
         )
         return
     if input_str not in game_code:
         catevent = await edit_or_reply(event, "`أعطني رمز اللعبة الصحيح...`")
         await asyncio.sleep(1)
         await edit_delete(
-            catevent, f"**رموز اللعبة المتاحة والأسماء :-**\n\n{game_list}", time=60
+            catevent, f"**رموز وأسماء الألعاب المتاحة :-**\n\n{game_list}", time=60
         )
     else:
         game = data[input_str]
