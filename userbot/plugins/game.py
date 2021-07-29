@@ -23,8 +23,8 @@ game_list = "1.`ttt` :- Tic-Tac-Toe\n2.`ttf` :- Tic-Tac-Four\n3.`cf` :- Connect 
 
 
 @catub.cat_cmd(
-    pattern="game(?:\s|$)([\s\S]*)",
-    command=("game", plugin_category),
+    pattern="لعبة(?:\s|$)([\s\S]*)",
+    command=("لعبة", plugin_category),
     info={
         "header": "Play inline games",
         "description": "Start an inline game by inlinegamebot",
@@ -50,20 +50,20 @@ async def igame(event):
     name = dict(zip(game_code, game_name))
     if not input_str:
         await edit_delete(
-            event, f"**Available Game Codes & Names :-**\n\n{game_list}", time=60
+            event, f"**رموز اللعبة المتاحة والأسماء :-**\n\n{game_list}", time=60
         )
         return
     if input_str not in game_code:
-        catevent = await edit_or_reply(event, "`Give me a correct game code...`")
+        catevent = await edit_or_reply(event, "`أعطني رمز اللعبة الصحيح...`")
         await asyncio.sleep(1)
         await edit_delete(
-            catevent, f"**Available Game Codes & Names :-**\n\n{game_list}", time=60
+            catevent, f"**رموز اللعبة المتاحة والأسماء :-**\n\n{game_list}", time=60
         )
     else:
         game = data[input_str]
         gname = name[input_str]
         await edit_or_reply(
-            event, f"**Game code `{input_str}` is selected for game:-** __{gname}__"
+            event, f"**رمز اللعبة `{input_str}` تم اختياره للعبة:-** __{gname}__"
         )
         await asyncio.sleep(1)
         bot = "@inlinegamesbot"
