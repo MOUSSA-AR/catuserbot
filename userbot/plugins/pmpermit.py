@@ -82,12 +82,12 @@ async def do_pm_permit_action(event, chat):  # sourcery no-metrics
                 remwarns=remwarns,
             )
         else:
-            USER_BOT_WARN_ZERO = f"**You were spamming my master** {my_mention}**'s inbox, henceforth you have been blocked.**"
+            USER_BOT_WARN_ZERO = f"**لقد ارسلت رسائل مزعجة إلى سيدي** {my_mention}**'. من الآن فصاعدا قد تم حظرك.**"
         msg = await event.reply(USER_BOT_WARN_ZERO)
         await event.client(functions.contacts.BlockRequest(chat.id))
-        the_message = f"#BLOCKED_PM\
-                            \n[{get_display_name(chat)}](tg://user?id={chat.id}) is blocked\
-                            \n**Message Count:** {PM_WARNS[str(chat.id)]}"
+        the_message = f"#حظر_العميل\
+                            \n[{get_display_name(chat)}](tg://user?id={chat.id}) قد تم حظره\
+                            \n**عدد الرسائل:** {PM_WARNS[str(chat.id)]}"
         del PM_WARNS[str(chat.id)]
         sql.del_collection("pmwarns")
         sql.del_collection("pmmessagecache")
@@ -119,17 +119,25 @@ async def do_pm_permit_action(event, chat):  # sourcery no-metrics
             remwarns=remwarns,
         )
     elif gvarstatus("pmmenu") is None:
-        USER_BOT_NO_WARN = f"""__Hi__ {mention}__, I haven't approved you yet to personal message me. 
+        USER_BOT_NO_WARN = f"""__أهلا وسهلا بك__ {mention}__, أنا العميل برو المسؤول عن حماية {my_mention} من المزعجين
 
-You have {warns}/{totalwarns} warns until you get blocked by the CatUserbot.
+لم أوافق على رسالتك بعد.
 
-Choose an option from below to specify the reason of your message and wait for me to check it. __⬇️"""
+لديك {warns}/{totalwarns} تحذير قبل أن أقوم بحظرك.
+
+__اختر من الأسفل سبب وجودك هنا وإنتظر حتى يرى سيدي على رسالتك. __⬇️"""
+
     else:
-        USER_BOT_NO_WARN = f"""__Hi__ {mention}__, I haven't approved you yet to personal message me.
 
-You have {warns}/{totalwarns} warns until you get blocked by the CatUserbot.
+        USER_BOT_NO_WARN = f"""__اهلا وسهلا بك__ {mention}__, أنا العميل برو المسؤول عن حماية {my_mention} من المزعجين
 
-Don't spam my inbox. say reason and wait until my response.__"""
+لم اوافق على رسالتك بعد
+
+لديك {warns}/{totalwarns} تحذير قبل أن أقوم بحظرك.
+
+لم أوافق على رسالتك الشخصية بعد.
+
+__اختر من الأسفل سبب وجودك هنا وإنتظر حتى يرى سيدي على رسالتك. __⬇️"""
     addgvar("pmpermit_text", USER_BOT_NO_WARN)
     PM_WARNS[str(chat.id)] += 1
     try:
@@ -184,7 +192,7 @@ async def do_pm_options_action(event, chat):
     except AttributeError:
         PMMESSAGE_CACHE = {}
     if str(chat.id) not in PM_WARNS:
-        text = "__Select option from above message and wait. Don't spam my inbox, this is your last warning.__"
+        text = "__ حدد الخيار من الرسالة أعلاه وانتظر.  لا ترسل رسائل غير مرغوب فيها إلى صندوق الوارد الخاص بي ، فهذا هو آخر تحذير لك.__"
         await event.reply(text)
         PM_WARNS[str(chat.id)] = 1
         sql.del_collection("pmwarns")
@@ -203,14 +211,14 @@ async def do_pm_options_action(event, chat):
         LOGS.info(str(e))
     sql.del_collection("pmmessagecache")
     sql.add_collection("pmmessagecache", PMMESSAGE_CACHE, {})
-    USER_BOT_WARN_ZERO = f"**If I remember correctly I mentioned in my previous message that this is not the right place for you to spam. \
-Though you ignored that message.So, I simply blocked you. \
-Now you can't do anything unless my master comes online and unblocks you.**"
+    USER_BOT_WARN_ZERO = f"**لقد اخبرتك بأن سيدي سيرد عليك حال رؤيته رسالتك. \
+ومع ذلك تستمر بإزعاجي. \
+لهذا السبب سأضطر لحظرك. وداعا👋.**"
     await event.reply(USER_BOT_WARN_ZERO)
     await event.client(functions.contacts.BlockRequest(chat.id))
-    the_message = f"#BLOCKED_PM\
-                            \n[{get_display_name(chat)}](tg://user?id={chat.id}) is blocked\
-                            \n**Reason:** __He/She didn't opt for any provided options and kept on messaging.__"
+    the_message = f"#حظر_العميل\
+                            \n[{get_display_name(chat)}](tg://user?id={chat.id}) قد تم حظره\
+                            \n**السبب:** __هذا المتطفل/لم يختر أي خيار يبين سبب وجوده هنا.__"
     sqllist.rm_from_list("pmoptions", chat.id)
     try:
         return await event.client.send_message(
@@ -231,10 +239,10 @@ async def do_pm_enquire_action(event, chat):
     except AttributeError:
         PMMESSAGE_CACHE = {}
     if str(chat.id) not in PM_WARNS:
-        text = """__Hey! Have some patience. My master has not seen your message yet. \
-My master usually responds to people, though idk about some exceptional users.__
-__My master will respond when he/she comes online, if he/she wants to.__
-**Please do not spam unless you wish to be blocked and reported.**"""
+        text = """__صديقي! تحلى بالصبر. لم يرى سيدي رسالتك بعد. \
+عادة ما يستجيب سيدي للناس ، على الرغم من عدم معرفتي ببعض المستخدمين الاستثنائيين.__
+__سيستجيب سيدي عند اتصاله بالإنترنت ، إذا أراد ذلك.__
+**يرجى عدم إرسال بريد عشوائي إلا إذا كنت ترغب في أن يتم حظرك والإبلاغ عنك.**"""
         await event.reply(text)
         PM_WARNS[str(chat.id)] = 1
         sql.del_collection("pmwarns")
@@ -253,14 +261,14 @@ __My master will respond when he/she comes online, if he/she wants to.__
         LOGS.info(str(e))
     sql.del_collection("pmmessagecache")
     sql.add_collection("pmmessagecache", PMMESSAGE_CACHE, {})
-    USER_BOT_WARN_ZERO = f"**If I remember correctly I mentioned in my previous message that this is not the right place for you to spam. \
-Though you ignored that message. So, I simply blocked you. \
-Now you can't do anything unless my master comes online and unblocks you.**"
+    USER_BOT_WARN_ZERO = f"**لقد اخبرتك بأن سيدي سيرد عليك حال رؤيته رسالتك. \
+لهذا السبب سأضطر لحظرك. \
+الآن لا يمكنك فعل أي شيء ما لم يتصل سيدي بالإنترنت ويفك عنك الحظر.**"
     await event.reply(USER_BOT_WARN_ZERO)
     await event.client(functions.contacts.BlockRequest(chat.id))
-    the_message = f"#BLOCKED_PM\
-                \n[{get_display_name(chat)}](tg://user?id={chat.id}) is blocked\
-                \n**Reason:** __He/She opted for enquire option but didn't wait after being told also and kept on messaging so blocked.__"
+    the_message = f"#حظر_العميل\
+                \n[{get_display_name(chat)}](tg://user?id={chat.id}) قد تم حظره\
+                \n**السبب:** __هذا المتطفل/اختار خيار ↞الاستفسار↠ لكنه لم ينتظر وواصل ارسال الرسائل حتى قمت بحظره.__"
     sqllist.rm_from_list("pmenquire", chat.id)
     try:
         return await event.client.send_message(
@@ -281,10 +289,10 @@ async def do_pm_request_action(event, chat):
     except AttributeError:
         PMMESSAGE_CACHE = {}
     if str(chat.id) not in PM_WARNS:
-        text = """__Hey have some patience. My master has not seen your message yet. \
-My master usually responds to people, though idk about some exceptional users.__
-__My master will respond when he/she comes back online, if he/she wants to.__
-**Please do not spam unless you wish to be blocked and reported.**"""
+        text = """__صديقي! تحلى بالصبر. لم يرى سيدي رسالتك بعد. \
+عادة ما يستجيب سيدي للناس ، على الرغم من عدم معرفتي ببعض المستخدمين الاستثنائيين.__
+__سيستجيب سيدي عند اتصاله بالإنترنت ، إذا أراد ذلك.__
+**يرجى عدم إرسال بريد عشوائي إلا إذا كنت ترغب في أن يتم حظرك والإبلاغ عنك.**"""
         await event.reply(text)
         PM_WARNS[str(chat.id)] = 1
         sql.del_collection("pmwarns")
@@ -303,14 +311,14 @@ __My master will respond when he/she comes back online, if he/she wants to.__
         LOGS.info(str(e))
     sql.del_collection("pmmessagecache")
     sql.add_collection("pmmessagecache", PMMESSAGE_CACHE, {})
-    USER_BOT_WARN_ZERO = f"**If I remember correctly I mentioned in my previous message that this is not the right place for you to spam. \
-Though you ignored me and messaged me. So, i simply blocked you. \
-Now you can't do anything unless my master comes online and unblocks you.**"
+    USER_BOT_WARN_ZERO = f"**لقد اخبرتك بأن سيدي سيرد عليك حال رؤيته رسالتك. \
+لهذا السبب سأضطر لحظرك. \
+الآن لا يمكنك فعل أي شيء ما لم يتصل سيدي بالإنترنت ويفك عنك الحظر.**"
     await event.reply(USER_BOT_WARN_ZERO)
     await event.client(functions.contacts.BlockRequest(chat.id))
-    the_message = f"#BLOCKED_PM\
-                \n[{get_display_name(chat)}](tg://user?id={chat.id}) is blocked\
-                \n**Reason:** __He/She opted for the request option but didn't wait after being told also so blocked.__"
+    the_message = f"#حظر_العميل\
+                \n[{get_display_name(chat)}](tg://user?id={chat.id}) قد تم حظره\
+                \n**السبب:** __هذا المتطفل/اختار خيار الطلب لكنه لم ينتظر فاضطررت لحظره.__"
     sqllist.rm_from_list("pmrequest", chat.id)
     try:
         return await event.client.send_message(
@@ -331,10 +339,10 @@ async def do_pm_chat_action(event, chat):
     except AttributeError:
         PMMESSAGE_CACHE = {}
     if str(chat.id) not in PM_WARNS:
-        text = """__Heyy! I am busy right now I already asked you to wait know. After my work finishes. \
-We can talk but not right know. Hope you understand.__
-__My master will respond when he/she comes back online, if he/she wants to.__
-**Please do not spam unless you wish to be blocked and reported.**"""
+        text = """__مهلا! إن سيدي مشغول الآن. يمكنك التكلم معه حالما ينتهي من العمل. \
+يمكنك التحدث مع سيدي لكن ليس الآن. أتمنى ان تتفهم.__
+__سيستجيب سيدي عند اتصاله بالإنترنت ، إذا أراد ذلك.__
+**يرجى عدم إرسال بريد عشوائي إلا إذا كنت ترغب في أن يتم حظرك والإبلاغ عنك.**"""
         await event.reply(text)
         PM_WARNS[str(chat.id)] = 1
         sql.del_collection("pmwarns")
@@ -353,14 +361,14 @@ __My master will respond when he/she comes back online, if he/she wants to.__
         LOGS.info(str(e))
     sql.del_collection("pmmessagecache")
     sql.add_collection("pmmessagecache", PMMESSAGE_CACHE, {})
-    USER_BOT_WARN_ZERO = f"**If I remember correctly I mentioned in my previous message this is not the right place for you to spam. \
-Though you ignored that message. So, I simply blocked you. \
-Now you can't do anything unless my master comes online and unblocks you.**"
+    USER_BOT_WARN_ZERO = f"**لقد اخبرتك بأن سيدي سيرد عليك حال رؤيته رسالتك. \
+لهذا السبب سأضطر لحظرك. \
+الآن لا يمكنك فعل أي شيء ما لم يتصل سيدي بالإنترنت ويفك عنك الحظر.**"
     await event.reply(USER_BOT_WARN_ZERO)
     await event.client(functions.contacts.BlockRequest(chat.id))
-    the_message = f"#BLOCKED_PM\
-                \n[{get_display_name(chat)}](tg://user?id={chat.id}) is blocked\
-                \n**Reason:** __He/She select opted for the chat option but didn't wait after being told also so blocked.__"
+    the_message = f"#حظر_العميل\
+                \n[{get_display_name(chat)}](tg://user?id={chat.id}) قد تم حظره\
+                \n**السبب:** __هذا المتطفل/اختار خيار الدردشة لكنه لم ينتظر فاضطررت لحظره.__"
     sqllist.rm_from_list("pmchat", chat.id)
     try:
         return await event.client.send_message(
@@ -382,9 +390,9 @@ async def do_pm_spam_action(event, chat):
             del PMMESSAGE_CACHE[str(chat.id)]
     except Exception as e:
         LOGS.info(str(e))
-    USER_BOT_WARN_ZERO = f"**If I remember correctly I mentioned in my previous message this is not the right place for you to spam. \
-Though you ignored that message. So, I simply blocked you. \
-Now you can't do anything unless my master comes online and unblocks you.**"
+    USER_BOT_WARN_ZERO = f"**لقد اخبرتك بأن سيدي سيرد عليك حال رؤيته رسالتك. \
+لهذا السبب سأضطر لحظرك. \
+الآن لا يمكنك فعل أي شيء ما لم يتصل سيدي بالإنترنت ويفك عنك الحظر.**"
     await event.reply(USER_BOT_WARN_ZERO)
     await event.client(functions.contacts.BlockRequest(chat.id))
     the_message = f"#BLOCKED_PM\
