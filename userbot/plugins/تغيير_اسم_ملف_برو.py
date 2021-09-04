@@ -16,8 +16,8 @@ thumb_image_path = os.path.join(Config.TMP_DOWNLOAD_DIRECTORY, "thumb_image.jpg"
 
 
 @catub.cat_cmd(
-    pattern="rnup ?(-f)? ([\s\S]*)",
-    command=("rnup", plugin_category),
+    pattern="تغيير الاسم ?(-f)? ([\s\S]*)",
+    command=("تغيير الاسم", plugin_category),
     info={
         "header": "To rename and upload the replied file.",
         "flags": {"f": "will upload as file that is document not streamable."},
@@ -36,13 +36,13 @@ async def _(event):
     supsstream = not flags
     catevent = await edit_or_reply(
         event,
-        "`Rename & Upload in process 🙄🙇‍♂️🙇‍♂️🙇‍♀️ It might take some time if file size is big`",
+        "`عملية إعادة التسمية والتحميل قد يستغرق الأمر بعض الوقت إذا كان حجم الملف كبيرًا`",
     )
     reply_to_id = await reply_id(event)
     input_str = event.pattern_match.group(2)
     if not event.reply_to_msg_id:
         return await catevent.edit(
-            "**Syntax : **`.rnup file name` as reply to a Telegram media"
+            "**بناء الجملة : **`.تغيير الاسم + اسم الملف` كرد على وسائط التلغرام"
         )
     start = datetime.now()
     file_name = input_str
@@ -63,7 +63,7 @@ async def _(event):
     except Exception:
         thumb = thumb
     if not os.path.exists(downloaded_file_name):
-        return await catevent.edit(f"File Not Found {input_str}")
+        return await catevent.edit(f"الملف غير موجود {input_str}")
     c_time = time.time()
     caat = await event.client.send_file(
         event.chat_id,
@@ -82,5 +82,5 @@ async def _(event):
     ms_two = (end_two - end).seconds
     await edit_delete(
         catevent,
-        f"`Downloaded file in {ms_one} seconds.\nAnd Uploaded in {ms_two} seconds.`",
+        f"`تم تنزيل الملف بتنسيق {ms_one} ثواني.\nوتحميلها بتنسيق {ms_two} ثواني.`",
     )
