@@ -93,7 +93,7 @@ async def upload(path, event, udir_event, catflag=None):  # sourcery no-metrics
     if os.path.isdir(path):
         await event.client.send_message(
             event.chat_id,
-            f"**Folder : **`{str(path)}`",
+            f"**الملف : **`{str(path)}`",
         )
         Files = os.listdir(path)
         Files = sortthings(Files, path)
@@ -126,7 +126,7 @@ async def upload(path, event, udir_event, catflag=None):  # sourcery no-metrics
         await event.client.send_file(
             event.chat_id,
             file=media,
-            caption=f"**File Name : **`{fname}`",
+            caption=f"**اسم الملف : **`{fname}`",
             reply_to=reply_to_id,
         )
 
@@ -134,8 +134,8 @@ async def upload(path, event, udir_event, catflag=None):  # sourcery no-metrics
 
 
 @catub.cat_cmd(
-    pattern="upload( -f)? ([\s\S]*)",
-    command=("upload", plugin_category),
+    pattern="تحميل( -f)? ([\s\S]*)",
+    command=("تحميل", plugin_category),
     info={
         "header": "To upload files from server to telegram",
         "description": "To upload files which are downloaded in your bot.",
@@ -156,25 +156,25 @@ async def uploadir(event):
     if not os.path.exists(path):
         return await edit_or_reply(
             event,
-            f"`there is no such directory/file with the name {path} to upload`",
+            f"`لا يوجد ملف بالاسم {path} للتحميل`",
         )
-    udir_event = await edit_or_reply(event, "Uploading....")
+    udir_event = await edit_or_reply(event, "جاري التحميل....")
     if os.path.isdir(path):
-        await edit_or_reply(udir_event, f"`Gathering file details in directory {path}`")
+        await edit_or_reply(udir_event, f"`جمع تفاصيل الملف في الدليل {path}`")
         UPLOAD_.uploaded = 0
         await upload(path, event, udir_event, catflag=flag)
         end = datetime.now()
         ms = (end - start).seconds
         await edit_delete(
             udir_event,
-            f"`Uploaded {UPLOAD_.uploaded} files successfully in {ms} seconds. `",
+            f"`تم الرفع {UPLOAD_.uploaded} الملفات بنجاح خلال {ms} ثواني. `",
         )
     else:
-        await edit_or_reply(udir_event, f"`Uploading file .....`")
+        await edit_or_reply(udir_event, f"`جاري تحميل الملف .....`")
         UPLOAD_.uploaded = 0
         await upload(path, event, udir_event, catflag=flag)
         end = datetime.now()
         ms = (end - start).seconds
         await edit_delete(
-            udir_event, f"`Uploaded file {str(path)} successfully in {ms} seconds. `"
+            udir_event, f"`تحميل الملف {str(path)} اكتمل في {ms} ثواني. `"
         )
