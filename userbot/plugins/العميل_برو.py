@@ -395,9 +395,9 @@ async def do_pm_spam_action(event, chat):
 الآن لا يمكنك فعل أي شيء ما لم يتصل سيدي بالإنترنت ويفك عنك الحظر.**"
     await event.reply(USER_BOT_WARN_ZERO)
     await event.client(functions.contacts.BlockRequest(chat.id))
-    the_message = f"#BLOCKED_PM\
-                            \n[{get_display_name(chat)}](tg://user?id={chat.id}) is blocked\
-                            \n**Reason:** he opted for spam option and messaged again."
+    the_message = f"#حظر_العميل\
+                            \n[{get_display_name(chat)}](tg://user?id={chat.id}) تم حظره\
+                            \n**السبب:** اختار خيار البريد العشوائي وأرسل الرسائل مرة أخرى."
     sqllist.rm_from_list("pmspam", chat.id)
     sql.add_collection("pmmessagecache", PMMESSAGE_CACHE, {})
     try:
@@ -486,19 +486,19 @@ async def you_dm_other(event):
 @catub.tgbot.on(CallbackQuery(data=re.compile(rb"show_pmpermit_options")))
 async def on_plug_in_callback_query_handler(event):
     if event.query.user_id == event.client.uid:
-        text = "Idoit these options are for users who messages you, not for you"
+        text = "احرص على أن تكون هذه الخيارات للمستخدمين الذين يرسلون إليك رسائل ، وليس لك"
         return await event.answer(text, cache_time=0, alert=True)
-    text = f"""Ok, Now you are accessing the availabe menu of my master, {mention}.
-__Let's make this smooth and let me know why you are here.__
+    text = f"""حسنًا ، أنت الآن تصل إلى القائمة المتاحة لسيدي, {mention}.
+__دعنا نجعل هذا سلسًا ودعني أعرف لماذا أنت هنا.__
 
-**Choose one of the following reasons why you are here:**"""
+**اختر أحد الأسباب التالية لوجودك هنا:**"""
     buttons = [
-        (Button.inline(text="To enquire something.", data="to_enquire_something"),),
-        (Button.inline(text="To request something.", data="to_request_something"),),
-        (Button.inline(text="To chat with my master.", data="to_chat_with_my_master"),),
+        (Button.inline(text="للاستفسار عن شيء ما.", data="to_enquire_something"),),
+        (Button.inline(text="لطلب شيء.", data="to_request_something"),),
+        (Button.inline(text="للدردشة مع سيدي.", data="to_chat_with_my_master"),),
         (
             Button.inline(
-                text="To spam my master's inbox.",
+                text="لإرسال رسائل عشوائية إلى البريد الوارد الخاص بسيدي.",
                 data="to_spam_my_master_inbox",
             ),
         ),
@@ -520,9 +520,9 @@ async def on_plug_in_callback_query_handler(event):
     if event.query.user_id == event.client.uid:
         text = "Idoit this options for user who messages you. not for you"
         return await event.answer(text, cache_time=0, alert=True)
-    text = """__Okay. Your request has been registered. Do not spam my master's inbox now. \
-My master is busy right now, When My master comes online he/she will check your message and ping you. \
-Then we can extend this conversation more but not right now.__"""
+    text = """__تمام.  تم تسجيل طلبك.  لا ترسل رسائل غير مرغوب فيها إلى صندوق الوارد الخاص بي الآن. \
+سيدي مشغول الآن ، عندما يتصل سيدي بالإنترنت ، سيتحقق من رسالتك ويتصل بك. \
+ثم يمكننا التحدث أكثر ولكن ليس الآن.__"""
     sqllist.add_to_list("pmenquire", event.query.user_id)
     try:
         PM_WARNS = sql.get_collection("pmwarns").json
@@ -541,10 +541,10 @@ async def on_plug_in_callback_query_handler(event):
     if event.query.user_id == event.client.uid:
         text = "Idoit this options for user who messages you. not for you"
         return await event.answer(text, cache_time=0, alert=True)
-    text = """__Okay. I have notified my master about this. When he/she comes comes online\
- or when my master is free he/she will look into this chat and will ping you so we can have a friendly chat.__\
+    text = """__تمام.  لقد أخبرت سيدي عن هذا.  سيتحدث معك عندما يكون متصلاً بالإنترنت\
+ أو عندما يكون سيدي متفرغًا ، سينظر في هذه الدردشة وسيتصل بك حتى نتمكن من إجراء محادثة ودية.__\
 
-**But right now please do not spam unless you wish to get blocked.**"""
+**ولكن في الوقت الحالي ، يرجى عدم إرسال بريد عشوائي إلا إذا كنت ترغب في حظره.**"""
     sqllist.add_to_list("pmrequest", event.query.user_id)
     try:
         PM_WARNS = sql.get_collection("pmwarns").json
@@ -563,8 +563,8 @@ async def on_plug_in_callback_query_handler(event):
     if event.query.user_id == event.client.uid:
         text = "Idoit these options are for users who message you. not for you"
         return await event.answer(text, cache_time=0, alert=True)
-    text = """__Yaa sure we can have a friendly chat but not right now. we can have this\
-some other time. Right now I am a little busy. when I come online and if I am free. I will ping you ,this is Damm sure.__"""
+    text = """__ متأكد من أنه يمكننا إجراء محادثة ودية ولكن ليس الآن.  يمكنك الحصول على هذا\
+في وقت آخر.  الآن أنا مشغول قليلاً.  عندما أكون متصلاً بالإنترنت وإذا كنت متفرغًا.  سأرسل إليك ، هذا مؤكد!.__"""
     sqllist.add_to_list("pmchat", event.query.user_id)
     try:
         PM_WARNS = sql.get_collection("pmwarns").json
@@ -596,8 +596,8 @@ async def on_plug_in_callback_query_handler(event):
          \n░░░░░░░░░░░█░░█\
          \n░░░░░░░░░░░█░░█\
          \n░░░░░░░░░░░░▀▀`\
-         \n**So uncool, this is not your home. Go bother somewhere else.\
-         \n\nAnd this is your last warning if you send one more message you will be blocked automatically.**"
+         \n**غير بارع ، هذا ليس منزلك.  اذهب إلى مكان آخر.\
+         \n\nوهذا هو آخر تحذير لك إذا أرسلت رسالة أخرى فسيتم حظرك تلقائيًا.**"
     sqllist.add_to_list("pmspam", event.query.user_id)
     try:
         PM_WARNS = sql.get_collection("pmspam").json
@@ -612,8 +612,8 @@ async def on_plug_in_callback_query_handler(event):
 
 
 @catub.cat_cmd(
-    pattern="pmguard (on|off)$",
-    command=("pmguard", plugin_category),
+    pattern="العميل (on|off)$",
+    command=("العميل", plugin_category),
     info={
         "header": "To turn on or turn off pmpermit.",
         "usage": "{tr}pmguard on/off",
@@ -626,22 +626,22 @@ async def pmpermit_on(event):
         if gvarstatus("pmpermit") is None:
             addgvar("pmpermit", "true")
             await edit_delete(
-                event, "__Pmpermit has been enabled for your account successfully.__"
+                event, "__تم تفعيل العميل لحسابك بنجاح.__"
             )
         else:
-            await edit_delete(event, "__Pmpermit is already enabled for your account__")
+            await edit_delete(event, "__تم تفعيل العميل بالفعل لحسابك__")
     elif gvarstatus("pmpermit") is not None:
         delgvar("pmpermit")
         await edit_delete(
-            event, "__Pmpermit has been disabled for your account successfully__"
+            event, "__تم تعطيل العميل لحسابك بنجاح__"
         )
     else:
-        await edit_delete(event, "__Pmpermit is already disabled for your account__")
+        await edit_delete(event, "__تم تعطيل العميل بالفعل لحسابك__")
 
 
 @catub.cat_cmd(
-    pattern="pmmenu (on|off)$",
-    command=("pmmenu", plugin_category),
+    pattern="قائمة العميل (on|off)$",
+    command=("قائمة العميل", plugin_category),
     info={
         "header": "To turn on or turn off pmmenu.",
         "usage": "{tr}pmmenu on/off",
@@ -655,26 +655,26 @@ async def pmpermit_on(event):
             addgvar("pmmenu", "false")
             await edit_delete(
                 event,
-                "__Pmpermit Menu has been disabled for your account successfully.__",
+                "__تم تعطيل قائمة العميل لحسابك بنجاح.__",
             )
         else:
             await edit_delete(
-                event, "__Pmpermit Menu is already disabled for your account__"
+                event, "__قائمة العميل معطلة بالفعل لحسابك__"
             )
     elif gvarstatus("pmmenu") is not None:
         delgvar("pmmenu")
         await edit_delete(
-            event, "__Pmpermit Menu has been enabled for your account successfully__"
+            event, "__تم تفعيل قائمة العميل لحسابك بنجاح__"
         )
     else:
         await edit_delete(
-            event, "__Pmpermit Menu is already enabled for your account__"
+            event, "__تم تمكين قائمة العميل بالفعل لحسابك__"
         )
 
 
 @catub.cat_cmd(
-    pattern="(a|approve)(?:\s|$)([\s\S]*)",
-    command=("approve", plugin_category),
+    pattern="(س|سماح)(?:\s|$)([\s\S]*)",
+    command=("سماح", plugin_category),
     info={
         "header": "To approve user to direct message you.",
         "usage": [
@@ -688,7 +688,7 @@ async def approve_p_m(event):  # sourcery no-metrics
     if gvarstatus("pmpermit") is None:
         return await edit_delete(
             event,
-            f"__Turn on pmpermit by doing __`{cmdhd}pmguard on` __for working of this plugin__",
+            f"__قم بتشغيل العميل عن طريق عمل __`{cmdhd}العميل on` __لعمل هذا البرنامج المساعد__",
         )
     if event.is_private:
         user = await event.get_chat()
@@ -723,7 +723,7 @@ async def approve_p_m(event):  # sourcery no-metrics
             sqllist.rm_from_list("pmoptions", chat.id)
         await edit_delete(
             event,
-            f"__Approved to pm__ [{user.first_name}](tg://user?id={user.id})\n**Reason :** __{reason}__",
+            f"__تمت الموافقة على__ [{user.first_name}](tg://user?id={user.id})\n**السبب :** __{reason}__",
         )
         try:
             PMMESSAGE_CACHE = sql.get_collection("pmmessagecache").json
@@ -744,13 +744,13 @@ async def approve_p_m(event):  # sourcery no-metrics
     else:
         await edit_delete(
             event,
-            f"[{user.first_name}](tg://user?id={user.id}) __is already in approved list__",
+            f"[{user.first_name}](tg://user?id={user.id}) __موجود بالفعل في القائمة المعتمدة__",
         )
 
 
 @catub.cat_cmd(
-    pattern="(da|disapprove)(?:\s|$)([\s\S]*)",
-    command=("disapprove", plugin_category),
+    pattern="(ر|رفض)(?:\s|$)([\s\S]*)",
+    command=("رفض", plugin_category),
     info={
         "header": "To disapprove user to direct message you.",
         "note": "This command works only for approved users",
@@ -767,7 +767,7 @@ async def disapprove_p_m(event):
     if gvarstatus("pmpermit") is None:
         return await edit_delete(
             event,
-            f"__Turn on pmpermit by doing __`{cmdhd}pmguard on` __for working of this plugin__",
+            f"__قم بتشغيل العميل عن طريق عمل __`{cmdhd}العميل on` __لعمل هذا البرنامج المساعد__",
         )
     if event.is_private:
         user = await event.get_chat()
@@ -775,14 +775,14 @@ async def disapprove_p_m(event):
 
     else:
         reason = event.pattern_match.group(2)
-        if reason != "all":
+        if reason != "الجميع":
             user, reason = await get_user_from_event(event, secondgroup=True)
             if not user:
                 return
-    if reason == "all":
+    if reason == "الجميع":
         pmpermit_sql.disapprove_all()
         return await edit_delete(
-            event, "__Ok! I have disapproved everyone successfully.__"
+            event, "__نعم!  لقد رفضت الجميع بنجاح.__"
         )
     if not reason:
         reason = "Not Mentioned."
@@ -790,18 +790,18 @@ async def disapprove_p_m(event):
         pmpermit_sql.disapprove(user.id)
         await edit_or_reply(
             event,
-            f"[{user.first_name}](tg://user?id={user.id}) __is disapproved to personal message me.__\n**Reason:**__ {reason}__",
+            f"[{user.first_name}](tg://user?id={user.id}) __مرفوض على رسائلي الشخصية.__\n**السبب:**__ {reason}__",
         )
     else:
         await edit_delete(
             event,
-            f"[{user.first_name}](tg://user?id={user.id}) __is not yet approved__",
+            f"[{user.first_name}](tg://user?id={user.id}) __لم تتم الموافقة عليه بعد__",
         )
 
 
 @catub.cat_cmd(
-    pattern="block(?:\s|$)([\s\S]*)",
-    command=("block", plugin_category),
+    pattern="حظر(?:\s|$)([\s\S]*)",
+    command=("حظر", plugin_category),
     info={
         "header": "To block user to direct message you.",
         "usage": [
@@ -815,7 +815,7 @@ async def block_p_m(event):
     if gvarstatus("pmpermit") is None:
         return await edit_delete(
             event,
-            f"__Turn on pmpermit by doing __`{cmdhd}pmguard on` __for working of this plugin__",
+            f"__قم بتشغيل العميل عن طريق عمل __`{cmdhd}العميل on` __لعمل هذا البرنامج المساعد__",
         )
     if event.is_private:
         user = await event.get_chat()
@@ -825,7 +825,7 @@ async def block_p_m(event):
         if not user:
             return
     if not reason:
-        reason = "Not Mentioned."
+        reason = "لم يذكر."
     try:
         PM_WARNS = sql.get_collection("pmwarns").json
     except AttributeError:
@@ -851,13 +851,13 @@ async def block_p_m(event):
     await event.client(functions.contacts.BlockRequest(user.id))
     await edit_delete(
         event,
-        f"[{user.first_name}](tg://user?id={user.id}) __is blocked, he can no longer personal message you.__\n**Reason:** __{reason}__",
+        f"[{user.first_name}](tg://user?id={user.id}) __تم حظره, لم يعد قادرًا على إرسال رسائل شخصية إليك.__\n**السبب:** __{reason}__",
     )
 
 
 @catub.cat_cmd(
-    pattern="unblock(?:\s|$)([\s\S]*)",
-    command=("unblock", plugin_category),
+    pattern="رفع الحظر(?:\s|$)([\s\S]*)",
+    command=("رفع الحظر", plugin_category),
     info={
         "header": "To unblock a user.",
         "usage": [
@@ -871,7 +871,7 @@ async def unblock_pm(event):
     if gvarstatus("pmpermit") is None:
         return await edit_delete(
             event,
-            f"__Turn on pmpermit by doing __`{cmdhd}pmguard on` __for working of this plugin__",
+            f"__قم بتشغيل العميل عن طريق عمل __`{cmdhd}العميل on` __لعمل هذا البرنامج المساعد__",
         )
     if event.is_private:
         user = await event.get_chat()
@@ -881,16 +881,16 @@ async def unblock_pm(event):
         if not user:
             return
     if not reason:
-        reason = "Not Mentioned."
+        reason = "لم يذكر."
     await event.client(functions.contacts.UnblockRequest(user.id))
     await event.edit(
-        f"[{user.first_name}](tg://user?id={user.id}) __is unblocked he/she can personal message you from now on.__\n**Reason:** __{reason}__"
+        f"[{user.first_name}](tg://user?id={user.id}) __غير محظور يمكنه إرسال رسائل شخصية إليك من الآن فصاعدًا.__\n**السبب:** __{reason}__"
     )
 
 
 @catub.cat_cmd(
-    pattern="listapproved$",
-    command=("listapproved", plugin_category),
+    pattern="قائمة العميل$",
+    command=("قائمة العميل", plugin_category),
     info={
         "header": "To see list of approved users.",
         "usage": [
@@ -903,18 +903,18 @@ async def approve_p_m(event):
     if gvarstatus("pmpermit") is None:
         return await edit_delete(
             event,
-            f"__Turn on pmpermit by doing __`{cmdhd}pmguard on` __to work this plugin__",
+            f"__قم بتشغيل العميل عن طريق عمل __`{cmdhd}العميل on` __للعمل على هذا البرنامج المساعد__",
         )
     approved_users = pmpermit_sql.get_all_approved()
-    APPROVED_PMs = "**Current Approved PMs**\n\n"
+    APPROVED_PMs = "**المدراء الحاليين**\n\n"
     if len(approved_users) > 0:
         for user in approved_users:
-            APPROVED_PMs += f"• 👤 {_format.mentionuser(user.first_name , user.user_id)}\n**ID:** `{user.user_id}`\n**UserName:** @{user.username}\n**Date: **__{user.date}__\n**Reason: **__{user.reason}__\n\n"
+            APPROVED_PMs += f"• 👤 {_format.mentionuser(user.first_name , user.user_id)}\n**الايدي:** `{user.user_id}`\n**المعرف:** @{user.username}\n**التاريخ: **__{user.date}__\n**السبب: **__{user.reason}__\n\n"
     else:
-        APPROVED_PMs = "`You haven't approved anyone yet`"
+        APPROVED_PMs = "`لم توافق على أي شخص حتى الآن`"
     await edit_or_reply(
         event,
         APPROVED_PMs,
         file_name="approvedpms.txt",
-        caption="`Current Approved PMs`",
+        caption="`المدراء الحاليين`",
     )
