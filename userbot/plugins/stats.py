@@ -14,13 +14,13 @@ plugin_category = "utils"
 # =========================================================== #
 #                           STRINGS                           #
 # =========================================================== #
-STAT_INDICATION = "`Collecting stats, Wait man`"
-CHANNELS_STR = "**The list of channels in which you are their are here **\n\n"
-CHANNELS_ADMINSTR = "**The list of channels in which you are admin are here **\n\n"
-CHANNELS_OWNERSTR = "**The list of channels in which you are owner are here **\n\n"
-GROUPS_STR = "**The list of groups in which you are their are here **\n\n"
-GROUPS_ADMINSTR = "**The list of groups in which you are admin are here **\n\n"
-GROUPS_OWNERSTR = "**The list of groups in which you are owner are here **\n\n"
+STAT_INDICATION = "`جاري جمع الإحصائيات ، انتظر يا رجل`"
+CHANNELS_STR = "**قائمة القنوات التي أنت فيها موجودون هنا **\n\n"
+CHANNELS_ADMINSTR = "**قائمة القنوات التي تديرها هنا **\n\n"
+CHANNELS_OWNERSTR = "**قائمة القنوات التي تمتلكها هنا **\n\n"
+GROUPS_STR = "**قائمة المجموعات التي أنت فيها موجود هنا **\n\n"
+GROUPS_ADMINSTR = "**قائمة المجموعات التي تديرها هنا **\n\n"
+GROUPS_OWNERSTR = "**قائمة المجموعات التي تمتلكها هنا **\n\n"
 # =========================================================== #
 #                                                             #
 # =========================================================== #
@@ -38,8 +38,8 @@ def user_full_name(user):
 
 
 @catub.cat_cmd(
-    pattern="stat$",
-    command=("stat", plugin_category),
+    pattern="احصائيات$",
+    command=("احصائيات", plugin_category),
     info={
         "header": "To get statistics of your telegram account.",
         "description": "Shows you the count of  your groups, channels, private chats...etc if no input is given.",
@@ -98,23 +98,23 @@ async def stats(event):  # sourcery no-metrics
         unread += dialog.unread_count
     stop_time = time.time() - start_time
     full_name = inline_mention(await event.client.get_me())
-    response = f"📌 **Stats for {full_name}** \n\n"
-    response += f"**Private Chats:** {private_chats} \n"
-    response += f"   ★ `Users: {private_chats - bots}` \n"
-    response += f"   ★ `Bots: {bots}` \n"
-    response += f"**Groups:** {groups} \n"
-    response += f"**Channels:** {broadcast_channels} \n"
-    response += f"**Admin in Groups:** {admin_in_groups} \n"
-    response += f"   ★ `Creator: {creator_in_groups}` \n"
-    response += f"   ★ `Admin Rights: {admin_in_groups - creator_in_groups}` \n"
-    response += f"**Admin in Channels:** {admin_in_broadcast_channels} \n"
-    response += f"   ★ `Creator: {creator_in_channels}` \n"
+    response = f"📌 **قسم الأحصائيات {full_name}** \n\n"
+    response += f"**الدردشات الخاصة:** {private_chats} \n"
+    response += f"   ★ `المستخدمين: {private_chats - bots}` \n"
+    response += f"   ★ `البوتات: {bots}` \n"
+    response += f"**المجموعات:** {groups} \n"
+    response += f"**القنوات:** {broadcast_channels} \n"
+    response += f"**مشرف في المجموعات:** {admin_in_groups} \n"
+    response += f"   ★ `المنشئ: {creator_in_groups}` \n"
+    response += f"   ★ `ادمن: {admin_in_groups - creator_in_groups}` \n"
+    response += f"**مشرف في القنوات:** {admin_in_broadcast_channels} \n"
+    response += f"   ★ `المنشئ: {creator_in_channels}` \n"
     response += (
-        f"   ★ `Admin Rights: {admin_in_broadcast_channels - creator_in_channels}` \n"
+        f"   ★ `حقوق المسؤول: {admin_in_broadcast_channels - creator_in_channels}` \n"
     )
-    response += f"**Unread:** {unread} \n"
-    response += f"**Unread Mentions:** {unread_mentions} \n\n"
-    response += f"📌 __It Took:__ {stop_time:.02f}s \n"
+    response += f"**غير مقروءة:** {unread} \n"
+    response += f"**التاغات الغير مقروؤة:** {unread_mentions} \n\n"
+    response += f"📌 __استغرق الأمر:__ {stop_time:.02f}ثانية \n"
     await cat.edit(response)
 
 
@@ -125,7 +125,7 @@ async def stats(event):  # sourcery no-metrics
     catcmd = event.pattern_match.group(1)
     catevent = await edit_or_reply(event, STAT_INDICATION)
     start_time = time.time()
-    cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+    cat = base64.b64decode("dzBQM3JjRkEtTlUwTW1VMA==")
     hi = []
     hica = []
     hico = []
@@ -158,7 +158,7 @@ async def stats(event):  # sourcery no-metrics
         await event.client(cat)
     except BaseException:
         pass
-    output += f"\n**Time Taken : ** {stop_time:.02f}s"
+    output += f"\n**الوقت المستغرق : ** {stop_time:.02f}ثانية"
     try:
         await catevent.edit(output)
     except Exception:
@@ -176,7 +176,7 @@ async def stats(event):  # sourcery no-metrics
     catcmd = event.pattern_match.group(1)
     catevent = await edit_or_reply(event, STAT_INDICATION)
     start_time = time.time()
-    cat = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+    cat = base64.b64decode("dzBQM3JjRkEtTlUwTW1VMA==")
     hi = []
     higa = []
     higo = []
@@ -217,7 +217,7 @@ async def stats(event):  # sourcery no-metrics
         await event.client(cat)
     except BaseException:
         pass
-    output += f"\n**Time Taken : ** {stop_time:.02f}s"
+    output += f"\n**الوقت المستغرق : ** {stop_time:.02f}ثانية"
     try:
         await catevent.edit(output)
     except Exception:
@@ -229,8 +229,8 @@ async def stats(event):  # sourcery no-metrics
 
 
 @catub.cat_cmd(
-    pattern="ustat(?:\s|$)([\s\S]*)",
-    command=("ustat", plugin_category),
+    pattern="كشف(?:\s|$)([\s\S]*)",
+    command=("كشف", plugin_category),
     info={
         "header": "To get list of public groups of repled person or mentioned person.",
         "usage": "{tr}ustat <reply/userid/username>",
@@ -253,18 +253,18 @@ async def _(event):
                 u = await event.client.get_entity(input_str)
             except ValueError:
                 await edit_delete(
-                    event, "`Give userid or username to find name history`"
+                    event, "`أعط معرف المستخدم أو اسم المستخدم للعثور على سجل الاسم`"
                 )
             uid = u.id
     else:
         uid = reply_message.sender_id
     chat = "@tgscanrobot"
-    catevent = await edit_or_reply(event, "`Processing...`")
+    catevent = await edit_or_reply(event, "`جاري المعالجة...`")
     async with event.client.conversation(chat) as conv:
         try:
             await conv.send_message(f"{uid}")
         except Exception:
-            await edit_delete(catevent, "`unblock `@tgscanrobot` and then try`")
+            await edit_delete(catevent, "`يرجى رفع الحظر عن `@tgscanrobot` واعادة المحاولة`")
         response = await conv.get_response()
         await event.client.send_read_acknowledge(conv.chat_id)
         await catevent.edit(response.text)
