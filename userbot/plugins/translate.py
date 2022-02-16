@@ -37,7 +37,7 @@ async def getTranslate(text, **kwargs):
     },
 )
 async def _(event):
-    "To translate the text."
+    "لترجمة النصوص."
     input_str = event.pattern_match.group(1)
     if event.reply_to_msg_id:
         previous_message = await event.get_reply_message()
@@ -47,7 +47,7 @@ async def _(event):
         lan, text = input_str.split(";")
     else:
         return await edit_delete(
-            event, "`.tl LanguageCode` as reply to a message", time=5
+            event, "`قم بالرد على الرسالة المراد ترجمتها باستخدام الرمز .ترجمة مع رمز اللغة", time=5
         )
     text = deEmojify(text.strip())
     lan = lan.strip()
@@ -55,11 +55,11 @@ async def _(event):
     try:
         translated = await getTranslate(text, dest=lan)
         after_tr_text = translated.text
-        output_str = f"**TRANSLATED from {LANGUAGES[translated.src].title()} to {LANGUAGES[lan].title()}**\
+        output_str = f"**للترجمة من {LANGUAGES[translated.src].title()} إلى {LANGUAGES[lan].title()}**\
                 \n`{after_tr_text}`"
         await edit_or_reply(event, output_str)
     except Exception as exc:
-        await edit_delete(event, f"**Error:**\n`{str(exc)}`", time=5)
+        await edit_delete(event, f"**خطأ:**\n`{str(exc)}`", time=5)
 
 
 @catub.cat_cmd(
@@ -75,7 +75,7 @@ async def _(event):
     },
 )
 async def translateme(trans):
-    "To translate the text to required language."
+    "لترجة النص إلى اللغة المطلوبة."
     textx = await trans.get_reply_message()
     message = trans.pattern_match.group(1)
     if message:
@@ -84,16 +84,16 @@ async def translateme(trans):
         message = textx.text
     else:
         return await edit_or_reply(
-            trans, "`Give a text or reply to a message to translate!`"
+            trans, "`قم بالرد على النص باستخدام الأمر .ترجمة2 لترجمته!`"
         )
     TRT_LANG = gvarstatus("TRT_LANG") or "en"
     try:
         reply_text = await getTranslate(deEmojify(message), dest=TRT_LANG)
     except ValueError:
-        return await edit_delete(trans, "`Invalid destination language.`", time=5)
+        return await edit_delete(trans, "`لغة الوجهة غير صحيحة.`", time=5)
     source_lan = LANGUAGES[f"{reply_text.src.lower()}"]
     transl_lan = LANGUAGES[f"{reply_text.dest.lower()}"]
-    reply_text = f"**From {source_lan.title()}({reply_text.src.lower()}) to {transl_lan.title()}({reply_text.dest.lower()}) :**\n`{reply_text.text}`"
+    reply_text = f"**من {source_lan.title()}({reply_text.src.lower()}) إلى {transl_lan.title()}({reply_text.dest.lower()}) :**\n`{reply_text.text}`"
 
     await edit_or_reply(trans, reply_text)
     if BOTLOG:
