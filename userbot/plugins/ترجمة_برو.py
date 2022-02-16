@@ -24,8 +24,8 @@ async def getTranslate(text, **kwargs):
 
 
 @catub.cat_cmd(
-    pattern="tl ([\s\S]*)",
-    command=("tl", plugin_category),
+    pattern="ترجمة ([\s\S]*)",
+    command=("ترجمة", plugin_category),
     info={
         "header": "To translate the text to required language.",
         "note": "For langugage codes check [this link](https://bit.ly/2SRQ6WU)",
@@ -63,8 +63,8 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="trt(?: |$)([\s\S]*)",
-    command=("trt", plugin_category),
+    pattern="ترجمة2(?: |$)([\s\S]*)",
+    command=("ترجمة2", plugin_category),
     info={
         "header": "To translate the text to required language.",
         "note": "for this set command set lanuage by lang tst command.",
@@ -99,7 +99,7 @@ async def translateme(trans):
     if BOTLOG:
         await trans.client.send_message(
             BOTLOG_CHATID,
-            f"`Translated some {source_lan.title()} stuff to {transl_lan.title()} just now.`",
+            f"`ترجمة بعض {source_lan.title()} الكلمات إلى {transl_lan.title()} الآن فقط.`",
         )
 
 
